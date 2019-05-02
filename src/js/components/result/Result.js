@@ -1,7 +1,7 @@
 import React from 'react'
 import {Step, Segment} from 'semantic-ui-react'
 
-const Content = () => (
+const Results = () => (
     <div>
         <Segment stacked>
             <Step.Group>
@@ -14,4 +14,4 @@ const Content = () => (
     </div>
 );
 
-export default Content
+export default Results
