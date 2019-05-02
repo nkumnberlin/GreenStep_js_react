@@ -22,6 +22,7 @@ nach installieren von semantic-react:
 cd semantic
 gulp build
 
+```javascript
 webpack.config:
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 module.exports = {
@@ -110,4 +111,5 @@ package.json:
     "semantic-ui-react": "^0.86.0"
   }
 }
+'''
 
