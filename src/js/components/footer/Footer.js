@@ -8,12 +8,12 @@ export default class Footer extends Component {
     render() {
 
         return (
-            <Segment inverted>
-            <Grid columns={3} divided>
-                <Grid.Row>
+            <Segment>
+                <Grid columns={3} divided>
+                    <Grid.Row>
                         <Grid.Column>
-                            <Header inverted size='large'> About</Header>
-                            <List divided inverted relaxed>
+                            <Header size='large'> About</Header>
+                            <List divided relaxed>
                                 <List.Item active> Home</List.Item>
                                 <List.Item> test2</List.Item>
                                 <List.Item> test3</List.Item>
@@ -21,22 +21,22 @@ export default class Footer extends Component {
                         </Grid.Column>
                         <Grid.Column>
                             <Header inverted size='large'> About</Header>
-                            <List divided inverted relaxed>
-                            <List.Item active> Home</List.Item>
+                            <List divided relaxed>
+                                <List.Item active> Home</List.Item>
                                 <List.Item> test2</List.Item>
                                 <List.Item> test3</List.Item>
                             </List>
                         </Grid.Column>
                         <Grid.Column>
                             <Header inverted size='large'> About</Header>
-                            <List divided inverted relaxed>
+                            <List divided relaxed>
                                 <List.Item active> Home</List.Item>
                                 <List.Item> test2</List.Item>
                                 <List.Item> test3</List.Item>
                             </List>
                         </Grid.Column>
-                </Grid.Row>
-            </Grid>
+                    </Grid.Row>
+                </Grid>
             </Segment>
         )
     }

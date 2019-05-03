@@ -1,0 +1,38 @@
+.cd-section {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.cd-section--bg-fixed {
+    min-height: 100vh;
+    background-attachment: fixed;
+}
+
+/* backgrounds */
+.cd-section:nth-child(1) {
+    background-image: url("../Images/grassBackground.jpg");
+}
+
+.cd-section:nth-child(2) {
+    background-image: url("../Images/test.jpg");
+}
+
+.cd-section:nth-child(3) {
+    /* background image here */
+}
+
+
+/*
+.container {
+    height: 700px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: 100% auto;
+    position:relative;
+}
+.parallax_image_first{
+    background-image: url("../Images/grassBackground.jpg");
+}
+*/
