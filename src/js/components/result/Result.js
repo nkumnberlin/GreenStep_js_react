@@ -9,44 +9,36 @@ const Results = () => (
                 <Grid.Row>
                     <Grid.Column>
 
-                        <Segment>
-                            <Step.Group>
-                                <Step>
-                                    <Step.Title>RESULTS</Step.Title>
-                                    <Step.Description>Choose your </Step.Description>
-                                </Step>
-                            </Step.Group>
-                        </Segment>
+                        <Step.Group>
+                            <Step>
+                                <Step.Title>RESULTS</Step.Title>
+                                <Step.Description>Choose your </Step.Description>
+                            </Step>
+                        </Step.Group>
                     </Grid.Column>
                     <Grid.Column>
-                        <Segment>
-                            <Step.Group>
-                                <Step>
-                                    <Step.Title>RESULTS</Step.Title>
-                                    <Step.Description>Choose your </Step.Description>
-                                </Step>
-                            </Step.Group>
-                        </Segment>
+                        <Step.Group>
+                            <Step>
+                                <Step.Title>RESULTS</Step.Title>
+                                <Step.Description>Choose your </Step.Description>
+                            </Step>
+                        </Step.Group>
                     </Grid.Column>
                     <Grid.Column>
-                        <Segment>
-                            <Step.Group>
-                                <Step>
-                                    <Step.Title>RESULTS</Step.Title>
-                                    <Step.Description>Choose your </Step.Description>
-                                </Step>
-                            </Step.Group>
-                        </Segment>
+                        <Step.Group>
+                            <Step>
+                                <Step.Title>RESULTS</Step.Title>
+                                <Step.Description>Choose your </Step.Description>
+                            </Step>
+                        </Step.Group>
                     </Grid.Column>
                     <Grid.Column>
-                        <Segment>
-                            <Step.Group>
-                                <Step>
-                                    <Step.Title>RESULTS</Step.Title>
-                                    <Step.Description>Choose your </Step.Description>
-                                </Step>
-                            </Step.Group>
-                        </Segment>
+                        <Step.Group>
+                            <Step>
+                                <Step.Title>RESULTS</Step.Title>
+                                <Step.Description>Choose your </Step.Description>
+                            </Step>
+                        </Step.Group>
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
