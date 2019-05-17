@@ -1,26 +1,131 @@
-import React from 'react'
-import { Button, Form, Label, Segment } from 'semantic-ui-react'
+import React, {Component} from 'react';
+import PlacesAutocomplete, {
+    geocodeByAddress,
+    getLatLng,
+} from 'react-places-autocomplete';
+import {Segment, Grid, Form, Button} from 'semantic-ui-react'
 
-const Search = () => (
-<Segment stacked>
-    <Form>
-        <Form.Group unstackable widths={2}>
-            <Form.Input label='Departure' placeholder='Departure' />
-
-        </Form.Group>
-        <Form.Group widths={2}>
-            <Form.Input label='Destination' placeholder='Destination' />
-
-        </Form.Group>
-        <Button type='submit'>Search</Button>
-    </Form>
-</Segment>
-)
-
-const test = {
-    ready1: {
-        key: "value"
+export default class LocationSearchInput extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { address: '' };
     }
-};
 
-export default Search
+    handleChange = address => {
+        this.setState({ address });
+    };
+
+    handleSelect = address => {
+        geocodeByAddress(address)
+            .then(results => getLatLng(results[0]))
+            .then(latLng => console.log('Success', latLng))
+            .catch(error => console.error('Error', error));
+    };
+    render() {
+        return (
+            <PlacesAutocomplete
+                value={this.state.address}
+                onChange={this.handleChange}
+                onSelect={this.handleSelect}
+            >
+
+                MIT NER LISTE DAS ERLEDIGEN!!
+
+
+                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                    <div>
+                        <Segment>
+                            <Form>
+                            <Grid columns={2} divided>
+                                <Grid.Row>
+                                    <Grid.Column>
+
+                                        <Form.Input
+                                            {...getInputProps({
+                                                placeholder: 'Search Places ...',
+                                                className: 'location-search-input',
+                                            })}
+                                        />
+                                        <div className="autocomplete-dropdown-container">
+                                            {loading && <div>Loading...</div>}
+                                            {suggestions.map(suggestion => {
+                                                const className = suggestion.active
+                                                    ? 'suggestion-item--active'
+                                                    : 'suggestion-item';
+                                                // inline style for demonstration purpose
+                                                const style = suggestion.active
+                                                    ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                                                    : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                                                return (
+                                                    <div
+                                                        {...getSuggestionItemProps(suggestion, {
+                                                            className,
+                                                            style,
+                                                        })}
+                                                    >
+                                                        <span>{suggestion.description}</span>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    </Grid.Column>
+                                </Grid.Row>
+                            </Grid>
+                            </Form>
+                        </Segment>
+                    </div>
+                )}
+            </PlacesAutocomplete>
+        );
+    }
+}
+/*
+<div className="autocomplete-dropdown-container">
+                            {loading && <div>Loading...</div>}
+                            {suggestions.map(suggestion => {
+                                const className = suggestion.active
+                                    ? 'suggestion-item--active'
+                                    : 'suggestion-item';
+                                // inline style for demonstration purpose
+                                const style = suggestion.active
+                                    ? {backgroundColor: '#fafafa', cursor: 'pointer'}
+                                    : {backgroundColor: '#ffffff', cursor: 'pointer'};
+                                return (
+                                    <div
+                                        {...getSuggestionItemProps(suggestion, {
+                                            className,
+                                            style,
+                                        })}
+                                    >
+                                        <span>{suggestion.description}</span>
+                                    </div>
+                                );
+                            })}
+                        </div>
+ */
+
+
+/*
+ <div className="autocomplete-dropdown-container">
+                            {loading && <div>Loading...</div>}
+                            {suggestions.map(suggestion => {
+                                const className = suggestion.active
+                                    ? 'suggestion-item--active'
+                                    : 'suggestion-item';
+                                // inline style for demonstration purpose
+                                const style = suggestion.active
+                                    ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                                    : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                                return (
+                                    <div
+                                        {...getSuggestionItemProps(suggestion, {
+                                            className,
+                                            style,
+                                        })}
+                                    >
+                                        <span>{suggestion.description}</span>
+                                    </div>
+                                );
+                            })}
+                        </div>
+ */
