@@ -1,6 +1,7 @@
 import React from 'react'
 import {Step, Segment, Grid} from 'semantic-ui-react'
 
+
 const Results = () => (
 
     <div>

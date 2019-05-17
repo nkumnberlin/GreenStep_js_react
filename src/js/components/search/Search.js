@@ -21,6 +21,7 @@ export default class LocationSearchInput extends Component {
             .then(latLng => console.log('Success', latLng))
             .catch(error => console.error('Error', error));
     };
+
     render() {
         return (
             <PlacesAutocomplete
@@ -28,50 +29,39 @@ export default class LocationSearchInput extends Component {
                 onChange={this.handleChange}
                 onSelect={this.handleSelect}
             >
-
-                MIT NER LISTE DAS ERLEDIGEN!!
-
-
                 {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                     <div>
                         <Segment>
-                            <Form>
-                            <Grid columns={2} divided>
-                                <Grid.Row>
-                                    <Grid.Column>
+                        <Form.Input
+                            {...getInputProps({
+                                placeholder: 'Search Places ...',
+                                className: 'location-search-input',
+                            })}
+                        />
+                        <div className="autocomplete-dropdown-container">
+                            {loading && <div>Loading...</div>}
+                            {suggestions.map(suggestion => {
+                                const className = suggestion.active
+                                    ? 'suggestion-item--active'
+                                    : 'suggestion-item';
 
-                                        <Form.Input
-                                            {...getInputProps({
-                                                placeholder: 'Search Places ...',
-                                                className: 'location-search-input',
-                                            })}
-                                        />
-                                        <div className="autocomplete-dropdown-container">
-                                            {loading && <div>Loading...</div>}
-                                            {suggestions.map(suggestion => {
-                                                const className = suggestion.active
-                                                    ? 'suggestion-item--active'
-                                                    : 'suggestion-item';
-                                                // inline style for demonstration purpose
-                                                const style = suggestion.active
-                                                    ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                                                    : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                                                return (
-                                                    <div
-                                                        {...getSuggestionItemProps(suggestion, {
-                                                            className,
-                                                            style,
-                                                        })}
-                                                    >
-                                                        <span>{suggestion.description}</span>
-                                                    </div>
-                                                );
-                                            })}
-                                        </div>
-                                    </Grid.Column>
-                                </Grid.Row>
-                            </Grid>
-                            </Form>
+                                // inline style for demonstration purpose
+
+                                const style = suggestion.active
+                                    ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                                    : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                                return (
+                                    <div
+                                        {...getSuggestionItemProps(suggestion, {
+                                            className,
+                                            style,
+                                        })}
+                                    >
+                                        <span>{suggestion.description}</span>
+                                    </div>
+                                );
+                            })}
+                        </div>
                         </Segment>
                     </div>
                 )}
