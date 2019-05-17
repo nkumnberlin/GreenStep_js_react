@@ -8,10 +8,9 @@ import Title from './js/components/title/Title.js';
 import './style.css'
 import LocationSearchInput from "./js/components/search/Search";
 
-
+ReactDOM.render(<Title />, document.getElementById('title'));
 ReactDOM.render(<MenuBar/>, document.getElementById('header'));
 ReactDOM.render(<LocationSearchInput />, document.getElementById('search'));
-ReactDOM.render(<Title />, document.getElementById('title'));
 ReactDOM.render(<Results />, document.getElementById('results'));
 ReactDOM.render(<Footer />, document.getElementById('footer'));
 

@@ -30,46 +30,53 @@ export default class Results extends Component {
             }
         }
     ];
-
     descriptionResults = ['Transport', 'Emission Value', 'Distance']
 
     _renderFetchResults() {
         return Object.entries(this.fetchResults).map(([key, value], i) => {
-            return (
-                <Fragment key={key}>
-                    <Divider horizontal>
-                        <Header as='h4'>
-                            <Icon name='tag'/>
-                        </Header>
-                    </Divider>
+            let descriptionOfResult =
+                <><Divider horizontal>
+                    <Header as='h4'>
+                        <Icon name='tag'/>
+                    </Header>
+                </Divider>
                     <p>
                         {value[key].description}
-                    </p>
+                    </p></>;
 
-                    <Divider horizontal>
-                        <Header as='h4'>
-                            <Icon name='bar chart'/>
-                            Details
-                        </Header>
-                    </Divider>
+            let detailsOfResult = <Divider horizontal>
+                <Header as='h4'>
+                    <Icon name='bar chart'/>
+                    Details
+                </Header>
+            </Divider>;
 
+            const listOfResult =
+                <>
+                    <Table.Row>
+                        <Table.Cell width={2}>{this.descriptionResults[0]}</Table.Cell>
+                        <Table.Cell>{value[key].transport}</Table.Cell>
+                    </Table.Row>
+                    <Table.Row>
+                        <Table.Cell width={2}>{this.descriptionResults[1]}</Table.Cell>
+                        <Table.Cell>{value[key].emission}</Table.Cell>
+                    </Table.Row>
+                    <Table.Row>
+                        <Table.Cell width={2}>{this.descriptionResults[2]}</Table.Cell>
+                        <Table.Cell>{value[key].distance}</Table.Cell>
+                    </Table.Row>
+                </>;
+
+            return (
+                <Fragment key={key}>
+                    {descriptionOfResult}
+                    {detailsOfResult}
                     <Table definition>
                         <Table.Body>
                             <Grid columns={4} divided>
                                 <Grid.Row>
                                     <Grid.Column>
-                                        <Table.Row>
-                                            <Table.Cell width={2}>Transport</Table.Cell>
-                                            <Table.Cell>{value[key].transport}</Table.Cell>
-                                        </Table.Row>
-                                        <Table.Row>
-                                            <Table.Cell width={2}>Emission Value</Table.Cell>
-                                            <Table.Cell>{value[key].emission}</Table.Cell>
-                                        </Table.Row>
-                                        <Table.Row>
-                                            <Table.Cell width={2}>Distance</Table.Cell>
-                                            <Table.Cell>{value[key].distance}</Table.Cell>
-                                        </Table.Row>
+                                        {listOfResult}
                                     </Grid.Column>
                                 </Grid.Row>
                             </Grid>
