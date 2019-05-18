@@ -27,3 +27,13 @@
     margin-top: 2em;
     margin-bottom: 2em;
 }
+
+#progressBubble {
+    width:200px;
+    height:50px;
+    border:1px solid black;
+    background: -webkit-linear-gradient(left, red 100%, white 0%);
+    background: -moz-linear-gradient(left, red 50%, white 50%);
+    background: -ms-linear-gradient(left, red 50%, white 50%);
+    background: linear-gradient(left, red 50%, white 50%);
+}

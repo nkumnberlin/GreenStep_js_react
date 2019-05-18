@@ -1,92 +1,183 @@
-import React, {Component, Fragment} from 'react'
-import {Divider, Table, Header, Icon, Segment, Rail, Grid} from 'semantic-ui-react'
+import React, {Component} from 'react'
+import {Divider, Progress, Container, Header, Segment, Grid, SegmentGroup} from 'semantic-ui-react'
+import GridColumn from "semantic-ui-react/dist/commonjs/collections/Grid/GridColumn";
+import HeaderSubHeader from "semantic-ui-react/dist/commonjs/elements/Header/HeaderSubheader";
 
 
 export default class Results extends Component {
     fetchResults = [
         {
             0: {
-                transport: 'Flight',
-                emission: '10kg',
-                distance: '1000km',
+                transport: 'Plane',
+                emission: 21,
+                distance: 1000,
                 description: 'Fancy things about plane flights are bad!',
                 icon: 'tba'
             }
         }, {
             1: {
                 transport: 'Car',
-                emission: '8kg',
-                distance: '600km',
+                emission: 15,
+                distance: 600,
                 description: 'Fancy things about car rides are bad!',
                 icon: 'tba'
             }
         }, {
             2: {
                 transport: 'Train',
-                emission: '4kg',
-                distance: '300km',
+                emission: 8,
+                distance: 300,
                 description: 'Fancy things about train rides are bad!',
                 icon: 'tba'
             }
         }
     ];
-    descriptionResults = ['Transport', 'Emission Value', 'Distance']
+
+
+
+
+
 
     _renderFetchResults() {
         return Object.entries(this.fetchResults).map(([key, value], i) => {
-            let descriptionOfResult =
-                <>
-                <Grid.Column width={3}>
-                    <Divider horizontal>
-                    <Header as='h4'>
-                        <Icon name='tag'/>
-                    </Header>
-                </Divider>
-                    <p>
-                        {value[key].description}
-                    </p>
-                </Grid.Column>
-                </>;
 
-            const listOfResult =
-                <>
-                    <Grid.Column width={10}>
-                        <Segment>
-                            {this.descriptionResults[0]}
-                            {value[key].transport}
-                            {this.descriptionResults[1]}
-                            {value[key].emission}
-                            {this.descriptionResults[2]}
-                            {value[key].distance}
+            const getHighestEmission = () => {
+                let arr = [];
+                arr.push(value[key].emission)
+                // return(Math.max(...arr))
+                return 21;
+            };
+
+            const getHighestDistance= () => {
+                let arr = [];
+                Object.entries(this.fetchResults).map(([key, value]) => {
+                    arr.push(value[key].distance)
+                });
+                // return(Math.max(...arr))
+                return 1000;
+            };
+
+                const descriptionResults = {
+                    type: 'Transport',
+                    dist: 'Distance',
+                    em: 'Emission Value',
+                    unitWeight: 'kg',
+                    unitDistance: 'km',
+                    separator: ': '
+                };
+
+
+                const CreateCO2Bubble = (emission) =>
+                    <div>
+                        <Segment color={ColorOfBubble(emission)} circular style={SizeOfBubble(emission)}>
+                            <Header as='h2'>
+                                <p>{value[key].transport}</p>
+                            </Header>
+                            <Header.Subheader>
+                                <p>{value[key].emission}  {descriptionResults.unitWeight}</p>
+                                <p>{value[key].distance}  {descriptionResults.unitDistance}</p>
+                            </Header.Subheader>
                         </Segment>
-                    </Grid.Column>
-                </>;
+                    </div>;
 
-            return (
-                <Grid celled='internally'>
-                    <Grid.Row>
+                const SizeOfBubble = (emission) => {
+                    let sizeOfBubble;
+                    switch (true) {
+                        case emission < 10:
+                            sizeOfBubble = {width: 300, height: 200};
+                            break;
+                        case emission < 20:
+                            sizeOfBubble = {width: 450, height: 200};
+                            break;
+                        case emission > 20:
+                            sizeOfBubble = {width: 600, height: 200};
+                            break;
+                    }
+                    return sizeOfBubble;
+                };
+
+                const ColorOfBubble = (emission) => {
+                    let colorOfSegment;
+                    switch (true) {
+                        case emission < 5:
+                            colorOfSegment = 'green';
+                            break;
+                        case emission < 10:
+                            colorOfSegment = 'teal';
+                            break;
+                        case emission < 15:
+                            colorOfSegment = 'blue';
+                            break;
+                        case emission < 20:
+                            colorOfSegment = 'yellow';
+                            break;
+                        case emission < 25:
+                            colorOfSegment = 'red';
+                            break;
+                        case emission > 25:
+                            colorOfSegment = 'black';
+                            break;
+
+                    }
+                    return colorOfSegment;
+                };
+
+                const BuildTopProgressbar = (emission) => {
+                    const MaxEmission = getHighestEmission() / 100;
+                    return  emission / MaxEmission;
+                };
+
+            const BuildBotProgressbar = (distance) => {
+                const MaxEmission = getHighestDistance() / 100;
+                return  distance / MaxEmission;
+            };
 
 
-                        <Fragment key={key}>
-                            {descriptionOfResult}
-                            {listOfResult}
-                        </Fragment>
-                    </Grid.Row>
-                </Grid>
 
-            )
-        })
+
+            const BuildProgressbar = (emission, distance) =>
+                    <Segment>
+                        <Progress color={ColorOfBubble(emission)} percent={BuildTopProgressbar(emission)} attached='top' size='medium' />
+
+                        <Header as='h2'>
+                            <p>{value[key].transport} {}</p>
+                        </Header>
+                        <Header.Subheader>
+                            <p>{value[key].emission}  {descriptionResults.unitWeight}</p>
+                            <p>{value[key].distance}  {descriptionResults.unitDistance}</p>
+                        </Header.Subheader>
+
+                        <Progress percent={BuildBotProgressbar(distance)} attached='bottom' size='medium' />
+                    </Segment>
+
+
+
+                return (
+                    <Grid columns={1} key={key}>
+                        <Grid.Column>
+                            {/*{CreateCO2Bubble(value[key].emission)}*/}
+                            {BuildProgressbar(value[key].emission, value[key].distance)}
+                        </Grid.Column>
+                    </Grid>
+
+
+
+                )
+            }
+        )
     }
 
     render() {
         return (
             <div>
                 <Segment>
-                    <Header as='h4' textAlign='center'>Results</Header>
-                    {this._renderFetchResults()}
+                    <Container textAlign='center'><Header as='h4'> Results </Header></Container>
+                    <Divider/>
+                    <Container fluid textAlign='center'>
+                        {this._renderFetchResults()}
+                    </Container>
                 </Segment>
             </div>
-
         )
     };
 }

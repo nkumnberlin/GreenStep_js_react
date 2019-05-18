@@ -28,6 +28,7 @@ export default class LocationSearchInput extends Component {
                 value={this.state.address}
                 onChange={this.handleChange}
                 onSelect={this.handleSelect}
+
             >
                 {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                     <div>
