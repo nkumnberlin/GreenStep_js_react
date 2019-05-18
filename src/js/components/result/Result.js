@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react'
-import {Divider, Table, Header, Icon, Segment, Grid} from 'semantic-ui-react'
+import {Divider, Table, Header, Icon, Segment, Rail, Grid} from 'semantic-ui-react'
 
 
 export default class Results extends Component {
@@ -35,54 +35,45 @@ export default class Results extends Component {
     _renderFetchResults() {
         return Object.entries(this.fetchResults).map(([key, value], i) => {
             let descriptionOfResult =
-                <><Divider horizontal>
+                <>
+                <Grid.Column width={3}>
+                    <Divider horizontal>
                     <Header as='h4'>
                         <Icon name='tag'/>
                     </Header>
                 </Divider>
                     <p>
                         {value[key].description}
-                    </p></>;
-
-            let detailsOfResult = <Divider horizontal>
-                <Header as='h4'>
-                    <Icon name='bar chart'/>
-                    Details
-                </Header>
-            </Divider>;
+                    </p>
+                </Grid.Column>
+                </>;
 
             const listOfResult =
                 <>
-                    <Table.Row>
-                        <Table.Cell width={2}>{this.descriptionResults[0]}</Table.Cell>
-                        <Table.Cell>{value[key].transport}</Table.Cell>
-                    </Table.Row>
-                    <Table.Row>
-                        <Table.Cell width={2}>{this.descriptionResults[1]}</Table.Cell>
-                        <Table.Cell>{value[key].emission}</Table.Cell>
-                    </Table.Row>
-                    <Table.Row>
-                        <Table.Cell width={2}>{this.descriptionResults[2]}</Table.Cell>
-                        <Table.Cell>{value[key].distance}</Table.Cell>
-                    </Table.Row>
+                    <Grid.Column width={10}>
+                        <Segment>
+                            {this.descriptionResults[0]}
+                            {value[key].transport}
+                            {this.descriptionResults[1]}
+                            {value[key].emission}
+                            {this.descriptionResults[2]}
+                            {value[key].distance}
+                        </Segment>
+                    </Grid.Column>
                 </>;
 
             return (
-                <Fragment key={key}>
-                    {descriptionOfResult}
-                    {detailsOfResult}
-                    <Table definition>
-                        <Table.Body>
-                            <Grid columns={4} divided>
-                                <Grid.Row>
-                                    <Grid.Column>
-                                        {listOfResult}
-                                    </Grid.Column>
-                                </Grid.Row>
-                            </Grid>
-                        </Table.Body>
-                    </Table>
-                </Fragment>
+                <Grid celled='internally'>
+                    <Grid.Row>
+
+
+                        <Fragment key={key}>
+                            {descriptionOfResult}
+                            {listOfResult}
+                        </Fragment>
+                    </Grid.Row>
+                </Grid>
+
             )
         })
     }
