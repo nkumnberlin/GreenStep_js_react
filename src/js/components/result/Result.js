@@ -58,7 +58,7 @@ export default class Results extends Component {
             };
 
                 const descriptionResults = {
-                    type: 'Transport',
+                    typ: 'Type of Transport',
                     dist: 'Distance',
                     em: 'Emission Value',
                     unitWeight: 'kg',
@@ -69,9 +69,9 @@ export default class Results extends Component {
 
                 const CreateCO2Bubble = (emission) =>
                     <div>
-                        <Segment color={ColorOfBubble(emission)} circular style={SizeOfBubble(emission)}>
+                        <Segment  color={ColorOfBubble(emission)} circular style={SizeOfBubble(emission)}>
                             <Header as='h2'>
-                                <p>{value[key].transport}</p>
+                                <p>  {value[key].transport}</p>
                             </Header>
                             <Header.Subheader>
                                 <p>{value[key].emission}  {descriptionResults.unitWeight}</p>
@@ -140,11 +140,11 @@ export default class Results extends Component {
                         <Progress color={ColorOfBubble(emission)} percent={BuildTopProgressbar(emission)} attached='top' size='medium' />
 
                         <Header as='h2'>
-                            <p>{value[key].transport} {}</p>
+                            <p>{value[key].transport}</p>
                         </Header>
                         <Header.Subheader>
-                            <p>{value[key].emission}  {descriptionResults.unitWeight}</p>
-                            <p>{value[key].distance}  {descriptionResults.unitDistance}</p>
+                            <p>{descriptionResults.em}{descriptionResults.separator} {value[key].emission}{descriptionResults.unitWeight}</p>
+                            <p>{descriptionResults.dist}{descriptionResults.separator}{value[key].distance}  {descriptionResults.unitDistance}</p>
                         </Header.Subheader>
 
                         <Progress percent={BuildBotProgressbar(distance)} attached='bottom' size='medium' />
@@ -171,7 +171,7 @@ export default class Results extends Component {
         return (
             <div>
                 <Segment>
-                    <Container textAlign='center'><Header as='h4'> Results </Header></Container>
+                    <Container textAlign='center'><Header as='h1'> Results </Header></Container>
                     <Divider/>
                     <Container fluid textAlign='center'>
                         {this._renderFetchResults()}

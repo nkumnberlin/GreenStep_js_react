@@ -12,7 +12,8 @@ npm i --save-dev style-loader
 npm i css-loader -D
 npm i url-loader -D
 npm i file-loader -D
-
+npm i react-google-autocomplete --save
+npm install -s @material-ui/icons
 
 Requierments:
 node.js unter 10.11.0 wird benötigt für semantic-ui

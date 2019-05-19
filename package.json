@@ -30,7 +30,11 @@
   },
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@material-ui/icons": "^3.0.2",
+    "material-ui-search-bar": "^0.4.2",
     "node": "^10.11.0",
+    "react-google-autocomplete": "^1.1.0",
+    "react-load-script": "0.0.6",
     "react-places-autocomplete": "^7.2.1",
     "semantic-ui": "^2.4.2",
     "semantic-ui-css": "^2.4.1",
