@@ -7,7 +7,6 @@
 .cd-section--bg-fixed {
     min-height: 100em;
     background-attachment: fixed;
-    max-height: 800px;
 }
 
 /* backgrounds */
@@ -23,7 +22,7 @@
     /* background image here */
 }
 
-#footer, #results{
+#footer, #results, #title{
     margin-top: 2em;
     margin-bottom: 2em;
 }
