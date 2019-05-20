@@ -1,8 +1,5 @@
 import React, {Component} from 'react'
-import {Divider, Progress, Container, Header, Segment, Grid, SegmentGroup} from 'semantic-ui-react'
-import GridColumn from "semantic-ui-react/dist/commonjs/collections/Grid/GridColumn";
-import HeaderSubHeader from "semantic-ui-react/dist/commonjs/elements/Header/HeaderSubheader";
-
+import {Divider, Progress, Container, Header, Segment, Grid} from 'semantic-ui-react'
 
 export default class Results extends Component {
     fetchResults = [
@@ -124,7 +121,7 @@ export default class Results extends Component {
 
                 const BuildTopProgressbar = (emission) => {
                     const MaxEmission = getHighestEmission() / 100;
-                    return  emission / MaxEmission;
+                    return  100 - (emission / MaxEmission);
                 };
 
             const BuildBotProgressbar = (distance) => {
@@ -137,17 +134,15 @@ export default class Results extends Component {
 
             const BuildProgressbar = (emission, distance) =>
                     <Segment>
-                        <Progress color={ColorOfBubble(emission)} percent={BuildTopProgressbar(emission)} attached='top' size='medium' />
 
                         <Header as='h2'>
                             <p>{value[key].transport}</p>
                         </Header>
                         <Header.Subheader>
-                            <p>{descriptionResults.em}{descriptionResults.separator} {value[key].emission}{descriptionResults.unitWeight}</p>
-                            <p>{descriptionResults.dist}{descriptionResults.separator}{value[key].distance}  {descriptionResults.unitDistance}</p>
+                            <Progress content={<p><br/>{descriptionResults.em + descriptionResults.separator + +value[key].emission +descriptionResults.unitWeight}</p>} percent={BuildTopProgressbar(emission) } indicating  />
+                            <p><br/>{descriptionResults.dist}{descriptionResults.separator}{value[key].distance}  {descriptionResults.unitDistance}</p>
                         </Header.Subheader>
 
-                        <Progress percent={BuildBotProgressbar(distance)} attached='bottom' size='medium' />
                     </Segment>
 
 
