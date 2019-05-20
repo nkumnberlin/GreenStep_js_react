@@ -31,28 +31,24 @@ export default class Results extends Component {
     ];
 
 
-
-
-
-
     _renderFetchResults() {
         return Object.entries(this.fetchResults).map(([key, value], i) => {
 
-            const getHighestEmission = () => {
-                let arr = [];
-                arr.push(value[key].emission)
-                // return(Math.max(...arr))
-                return 21;
-            };
+                const getHighestEmission = () => {
+                    let arr = [];
+                    arr.push(value[key].emission)
+                    // return(Math.max(...arr))
+                    return 21;
+                };
 
-            const getHighestDistance= () => {
-                let arr = [];
-                Object.entries(this.fetchResults).map(([key, value]) => {
-                    arr.push(value[key].distance)
-                });
-                // return(Math.max(...arr))
-                return 1000;
-            };
+                const getHighestDistance = () => {
+                    let arr = [];
+                    Object.entries(this.fetchResults).map(([key, value]) => {
+                        arr.push(value[key].distance)
+                    });
+                    // return(Math.max(...arr))
+                    return 1000;
+                };
 
                 const descriptionResults = {
                     typ: 'Type of Transport',
@@ -64,87 +60,31 @@ export default class Results extends Component {
                 };
 
 
-                const CreateCO2Bubble = (emission) =>
-                    <div>
-                        <Segment  color={ColorOfBubble(emission)} circular style={SizeOfBubble(emission)}>
-                            <Header as='h2'>
-                                <p>  {value[key].transport}</p>
-                            </Header>
-                            <Header.Subheader>
-                                <p>{value[key].emission}  {descriptionResults.unitWeight}</p>
-                                <p>{value[key].distance}  {descriptionResults.unitDistance}</p>
-                            </Header.Subheader>
-                        </Segment>
-                    </div>;
-
-                const SizeOfBubble = (emission) => {
-                    let sizeOfBubble;
-                    switch (true) {
-                        case emission < 10:
-                            sizeOfBubble = {width: 300, height: 200};
-                            break;
-                        case emission < 20:
-                            sizeOfBubble = {width: 450, height: 200};
-                            break;
-                        case emission > 20:
-                            sizeOfBubble = {width: 600, height: 200};
-                            break;
-                    }
-                    return sizeOfBubble;
-                };
-
-                const ColorOfBubble = (emission) => {
-                    let colorOfSegment;
-                    switch (true) {
-                        case emission < 5:
-                            colorOfSegment = 'green';
-                            break;
-                        case emission < 10:
-                            colorOfSegment = 'teal';
-                            break;
-                        case emission < 15:
-                            colorOfSegment = 'blue';
-                            break;
-                        case emission < 20:
-                            colorOfSegment = 'yellow';
-                            break;
-                        case emission < 25:
-                            colorOfSegment = 'red';
-                            break;
-                        case emission > 25:
-                            colorOfSegment = 'black';
-                            break;
-
-                    }
-                    return colorOfSegment;
-                };
-
                 const BuildTopProgressbar = (emission) => {
                     const MaxEmission = getHighestEmission() / 100;
-                    return  100 - (emission / MaxEmission);
+                    return 100 - (emission / MaxEmission);
                 };
 
-            const BuildBotProgressbar = (distance) => {
-                const MaxEmission = getHighestDistance() / 100;
-                return  distance / MaxEmission;
-            };
+                const BuildBotProgressbar = (distance) => {
+                    const MaxEmission = getHighestDistance() / 100;
+                    return distance / MaxEmission;
+                };
 
 
-
-
-            const BuildProgressbar = (emission, distance) =>
+                const BuildProgressbar = (emission, distance) =>
                     <Segment>
-
                         <Header as='h2'>
                             <p>{value[key].transport}</p>
                         </Header>
                         <Header.Subheader>
-                            <Progress content={<p><br/>{descriptionResults.em + descriptionResults.separator + +value[key].emission +descriptionResults.unitWeight}</p>} percent={BuildTopProgressbar(emission) } indicating  />
-                            <p><br/>{descriptionResults.dist}{descriptionResults.separator}{value[key].distance}  {descriptionResults.unitDistance}</p>
+                            <Progress content={<p>
+                                <br/>{descriptionResults.em + descriptionResults.separator + +value[key].emission + descriptionResults.unitWeight}
+                            </p>} percent={BuildTopProgressbar(emission)} indicating/>
+                            <p>
+                                <br/>{descriptionResults.dist}{descriptionResults.separator}{value[key].distance} {descriptionResults.unitDistance}
+                            </p>
                         </Header.Subheader>
-
-                    </Segment>
-
+                    </Segment>;
 
 
                 return (
@@ -154,7 +94,6 @@ export default class Results extends Component {
                             {BuildProgressbar(value[key].emission, value[key].distance)}
                         </Grid.Column>
                     </Grid>
-
 
 
                 )

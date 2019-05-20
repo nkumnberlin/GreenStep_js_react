@@ -36,3 +36,31 @@
     background: -ms-linear-gradient(left, red 50%, white 50%);
     background: linear-gradient(left, red 50%, white 50%);
 }
+
+
+body {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: normal;
+    font-style: normal;
+}
+
+.ui.header{
+    font-family: 'Roboto Mono', monospace;
+    font-weight: normal;
+    font-style: normal;
+}
+
+.ui.positive.button {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: normal;
+    font-style: normal;
+}
+
+.ui.input {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
