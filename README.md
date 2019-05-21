@@ -36,20 +36,28 @@ npm install --save-dev @babel/plugin-transform-runtime
 npm install --save @babel/runtime
 
 Requierments:
+
 node.js unter 10.11.0 wird benötigt für semantic-ui
+
 npm install node@10.11.0
 
 nach installieren von semantic-react:
+
 cd semantic
+
 gulp build
 
 
 Tutorial:
+
 https://hackernoon.com/serving-react-and-django-together-2089645046e4 
+
 in kombi mit
+
 https://www.valentinog.com/blog/drf/
 
 viritual env - activate
+
 ---- python manage.py runserver ----
 
 

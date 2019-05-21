@@ -5,11 +5,9 @@ import Footer from './footer/Footer.js';
 import Results from './result/Result.js';
 import Title from './title/Title.js';
 import '../../style.css'
-import LocationSearchInput from "./search/Search.js";
 import PythonResponse from "./python_endpoint/PythonResponse.js"
-import DestinationInput from "./python_endpoint/DestinationInput.js"
+import Search from "./search/Search.js"
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
-import ReactDOM from "react-dom";
 
 
 export default class App extends Component {
@@ -21,7 +19,7 @@ export default class App extends Component {
                 </Router>
                 <MenuBar/>
                 <Title/>
-                <LocationSearchInput/>
+                <Search/>
                 <Results/>
                 <Footer/>
             </div>
