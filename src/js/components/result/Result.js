@@ -65,12 +65,6 @@ export default class Results extends Component {
                     return 100 - (emission / MaxEmission);
                 };
 
-                const BuildBotProgressbar = (distance) => {
-                    const MaxEmission = getHighestDistance() / 100;
-                    return distance / MaxEmission;
-                };
-
-
                 const BuildProgressbar = (emission, distance) =>
                     <Segment>
                         <Header as='h2'>
@@ -104,7 +98,7 @@ export default class Results extends Component {
     render() {
         return (
             <div>
-                <Segment>
+                <Segment className={'results'} >
                     <Container textAlign='center'><Header as='h1'> Results </Header></Container>
                     <Divider/>
                     <Container fluid textAlign='center'>

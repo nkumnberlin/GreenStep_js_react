@@ -8,6 +8,7 @@ import '../../style.css'
 import PythonResponse from "./python_endpoint/PythonResponse.js"
 import Search from "./search/Search.js"
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import PythonPost from "./python_endpoint/PythonPost.js";
 
 
 export default class App extends Component {
@@ -22,6 +23,7 @@ export default class App extends Component {
                 <Search/>
                 <Results/>
                 <Footer/>
+                <PythonPost/>
             </div>
         )
     }

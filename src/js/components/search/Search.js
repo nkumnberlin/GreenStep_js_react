@@ -3,7 +3,9 @@ import React, {Component} from 'react';
 import Script from 'react-load-script';
 import {Segment, Grid, Form, Button} from 'semantic-ui-react'
 import Header from "semantic-ui-react/dist/commonjs/elements/Header";
+import Departure from './departure.js'
 import Divider from "semantic-ui-react/dist/commonjs/elements/Divider";
+import PythonPost from "../python_endpoint/PythonPost";
 
 
 const form_style = {
@@ -22,10 +24,10 @@ export default class Search extends Component {
             lat: '',
             lng: ''
         };
-        this.geocoder;
         // Bind Functions
         this.handleScriptLoad = this.handleScriptLoad.bind(this);
-        this.handlePlaceSelect = this.handlePlaceSelect.bind(this);
+        this.handleDeparture = this.handleDeparture.bind(this);
+        this.handleArrival = this.handleArrival.bind(this);
 
     }
 
@@ -42,13 +44,39 @@ export default class Search extends Component {
             document.getElementById('arrival'));
 
         this.departure.setFields(this.fields);
-        this.departure.addListener('place_changed', this.handlePlaceSelect);
+        this.departure.addListener('place_changed', this.handleDeparture);
         this.arrival.setFields(this.fields);
-        this.arrival.addListener('place_changed', this.handlePlaceSelect);
+        this.arrival.addListener('place_changed', this.handleArrival);
     };
 
-    handlePlaceSelect = () => {
+    handleDeparture = () => {
         let place = this.departure.getPlace();
+        if (!place.geometry) {
+            // User entered the name of a Place that was not suggested and
+            // pressed the Enter key, or the Place Details request failed.
+            console.log("No details available for input: '" + place.name + "'");
+            return;
+        }
+        let address = place.address_components;
+        let lat = place.geometry.location.lat();
+        let lng = place.geometry.location.lng();
+        // Check if address is valid
+        console.log(address);
+        if (address) {
+            // Set State
+            this.setState(
+                {
+                    lat: lat,
+                    lng: lng
+                }
+            );
+            this.codeLatLng(lat, lng);
+            console.log(this.state)
+        }
+    };
+
+    handleArrival = () => {
+        let place = this.arrival.getPlace();
         if (!place.geometry) {
             // User entered the name of a Place that was not suggested and
             // pressed the Enter key, or the Place Details request failed.
@@ -89,6 +117,8 @@ export default class Search extends Component {
                 alert('Geocoder failed due to: ' + status);
             }
         });
+
+        // PythonPost.setState()
     };
 
 
@@ -101,19 +131,20 @@ export default class Search extends Component {
                 />
 
 
-                <Segment padded>
+                <Segment padded className={'search'}>
                     <Header textAlign={'center'} as='h3'> Plan your Trip and Compensate your Emission </Header>
 
                     <Grid>
                         <Grid.Row>
                             <Grid.Column width={12}>
                                 <Form>
-                                    <Form.Input id={'departure'} placeholder={'1'}
+                                    <Form.Input id={'departure'} placeholder={'Departure'}
                                                 style={form_style}
                                     />
                                 </Form>
+                                
                                 <Form>
-                                    <Form.Input id={'arrival'} placeholder={'2'}
+                                    <Form.Input id={'arrival'} placeholder={'Arrival'}
                                                 style={form_style}/>
                                 </Form>
                             </Grid.Column>

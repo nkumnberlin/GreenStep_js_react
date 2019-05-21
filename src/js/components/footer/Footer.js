@@ -8,7 +8,7 @@ export default class Footer extends Component {
     render() {
 
         return (
-            <Segment>
+            <Segment className={'footer'}>
                 <Grid columns={3} divided>
                     <Grid.Row>
                         <Grid.Column>

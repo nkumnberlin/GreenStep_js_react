@@ -22,8 +22,12 @@
     /* background image here */
 }
 
-#footer, #results, #title{
+.footer, .results, .title{
     margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.search{
     margin-bottom: 2em;
 }
 
