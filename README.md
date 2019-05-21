@@ -8,12 +8,32 @@ https://guide.freecodecamp.org/semantic-ui/
 Install:
 
 npm i @babel/plugin-proposal-class-properties
+
 npm i --save-dev style-loader
+
 npm i css-loader -D
+
 npm i url-loader -D
+
 npm i file-loader -D
+
 npm i react-google-autocomplete --save
+
 npm install -s @material-ui/icons
+
+npm install axios --save
+
+npm install redux
+
+npm install react-router
+
+npm i react-router-dom
+
+npm i --save-dev @babel/plugin-transform-regenerator
+
+npm install --save-dev @babel/plugin-transform-runtime
+
+npm install --save @babel/runtime
 
 Requierments:
 node.js unter 10.11.0 wird benötigt für semantic-ui
@@ -22,6 +42,16 @@ npm install node@10.11.0
 nach installieren von semantic-react:
 cd semantic
 gulp build
+
+
+Tutorial:
+https://hackernoon.com/serving-react-and-django-together-2089645046e4 
+in kombi mit
+https://www.valentinog.com/blog/drf/
+
+viritual env - activate
+---- python manage.py runserver ----
+
 
 ```javascript
 webpack.config:
