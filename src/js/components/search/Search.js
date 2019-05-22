@@ -142,7 +142,7 @@ export default class Search extends Component {
                                                 style={form_style}
                                     />
                                 </Form>
-                                
+
                                 <Form>
                                     <Form.Input id={'arrival'} placeholder={'Arrival'}
                                                 style={form_style}/>

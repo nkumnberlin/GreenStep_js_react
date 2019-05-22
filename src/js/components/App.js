@@ -15,9 +15,9 @@ export default class App extends Component {
     render() {
         return (
             <div>
-                <Router>
-                    <Route path='/' exact component={PythonResponse}/>
-                </Router>
+                {/*<Router>*/}
+                {/*    <Route path='/' exact component={PythonResponse}/>*/}
+                {/*</Router>*/}
                 <MenuBar/>
                 <Title/>
                 <Search/>

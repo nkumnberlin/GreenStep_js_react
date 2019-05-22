@@ -6,7 +6,6 @@ export default class PythonPost extends Component {
         state = {
         };
 
-
     //dest: {lat: 52.65182, lng: 8.126700000000028}
     //arr: {lat: 52.50386, lng: 13.509410000000003}
 
@@ -23,7 +22,6 @@ export default class PythonPost extends Component {
             .then(res => {
                 console.log(res);
                 console.log(res.data);
-
             })
     };
 
