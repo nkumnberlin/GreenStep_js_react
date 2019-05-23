@@ -150,7 +150,7 @@ export default class Search extends Component {
                             </Grid.Column>
 
                             <Grid.Column verticalAlign={'middle'} textAlign={'center'} width={4}>
-                                <Button positive> SEARCH </Button>
+                                <PythonPost />
                             </Grid.Column>
 
                         </Grid.Row>

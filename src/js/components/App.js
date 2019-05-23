@@ -23,7 +23,6 @@ export default class App extends Component {
                 <Search/>
                 <Results/>
                 <Footer/>
-                <PythonPost/>
             </div>
         )
     }

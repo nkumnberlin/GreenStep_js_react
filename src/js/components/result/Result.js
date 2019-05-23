@@ -2,6 +2,10 @@ import React, {Component} from 'react'
 import {Divider, Progress, Container, Header, Segment, Grid} from 'semantic-ui-react'
 
 export default class Results extends Component {
+    constructor(){
+        super()
+        // this.results = this.results.bind(this);
+    }
     fetchResults = [
         {
             0: {
@@ -97,8 +101,8 @@ export default class Results extends Component {
 
     render() {
         return (
-            <div>
-                <Segment className={'results'} >
+            <div className={'results'}>
+                <Segment>
                     <Container textAlign='center'><Header as='h1'> Results </Header></Container>
                     <Divider/>
                     <Container fluid textAlign='center'>
@@ -106,6 +110,7 @@ export default class Results extends Component {
                     </Container>
                 </Segment>
             </div>
+
         )
     };
 }
