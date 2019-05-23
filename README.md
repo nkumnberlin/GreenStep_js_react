@@ -56,10 +56,33 @@ in kombi mit
 
 https://www.valentinog.com/blog/drf/
 
-viritual env - activate
+
+
+>>>> Start Python Server: <<<<
+
+pip install virtualenv
+
+pip install django
+
+pip install django-restframework
+
+pip install django-cors-headers
+
+pip install requests
+
+move to: GreenStep\env\
+
+type in: Scripts\activate
+
+Viritual Env is now active: 
+
+To Start Python Server:
+
+move to backend\backend\ 
 
 ---- python manage.py runserver ----
 
+Happy Progging!
 
 ```javascript
 webpack.config:
