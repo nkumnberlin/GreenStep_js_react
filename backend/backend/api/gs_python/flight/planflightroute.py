@@ -70,15 +70,15 @@ class planflightroute:
             return False
 
     def getValues(self, origin_airport, dest_airport):
-        flight_dist = flightdistcalc().distanceInKmBetweenEarthCoordinates(origin_airport["lat"], origin_airport["lon"],
-                                                                         dest_airport["lat"], dest_airport["lon"])
+        flight_dist = flightdistcalc().distanceInKmBetweenEarthCoordinates(origin_airport["lat"], origin_airport["lng"],
+                                                                         dest_airport["lat"], dest_airport["lng"])
         takeoff_time= 30 #min
         flight_time = (flight_dist/800+takeoff_time)*60 #time is always in seconds
         arrival_transit_dist, arrival_transit_time = APIrequest().callGoogleDirectionsAPI(
-            str(origin_airport["lat"]) + " " + str(origin_airport["lon"]), origin_airport["iata"] + " airport",
+            str(origin_airport["lat"]) + " " + str(origin_airport["lng"]), origin_airport["iata"] + " airport",
             "transit")
         departure_transit_dist, departure_transit_time = APIrequest().callGoogleDirectionsAPI(
-            str(dest_airport["lat"]) + " " + str(dest_airport["lon"]), dest_airport["iata"] + " airport",
+            str(dest_airport["lat"]) + " " + str(dest_airport["lng"]), dest_airport["iata"] + " airport",
             "transit")
         return departure_transit_dist, arrival_transit_dist, flight_dist, departure_transit_time, arrival_transit_time, flight_time
 

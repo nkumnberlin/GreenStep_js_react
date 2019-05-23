@@ -21,10 +21,6 @@ class airportfinder:
             newdistance = flightdistcalc().distanceInKmBetweenEarthCoordinates(arr_lat, arr_lng, lat, lng)
             if newdistance<olddist:
                 #print (d["iata"]+"lat:" + str(lat)+"\tlng:"+str(lng))
-                #shortest_lat = lat
-                #shortest_lng = lng
-                #iata = d["iata"]
-                #airport_city = d["city"]
                 nearest_airport = d
                 olddist=newdistance
         return nearest_airport#iata, airport_city , shortest_lat, shortest_lng
