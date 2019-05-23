@@ -2,7 +2,6 @@
 import math
 class flightdistcalc:
     c = 0
-    earthRadiusKm = 0
     #def __call__(self):
     #    return earthRadiusKm * c
 
@@ -16,8 +15,7 @@ class flightdistcalc:
         dLon = self.degreesToRadians(lon2 - lon1)
         lat1 = self.degreesToRadians(lat1)
         lat2 = self.degreesToRadians(lat2)
-        a = math.sin(dLat / 2) * math.sin(dLat / 2) + math.sin(dLon / 2) * math.sin(dLon / 2) * math.cos(lat1) * math.cos(lat2)
+        a = math.sin(dLat / 2) * math.sin(dLat / 2) + math.sin(dLon / 2) * math.sin(dLon / 2) * math.cos(lat1) * \
+            math.cos(lat2)
         c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
         return earthRadiusKm * c * 1000
-
-
