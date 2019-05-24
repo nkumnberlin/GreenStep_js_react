@@ -5,7 +5,9 @@ import {Segment, Grid, Form, Button} from 'semantic-ui-react'
 import Header from "semantic-ui-react/dist/commonjs/elements/Header";
 import Departure from './departure.js'
 import Divider from "semantic-ui-react/dist/commonjs/elements/Divider";
-import PythonPost from "../python_endpoint/PythonPost";
+import postCords from "../python_endpoint/PythonPost";
+import Result from "../result/Result";
+
 
 
 const form_style = {
@@ -13,6 +15,7 @@ const form_style = {
     maxWidth: 800,
 };
 
+export let data_export = "";
 
 export default class Search extends Component {
     // Define Constructor
@@ -129,11 +132,8 @@ export default class Search extends Component {
                     url="https://maps.googleapis.com/maps/api/js?key=AIzaSyDo6leoat6ziQnl9n6oIsgYwSz5BopUfPM&libraries=places"
                     onLoad={this.handleScriptLoad}
                 />
-
-
                 <Segment padded className={'search'}>
                     <Header textAlign={'center'} as='h3'> Plan your Trip and Compensate your Emission </Header>
-
                     <Grid>
                         <Grid.Row>
                             <Grid.Column width={12}>
@@ -142,21 +142,16 @@ export default class Search extends Component {
                                                 style={form_style}
                                     />
                                 </Form>
-
                                 <Form>
                                     <Form.Input id={'arrival'} placeholder={'Arrival'}
                                                 style={form_style}/>
                                 </Form>
                             </Grid.Column>
-
                             <Grid.Column verticalAlign={'middle'} textAlign={'center'} width={4}>
-                                <PythonPost />
+                                <Button onClick={ data_export = postCords} positive> Submit </Button>
                             </Grid.Column>
-
                         </Grid.Row>
                     </Grid>
-
-
                 </Segment>
             </div>
         );

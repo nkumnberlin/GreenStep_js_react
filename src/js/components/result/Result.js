@@ -2,23 +2,23 @@ import React, {Component} from 'react'
 import {Divider, Progress, Container, Header, Segment, Grid} from 'semantic-ui-react'
 
 export default class Results extends Component {
-    constructor(){
-        super()
-        // this.results = this.results.bind(this);
+    constructor(props){
+        super(props);
     }
+
     fetchResults = [
         {
             0: {
                 transport: 'Plane',
                 emission: 21,
-                distance: 1000,
+                distance: 32,
                 description: 'Fancy things about plane flights are bad!',
                 icon: 'tba'
             }
         }, {
             1: {
                 transport: 'Car',
-                emission: 15,
+                emission: 1,
                 distance: 600,
                 description: 'Fancy things about car rides are bad!',
                 icon: 'tba'
@@ -26,7 +26,7 @@ export default class Results extends Component {
         }, {
             2: {
                 transport: 'Train',
-                emission: 8,
+                emission: 1000,
                 distance: 300,
                 description: 'Fancy things about train rides are bad!',
                 icon: 'tba'
@@ -34,6 +34,25 @@ export default class Results extends Component {
         }
     ];
 
+
+
+
+    getHighestEmission = () => {
+        let arr = [];
+        Object.entries(this.fetchResults).map(([key, value]) => {
+            // return(Math.max(...arr))
+        });
+        return 21;
+    };
+
+    getHighestDistance = () => {
+        let arr = [];
+        Object.entries(this.fetchResults).map(([key, value]) => {
+            arr.push(value[key].distance)
+        });
+        // return(Math.max(...arr))
+        return 1000;
+    };
 
     _renderFetchResults() {
         return Object.entries(this.fetchResults).map(([key, value], i) => {
@@ -114,4 +133,3 @@ export default class Results extends Component {
         )
     };
 }
-
