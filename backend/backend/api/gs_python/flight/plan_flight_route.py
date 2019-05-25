@@ -11,16 +11,31 @@ from APIrequests.APIrequest import APIrequest, call_flight_api
 # from .distcalc.calc_geographic_points import distcalc
 # from ..APIrequests.APIrequest import APIrequest, call_flight_api
 class planflightroute:
+    emission_flight = 0.18
+    emission_transit = 0.04
 
-    def planflight(self, arr_lng, arr_lat, dest_lng, dest_lat):
+    def __init__(self, origin_lng, origin_lat, dest_lng, dest_lat):
+        # Laegnengrad W/E
+        self.origin_lng = origin_lng
+        # Breitengrad N/S
+        self.origin_lat= origin_lat
+        self.dest_lng = dest_lng
+        self.dest_lat = dest_lat
+
+    def run_flight_planning(self):
+        departure_transit_dist, arrival_transit_dist, flight_dist, departure_transit_time, arrival_transit_time, flight_time = self.planflight()
+        flight_emission_result = flight_dist / 1000 * self.emission_flight + ((arrival_transit_dist + departure_transit_dist) / 1000) * self.emission_transit
+        return {"flight": {"dist": flight_dist + arrival_transit_dist + departure_transit_dist, "time": flight_time + arrival_transit_time + departure_transit_time, "emission": flight_emission_result}}
+
+    def planflight(self):
         #react
         #jsonload = json.load(open("api/gs_python/flight/largeairportDB.json"))
         #pycharm
         jsonload = json.load(open("/Users/tristanwachtel/PycharmProjects/GreenStep_js_react/backend/backend/api/gs_python/flight/largeairportDB.json"))
         #origin_iata, origin_city, origin_airport_lat, origin_airport_lng \
-        origin_airport = airportfinder().find_next_airport(arr_lat, arr_lng, jsonload)
+        origin_airport = airportfinder().find_next_airport(self.origin_lat, self.origin_lng, jsonload)
         #dest_iata, dest_city, dest_airport_lat, dest_airport_lng \
-        dest_airport = airportfinder().find_next_airport(dest_lat, dest_lng, jsonload)
+        dest_airport = airportfinder().find_next_airport(self.dest_lat, self.dest_lng, jsonload)
         #print ((origin_airport["iata"]+"\t"+ dest_airport["iata"]))
         flight_possible = call_flight_api().check_planned_route(origin_airport["iata"], dest_airport["iata"])
         #print (flight_possible)

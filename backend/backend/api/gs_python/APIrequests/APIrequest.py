@@ -26,6 +26,7 @@ class APIrequest:
 
     #berechnet auto und radstrecke
     def callGoogleDirectionsAPI(self, origin, destination, mode):
+        #print(origin+"\n"+destination)
         dist_response = requests.get(
             "https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + " &destination=" + destination
             + " &mode=" + mode + "&key=AIzaSyDo6leoat6ziQnl9n6oIsgYwSz5BopUfPM")
@@ -55,6 +56,7 @@ class call_flight_api:
         )
         json_decode_flightroute = json.loads(flight_route_response.text)
         #print (json_decode_flightroute)
+        #tbd: logik entfernen
         try:
             #print (json_decode_flightroute["Quotes"][0]["QuoteId"])
             # wenn "QuoteId":1,  im JSON-Response vorhanden dann: verfügbaren Routen
