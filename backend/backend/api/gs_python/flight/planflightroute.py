@@ -5,11 +5,11 @@ import json
 #Pycharm
 from flight.airportfinder import airportfinder
 from flight.flightdistcalc import flightdistcalc
-from APIrequests.APIrequest import APIrequest
+from APIrequests.APIrequest import APIrequest, call_flight_api
 #react
 # from .airportfinder import airportfinder
 # from .flightdistcalc import flightdistcalc
-# from ..APIrequests.APIrequest import APIrequest
+# from ..APIrequests.APIrequest import APIrequest, call_flight_api
 class planflightroute:
 
     def planflight(self, arr_lng, arr_lat, dest_lng, dest_lat):
@@ -22,7 +22,7 @@ class planflightroute:
         #dest_iata, dest_city, dest_airport_lat, dest_airport_lng \
         dest_airport = airportfinder().find_next_airport(dest_lat, dest_lng, jsonload)
         #print ((origin_airport["iata"]+"\t"+ dest_airport["iata"]))
-        flight_possible = self.check_planned_route(origin_airport["iata"], dest_airport["iata"])
+        flight_possible = call_flight_api().check_planned_route(origin_airport["iata"], dest_airport["iata"])
         #print (flight_possible)
         if flight_possible == True:
             return self.getValues(origin_airport, dest_airport)
@@ -34,35 +34,13 @@ class planflightroute:
             dest_airports = airportfinder().find_city_airport(dest_airport["city"], jsonload)
             for o_airport in origin_airports:
                 for d_airport in dest_airports:
-                    flight_possible = self.check_planned_route(o_airport["iata"], d_airport["iata"])
+                    flight_possible = call_flight_api().check_planned_route(o_airport["iata"], d_airport["iata"])
                     if flight_possible:
                         #print(flight_possible)
                         return self.getValues(o_airport, d_airport)
-                        break
             if flight_possible == False:
                 #print ("Nothing found")
                 return 0, 0, 0, 0, 0, 0
-
-    def check_planned_route(self, iata_origin, iata_dest):
-        flight_route_response = requests.get(
-            "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/DE/EUR/"
-            "de-DE/" + iata_origin + "/" + iata_dest + "/2019-10-01?inboundpartialdate=2019-10-10",
-            headers={
-                "X-RapidAPI-Host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
-                "X-RapidAPI-Key": "1de2f44c33msh037f72b19990e75p17ddc4jsn11356a6a1be8"
-            }
-        )
-        json_decode_flightroute = json.loads(flight_route_response.text)
-        #print (json_decode_flightroute)
-        try:
-            #print (json_decode_flightroute["Quotes"][0]["QuoteId"])
-            # wenn "QuoteId":1,  im JSON-Response vorhanden dann: verfügbaren Routen
-            if json_decode_flightroute["Quotes"][0]["QuoteId"] != 0:
-                return True
-            else:
-                return False
-        except KeyError:
-            return False
 
     def getValues(self, origin_airport, dest_airport):
         flight_dist = flightdistcalc().distanceInKmBetweenEarthCoordinates(origin_airport["lat"], origin_airport["lng"],
