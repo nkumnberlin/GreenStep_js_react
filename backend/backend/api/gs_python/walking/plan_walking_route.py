@@ -22,7 +22,7 @@ class walking_route:
         self.dest_lat = dest_lat
 
     def run_walking_planning(self):
-        cycling_dist, cycling_time = APIrequest().callMapBox("cycling", str(str(self.origin_lng) + "," +
+        walking_dist, walking_time = APIrequest().callMapBox("walking", str(str(self.origin_lng) + "," +
         str(self.origin_lat) + ";" + str(self.dest_lng) + "," + str(self.dest_lat)))
-        cycling_emission = cycling_dist / 1000 * self.emission_cycling
-        return {"walking": {"dist": 0, "time": 0, "emission": 0}}
+        walking_emission = walking_dist / 1000 * self.emission_walking
+        return {"walking": {"dist": walking_dist, "time": walking_time, "emission": walking_emission}}

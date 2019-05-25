@@ -5,6 +5,7 @@ from flight.plan_flight_route import planflightroute
 from cycling.plan_cycling_route import cycling_route
 from driving.plan_driving_route import driving_route
 from transit.plan_transit_route import transit_route
+from walking.plan_walking_route import walking_route
 #react
 #from .APIrequests.APIrequest import APIrequest
 #from .flight.planflightroute import planflightroute
@@ -25,7 +26,7 @@ class main:
 
     #Entry
     def __get__(self):
-        print(str(str(cycling_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_cycling_planning()) +"\n"+ str(driving_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_flight_planning()) +"\n"+ str(transit_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_transit_planning()) +"\n"+ str(planflightroute(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_flight_planning())))
+        print(str(str(walking_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_walking_planning()) +"\n"+ str(cycling_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_cycling_planning()) +"\n"+ str(driving_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_flight_planning()) +"\n"+ str(transit_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_transit_planning()) +"\n"+ str(planflightroute(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_flight_planning())))
 
     #def create_json(self):
         #flight_dist_sum, flight_time_sum, flight_emission_sum = self.call_flight_sth()
