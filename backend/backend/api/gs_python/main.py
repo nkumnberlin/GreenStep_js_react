@@ -1,9 +1,11 @@
 # coding=utf-8
-from .APIrequests.APIrequest import APIrequest
-#import flight.flight as flight
-from .flight.planflightroute import planflightroute
-import json
-from .domain.dataobject import dataobject
+#Pycharm
+from APIrequests.APIrequest import APIrequest
+from flight.planflightroute import planflightroute
+#react
+#from .APIrequests.APIrequest import APIrequest
+#from .flight.planflightroute import planflightroute
+
 class main:
     # emissions with upstream chain - source: Probas Umweltbundesamt
     emission_flight = 0.18
@@ -55,8 +57,8 @@ class main:
         cycling_dist, cycling_time, cycling_emission = self.call_cycling_sth()
         return {"flight": {"dist": flight_dist_sum, "time": flight_time_sum, "emission": flight_emission_sum}, "driving": {"dist": driving_dist,"time": driving_time,"emission": driving_emission}, "cycling": {"dist": cycling_dist,"time": cycling_time,"emission": cycling_emission}, "transit": {"dist": transit_dist,"time": transit_time,"emission": transit_emission}}
 
-#m=main(13.4662245, 52.5052512, 18.0965639, 59.324893)
-#print(m.create_json())
+m=main(13.4662245, 52.5052512, 18.0965639, 59.324893)
+print(m.create_json())
 # print("Emmitted Emission: \n - Cycling: " + str(
 #     emission_calc_cycling) + "kg CO2 p.P\t actual distance in meter: " + str(cycling_dist) + "\n - Driving: " + str(
 #     emission_calc_driving) + "kg CO2 p.P.\t actual distance in meter: " + str(driving_dist) + "\n - Transit: " + str(

@@ -704,7 +704,7 @@
       "lat":39.8098983765,
       "lng":30.5193996429,
       "name":"Anadolu University Airport",
-      "state":"Eski\u015fehir",
+      "state":"Eskişehir",
       "tz":"Europe/Istanbul"
    },
    "SPHY":{
@@ -2468,7 +2468,7 @@
       "lat":44.503200531,
       "lng":26.1021003723,
       "name":"Baneasa International Airport",
-      "state":"Bucure\u015fti",
+      "state":"Bucureşti",
       "tz":"Europe/Bucharest"
    },
    "KBKF":{
@@ -2528,7 +2528,7 @@
       "lat":12.668299675,
       "lng":108.120002747,
       "name":"Buon Ma Thuot Airport",
-      "state":"Ha-N\u1ed9i",
+      "state":"Ha-Nội",
       "tz":"Asia/Ho_Chi_Minh"
    },
    "LBBG":{
@@ -3320,7 +3320,7 @@
       "lat":46.9277000427,
       "lng":28.9309997559,
       "name":"Chisinau International Airport",
-      "state":"Chi\u0219inau-Municipality",
+      "state":"Chișinau-Municipality",
       "tz":"Europe/Chisinau"
    },
    "NZCH":{
@@ -3572,7 +3572,7 @@
       "lat":44.3622016907,
       "lng":28.4883003235,
       "name":"Mihail Kogalniceanu International Airport",
-      "state":"Constan\u021ba",
+      "state":"Constanța",
       "tz":"Europe/Bucharest"
    },
    "LTBU":{
@@ -3824,7 +3824,7 @@
       "lat":16.0438995361,
       "lng":108.1989974976,
       "name":"Da Nang International Airport",
-      "state":"Da-N\u1eb5ng",
+      "state":"Da-Nẵng",
       "tz":"Asia/Ho_Chi_Minh"
    },
    "KMSN":{
@@ -5528,7 +5528,7 @@
       "lat":25.1455993652,
       "lng":10.1426000595,
       "name":"Ghat Airport",
-      "state":"Sha\u2018biyat-Ghat",
+      "state":"Sha‘biyat-Gha",
       "tz":"Africa/Tripoli"
    },
    "RJNG":{
@@ -6092,7 +6092,7 @@
       "lat":21.221200943,
       "lng":105.8069992065,
       "name":"Noi Bai International Airport",
-      "state":"Ha-N\u1ed9i",
+      "state":"Ha-Nội",
       "tz":"Asia/Ho_Chi_Minh"
    },
    "FVHA":{
@@ -7352,7 +7352,7 @@
       "lat":38.771900177,
       "lng":34.5345001221,
       "name":"Nevsehir Kapadokya International Airport",
-      "state":"Nev\u015fehir",
+      "state":"Nevşehir",
       "tz":"Europe/Istanbul"
    },
    "OPKC":{
@@ -8132,7 +8132,7 @@
       "lat":32.3639984131,
       "lng":-64.6787033081,
       "name":"L.F. Wade International International Airport",
-      "state":"Saint-George\u02bcs",
+      "state":"Saint-Georgeʼs",
       "tz":"Atlantic/Bermuda"
    },
    "MGGT":{
@@ -10256,7 +10256,7 @@
       "lat":14.6625995636,
       "lng":49.375,
       "name":"Mukalla International Airport",
-      "state":"Mu\u1e29afaz\u0327at-\u1e28a\u1e11ramawt",
+      "state":"Muḩafaz̧at-Ḩaḑramawt",
       "tz":"Asia/Aden"
    },
    "UIUU":{
@@ -10316,7 +10316,7 @@
       "lat":38.7477989197,
       "lng":41.6612014771,
       "name":"Mus Airport",
-      "state":"Mu\u015f",
+      "state":"Muş",
       "tz":"Europe/Istanbul"
    },
    "FOON":{
@@ -11672,7 +11672,7 @@
       "lat":16.4015007019,
       "lng":107.70300293,
       "name":"Phu Bai Airport",
-      "state":"B\u1eafc-Ninh",
+      "state":"Bắc-Ninh",
       "tz":"Asia/Ho_Chi_Minh"
    },
    "VTSP":{
@@ -12500,7 +12500,7 @@
       "lat":25.6135005951,
       "lng":55.9388008118,
       "name":"Ras Al Khaimah International Airport",
-      "state":"Ra\u02bcs-al-Khaymah",
+      "state":"Raʼs-al-Khaymah",
       "tz":"Asia/Dubai"
    },
    "OIGG":{
@@ -13448,7 +13448,7 @@
       "lat":15.9660997391,
       "lng":48.7882995605,
       "name":"Sayun International Airport",
-      "state":"Mu\u1e29afaz\u0327at-\u1e28a\u1e11ramawt",
+      "state":"Muḩafaz̧at-Ḩaḑramawt",
       "tz":"Asia/Aden"
    },
    "EHAM":{
@@ -14468,7 +14468,7 @@
       "lat":13.6859998703,
       "lng":44.1390991211,
       "name":"Ta'izz International Airport",
-      "state":"Ta\u2018izz",
+      "state":"Ta‘izz",
       "tz":"Asia/Aden"
    },
    "RJOT":{
@@ -14539,7 +14539,7 @@
       "icao":"DAAT",
       "lat":22.8115005493,
       "lng":5.4510798454,
-      "name":"Aguenar \u2013 Hadj Bey Akhamok Airport",
+      "name":"Aguenar - Hadj Bey Akhamok Airport",
       "state":"Tamanrasset",
       "tz":"Africa/Algiers"
    },
@@ -15092,7 +15092,7 @@
       "lat":45.8098983765,
       "lng":21.3379001617,
       "name":"Timisoara Traian Vuia Airport",
-      "state":"Timi\u015f",
+      "state":"Timiş",
       "tz":"Europe/Bucharest"
    },
    "LICT":{
@@ -15356,7 +15356,7 @@
       "lat":37.6680984497,
       "lng":45.0686988831,
       "name":"Urmia Airport",
-      "state":"Az\u0304arbayjan-e-Gharbi",
+      "state":"Az̄arbayjan-e-Gharbi",
       "tz":"Asia/Tehran"
    },
    "LTBO":{
@@ -15368,7 +15368,7 @@
       "lat":38.6814994812,
       "lng":29.4717006683,
       "name":"Usak Airport",
-      "state":"U\u015fak",
+      "state":"Uşak",
       "tz":"Europe/Istanbul"
    },
    "SAWH":{
@@ -16219,7 +16219,7 @@
       "icao":"DAON",
       "lat":35.0167007446,
       "lng":-1.4500000477,
-      "name":"Zenata \u2013 Messali El Hadj Airport",
+      "name":"Zenata - Messali El Hadj Airport",
       "state":"Tlemcen",
       "tz":"Africa/Algiers"
    },

@@ -6,7 +6,11 @@ Created on Tue May 14 16:38:13 2019
 """
 
 import json
-from .flightdistcalc import flightdistcalc
+#react-Pfad
+#from .flightdistcalc import flightdistcalc
+
+#Pycharm - Pfad
+from flight.flightdistcalc import flightdistcalc
 
 class airportfinder:
 
@@ -17,7 +21,7 @@ class airportfinder:
         #print (jsonload.values())
         for d in jsonload.values():
             lat= d["lat"]
-            lng= d["lon"]
+            lng= d["lng"]
             newdistance = flightdistcalc().distanceInKmBetweenEarthCoordinates(arr_lat, arr_lng, lat, lng)
             if newdistance<olddist:
                 #print (d["iata"]+"lat:" + str(lat)+"\tlng:"+str(lng))

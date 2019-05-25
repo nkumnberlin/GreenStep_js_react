@@ -4,7 +4,7 @@ Created on Thu May  9 09:22:41 2019
 
 @author: tristanwachtel
 """
-#MUmbau man kann von der Google directions Api die Koordinaten nehmen, von der ZugPlanung und dieses dann der anderen API stecken
+#Umbau man kann von der Google directions Api die Koordinaten nehmen, von der ZugPlanung und dieses dann der anderen API stecken
 # from threading import Thread
 import requests
 import json

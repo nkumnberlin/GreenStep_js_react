@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 import math
 class flightdistcalc:
-    c = 0
-    #def __call__(self):
-    #    return earthRadiusKm * c
-
     def degreesToRadians(self, degrees):
       return degrees * math.pi / 180
 
