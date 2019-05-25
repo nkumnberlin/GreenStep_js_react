@@ -1,13 +1,45 @@
 import React, {Component} from 'react';
-import Script from 'react-load-script';
-import {Segment, Grid, Form, Button} from 'semantic-ui-react'
-import Header from "semantic-ui-react/dist/commonjs/elements/Header";
+import {Form} from "semantic-ui-react";
+const form_style = {
+    margin: '0 auto',
+    maxWidth: 800,
+};
 
+export default class Departure extends Component{
+    render() {
+        return (
+            <Form.Input id={'departure'}
+                        placeholder={'Departure'}
+                        style={form_style}
+                        onChange={this.props.action}
+                        value={this.props.value}
+            />
+        )
+    }
+}
 
-const Departure = () => (
- <div>
+    //
+    // handleScriptLoad() {
+    //     this.departure = new google.maps.places.Autocomplete(
+    //         document.getElementById('departure'));
+    //     this.departure.setFields(this.fields);
+    //     this.departure.addListener('place_changed', this.handleDeparture);
+    //
+    // }
+    // fields = ['address_components', 'geometry', 'icon', 'name'];
 
- </div>
-);
+    //
+    // handleDeparture = () => {
+    //     let place = this.departure.getPlace();
+    //     if (!place.geometry) {
+    //         // User entered the name of a Place that was not suggested and
+    //         // pressed the Enter key, or the Place Details request failed.
+    //         console.log("No details available for input: '" + place.name + "'");
+    //         return;
+    //     }
+    //
+    //     this.lat = place.geometry.location.lat();
+    //     this.lng = place.geometry.location.lng();
+    //
+    // };
 
-export default Departure
