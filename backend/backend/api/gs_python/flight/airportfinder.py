@@ -5,12 +5,11 @@ Created on Tue May 14 16:38:13 2019
 @author: tristanwachtel
 """
 
-import json
-#react-Pfad
-#from .flightdistcalc import flightdistcalc
+#react-Pfad - not tested in react
+#from .distcalc.calc_geographic_points import distcalc
 
-#Pycharm - Pfad
-from flight.flightdistcalc import flightdistcalc
+#Pycharm - path
+from distcalc.calc_geographic_points import distcalc
 
 class airportfinder:
 
@@ -19,7 +18,7 @@ class airportfinder:
         for d in jsonload.values():
             lat= d["lat"]
             lng= d["lng"]
-            newdistance = flightdistcalc().distanceInKmBetweenEarthCoordinates(arr_lat, arr_lng, lat, lng)
+            newdistance = distcalc().distanceInKmBetweenEarthCoordinates(arr_lat, arr_lng, lat, lng)
             if newdistance<olddist:
                 nearest_airport = d
                 olddist=newdistance

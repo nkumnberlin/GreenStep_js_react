@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import math
-class flightdistcalc:
+class distcalc:
     def degreesToRadians(self, degrees):
       return degrees * math.pi / 180
 

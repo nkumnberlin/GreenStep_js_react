@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
-import requests
 import json
 #Pycharm
 from flight.airportfinder import airportfinder
-from flight.flightdistcalc import flightdistcalc
+from distcalc.calc_geographic_points import distcalc
 from APIrequests.APIrequest import APIrequest, call_flight_api
 #react
 # from .airportfinder import airportfinder
-# from .flightdistcalc import flightdistcalc
+#not tested in react
+# from .distcalc.calc_geographic_points import distcalc
 # from ..APIrequests.APIrequest import APIrequest, call_flight_api
 class planflightroute:
 
@@ -29,22 +29,11 @@ class planflightroute:
         #tbd: else ist mit Fehlern behaftet - erledigt ?
         # - mgl Anpassung des Algorithmus, dass er weniger Anfragen durchführen muss
         else:
-            #Alternative Planung mit o^d SkyScanner-Aufrufen
-            origin_airports = airportfinder().find_city_airport(origin_airport["city"], jsonload)
-            dest_airports = airportfinder().find_city_airport(dest_airport["city"], jsonload)
-            for o_airport in origin_airports:
-                for d_airport in dest_airports:
-                    flight_possible = call_flight_api().check_planned_route(o_airport["iata"], d_airport["iata"])
-                    if flight_possible:
-                        #print(flight_possible)
-                        return self.getValues(o_airport, d_airport)
-            if flight_possible == False:
-                #print ("Nothing found")
-                return 0, 0, 0, 0, 0, 0
+            return self.search_for_alt_city_airports(origin_airport, dest_airport, jsonload)
 
     def getValues(self, origin_airport, dest_airport):
-        flight_dist = flightdistcalc().distanceInKmBetweenEarthCoordinates(origin_airport["lat"], origin_airport["lng"],
-                                                                            dest_airport["lat"], dest_airport["lng"])
+        flight_dist = distcalc().distanceInKmBetweenEarthCoordinates(origin_airport["lat"], origin_airport["lng"],
+                                                                     dest_airport["lat"], dest_airport["lng"])
         takeoff_time= 30 #min
         flight_time = (flight_dist/800+takeoff_time)*60 #time is always in seconds
         arrival_transit_dist, arrival_transit_time = APIrequest().callGoogleDirectionsAPI(str(origin_airport["lat"])
@@ -54,3 +43,17 @@ class planflightroute:
             "transit")
         return departure_transit_dist, arrival_transit_dist, flight_dist, departure_transit_time, \
                arrival_transit_time, flight_time
+
+    def search_for_alt_city_airports(self, origin_airport, dest_airport, jsonload):
+        # Alternative Planung mit o^d SkyScanner-Aufrufen
+        origin_airports = airportfinder().find_city_airport(origin_airport["city"], jsonload)
+        dest_airports = airportfinder().find_city_airport(dest_airport["city"], jsonload)
+        for o_airport in origin_airports:
+            for d_airport in dest_airports:
+                flight_possible = call_flight_api().check_planned_route(o_airport["iata"], d_airport["iata"])
+                if flight_possible:
+                    # print(flight_possible)
+                    return self.getValues(o_airport, d_airport)
+        if flight_possible == False:
+            # print ("Nothing found")
+            return 0, 0, 0, 0, 0, 0
