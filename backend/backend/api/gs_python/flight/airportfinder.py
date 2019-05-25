@@ -16,18 +16,14 @@ class airportfinder:
 
     def find_next_airport(self, arr_lat, arr_lng, jsonload):
         olddist = 10000000;
-        #arr_lat = 47.4962048
-        #arr_lng= 19.0395666
-        #print (jsonload.values())
         for d in jsonload.values():
             lat= d["lat"]
             lng= d["lng"]
             newdistance = flightdistcalc().distanceInKmBetweenEarthCoordinates(arr_lat, arr_lng, lat, lng)
             if newdistance<olddist:
-                #print (d["iata"]+"lat:" + str(lat)+"\tlng:"+str(lng))
                 nearest_airport = d
                 olddist=newdistance
-        return nearest_airport#iata, airport_city , shortest_lat, shortest_lng
+        return nearest_airport
 
     def find_city_airport(self, city, jsonload):
         airports = []

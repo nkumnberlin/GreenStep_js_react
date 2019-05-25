@@ -10,17 +10,6 @@ import requests
 import json
 
 class APIrequest:
-    # cycling_dist = 0
-    # transit_dist = 0
-    # driving_dist = 0
-    # flight_dist = 0
-    # arrival_transit_dist = 0
-    # departure_transit_dist = 0
-    # timeTrack = []
-    # def __call__(self):
-    #     print("noting in API")
-    # def __init__(self):
-    #     print("init in API")
     def callGooglePointAPI(self, address):
         dist_response = requests.get(
             "https://maps.googleapis.com/maps/api/geocode/json?address="+address+" &key=AIzaSyDo6leoat6ziQnl9n6oIsgYwSz5BopUfPM")

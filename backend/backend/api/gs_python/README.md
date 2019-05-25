@@ -23,7 +23,9 @@ from .flightdistcalc import flightdistcalc
 #Pycharm - Pfad
 from flight.flightdistcalc import flightdistcalc
 ```
-####2. Python 3.7.3 als Interpreter einstellen
+####2. Pfad der JSON-DB anpassen
+change path in module planflightroute, like you did before in step 1
+####3. Python 3.7.3 als Interpreter einstellen
 1. press Cmd + ,
 2. Project > Project Interpreter
 3. Choose Python 3.7 Interpreter or follow:

@@ -13,9 +13,10 @@ from APIrequests.APIrequest import APIrequest
 class planflightroute:
 
     def planflight(self, arr_lng, arr_lat, dest_lng, dest_lat):
+        #react
         #jsonload = json.load(open("api/gs_python/flight/largeairportDB.json"))
+        #pycharm
         jsonload = json.load(open("/Users/tristanwachtel/PycharmProjects/GreenStep_js_react/backend/backend/api/gs_python/flight/largeairportDB.json"))
-        #airportfinder = airportfinder()
         #origin_iata, origin_city, origin_airport_lat, origin_airport_lng \
         origin_airport = airportfinder().find_next_airport(arr_lat, arr_lng, jsonload)
         #dest_iata, dest_city, dest_airport_lat, dest_airport_lng \
@@ -28,24 +29,6 @@ class planflightroute:
         #tbd: else ist mit Fehlern behaftet - erledigt ?
         # - mgl Anpassung des Algorithmus, dass er weniger Anfragen durchführen muss
         else:
-            # origin_airports = airportfinder().find_city_airport(origin_airport["city"], jsonload)
-            # #print (flight_possible)
-            # #checkt ob der Startflughafen zu variieren ist
-            # for o_airport in origin_airports:
-            #     flight_possible = self.check_planned_route(o_airport["iata"], dest_airport["iata"])
-            #     if flight_possible:
-            #         print (flight_possible)
-            #         return self.getValues(o_airport, dest_airport)
-            #         break
-            # #print (flight_possible)
-            # if flight_possible == False:
-            #     dest_airports = airportfinder().find_city_airport(dest_airport["city"], jsonload)
-            #     for d_airport in dest_airports:
-            #         flight_possible = self.check_planned_route(origin_airport["iata"], d_airport["iata"])
-            #         if flight_possible:
-            #             print (flight_possible)
-            #             return self.getValues(airport, dest_airport)
-            #             break
             #Alternative Planung mit o^d SkyScanner-Aufrufen
             origin_airports = airportfinder().find_city_airport(origin_airport["city"], jsonload)
             dest_airports = airportfinder().find_city_airport(dest_airport["city"], jsonload)
@@ -69,12 +52,11 @@ class planflightroute:
                 "X-RapidAPI-Key": "1de2f44c33msh037f72b19990e75p17ddc4jsn11356a6a1be8"
             }
         )
-        # wenn "QuoteId":1,  im JSON-Response vorhanden dann: verfügbaren Routen
         json_decode_flightroute = json.loads(flight_route_response.text)
         #print (json_decode_flightroute)
-        #tbd: if-Block wirft FEHLER wenn keine Routen vorhanden sind - erledigt
         try:
             #print (json_decode_flightroute["Quotes"][0]["QuoteId"])
+            # wenn "QuoteId":1,  im JSON-Response vorhanden dann: verfügbaren Routen
             if json_decode_flightroute["Quotes"][0]["QuoteId"] != 0:
                 return True
             else:
@@ -94,14 +76,3 @@ class planflightroute:
             "transit")
         return departure_transit_dist, arrival_transit_dist, flight_dist, departure_transit_time, \
                arrival_transit_time, flight_time
-
-
-            #tbd: if 0,0,0,0,0,0 is returned, flight planning didn't was succesfull
-
-    # def find_other_airport(self):
-    #     #     airports = airportfinder().find_city_airport(origin_airport["city"])
-    #     #     for airport in airports:
-    #     #         flight_possible = planflightroute.check_planned_route(airport["iata"], dest_airport["iata"])
-    #     #         if flight_possible:
-    #     #             return planflightroute.getValues(airport, dest_airport)
-    #     #             break
