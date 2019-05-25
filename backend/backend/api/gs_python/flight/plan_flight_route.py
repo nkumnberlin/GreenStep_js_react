@@ -52,10 +52,10 @@ class planflightroute:
         takeoff_time= 30 #min
         flight_time = (flight_dist/800+takeoff_time)*60 #time is always in seconds
         arrival_transit_dist, arrival_transit_time = APIrequest().callGoogleDirectionsAPI(str(origin_airport["lat"])
-                                    + " " + str(origin_airport["lng"]), origin_airport["iata"] + " airport", "transit")
+        + " " + str(origin_airport["lng"]), origin_airport["iata"] + " airport", "transit", "&departure_time=1558951200")
         departure_transit_dist, departure_transit_time = APIrequest().callGoogleDirectionsAPI(
             str(dest_airport["lat"]) + " " + str(dest_airport["lng"]), dest_airport["iata"] + " airport",
-            "transit")
+            "transit", "&departure_time=1558951200")
         return departure_transit_dist, arrival_transit_dist, flight_dist, departure_transit_time, \
                arrival_transit_time, flight_time
 
@@ -63,6 +63,7 @@ class planflightroute:
         # Alternative Planung mit o^d SkyScanner-Aufrufen
         origin_airports = airportfinder().find_city_airport(origin_airport["city"], jsonload)
         dest_airports = airportfinder().find_city_airport(dest_airport["city"], jsonload)
+        flight_possible = False
         for o_airport in origin_airports:
             for d_airport in dest_airports:
                 flight_possible = call_flight_api().check_planned_route(o_airport["iata"], d_airport["iata"])

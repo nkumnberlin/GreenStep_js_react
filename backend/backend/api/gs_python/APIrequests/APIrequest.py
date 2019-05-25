@@ -10,6 +10,7 @@ import requests
 import json
 
 class APIrequest:
+    #deprecatwed, we are getting the coords, form the frontend
     def callGooglePointAPI(self, address):
         dist_response = requests.get(
             "https://maps.googleapis.com/maps/api/geocode/json?address="+address+" &key=AIzaSyDo6leoat6ziQnl9n6oIsgYwSz5BopUfPM")
@@ -24,12 +25,13 @@ class APIrequest:
         json_decode_dist = json.loads(dist_response.text)
         return json_decode_dist["routes"][0]["distance"], json_decode_dist["routes"][0]["duration"]
 
-    #berechnet auto und radstrecke
-    def callGoogleDirectionsAPI(self, origin, destination, mode):
+    #used for transit-planning
+    #extras = can be used for setting eg a departuretime, if nothing should happen, just send a empty String
+    def callGoogleDirectionsAPI(self, origin, destination, mode, extras):
         #print(origin+"\n"+destination)
         dist_response = requests.get(
             "https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + " &destination=" + destination
-            + " &mode=" + mode + "&key=AIzaSyDo6leoat6ziQnl9n6oIsgYwSz5BopUfPM")
+            + " &mode=" + mode + extras +"&key=AIzaSyDo6leoat6ziQnl9n6oIsgYwSz5BopUfPM")
         #print (dist_response.raw_body)
         json_decode_dist = json.loads(dist_response.text)
         #print (json_decode_dist)
