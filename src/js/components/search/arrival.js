@@ -16,7 +16,10 @@ export default class Arrival extends Component{
                         style={form_style}
                         onChange={this.props.actionArrival}
                         value={this.props.valueArrival}
+<<<<<<< HEAD
                         autoComplete={this.props.complete}
+=======
+>>>>>>> test_2
             />
         )
     }

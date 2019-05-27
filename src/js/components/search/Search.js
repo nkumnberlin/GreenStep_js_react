@@ -6,14 +6,11 @@ import Header from "semantic-ui-react/dist/commonjs/elements/Header";
 import Departure from './departure.js'
 import Divider from "semantic-ui-react/dist/commonjs/elements/Divider";
 import postCords from "../python_endpoint/PythonPost";
-<<<<<<< HEAD
 import GooglePlacesSuggest from "react-google-places-suggest"
 import GoogleMapLoader from "react-google-maps-loader"
 
 const MY_API_KEY = "AIzaSyDo6leoat6ziQnl9n6oIsgYwSz5BopUfPM";
-=======
 import Result from "../result/Result";
->>>>>>> parent of 7449b079... prep for code testing
 
 
 
@@ -24,6 +21,8 @@ const form_style = {
 
 export let data_export = "";
 
+let test = ""
+
 export default class Search extends Component {
     // Define Constructor
     constructor(props) {
@@ -31,7 +30,6 @@ export default class Search extends Component {
 
         // // Declare State
         this.state = {
-<<<<<<< HEAD
             depSearch: "",
             depValue: "",
             arrSearch: "",
@@ -65,9 +63,6 @@ export default class Search extends Component {
             console.log('No results for ', this.state.depSearch)
         }else{
             console.log('No results for ', this.state.arrSearch)
-=======
-            lat: '',
-            lng: ''
         };
         // Bind Functions
         this.handleScriptLoad = this.handleScriptLoad.bind(this);
@@ -143,7 +138,6 @@ export default class Search extends Component {
             );
             this.codeLatLng(lat, lng);
             console.log(this.state)
->>>>>>> parent of 7449b079... prep for code testing
         }
     };
 
@@ -169,7 +163,6 @@ export default class Search extends Component {
 
 
     render() {
-<<<<<<< HEAD
         const {depSearch, arrSearch} = this.state;
         return (
             <GoogleMapLoader
@@ -210,7 +203,6 @@ export default class Search extends Component {
                 }
             />
         )
-=======
         return (
             <div>
                 <Script
@@ -240,6 +232,5 @@ export default class Search extends Component {
                 </Segment>
             </div>
         );
->>>>>>> parent of 7449b079... prep for code testing
     }
 }
