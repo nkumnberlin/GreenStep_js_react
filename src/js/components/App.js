@@ -17,10 +17,9 @@ export default class App extends Component {
         super(props)
 
         this.state = {
-            departure: {
-            },
-            arrival: {
-            }
+            departure: {},
+            arrival: {},
+            resultData: {}
         }
     }
 
@@ -40,16 +39,8 @@ export default class App extends Component {
     handleDeparture = () => {
         let place = this.departure.getPlace();
         if (place) {
-            if (!place.geometry) {
-                // User entered the name of a Place that was not suggested and
-                // pressed the Enter key, or the Place Details request failed.
-                console.log("No details available for input: '" + place.name + "'");
-                return;
-            }
-            let lat = place.geometry.location.lat();
-            let lng = place.geometry.location.lng();
-            console.log("latlng: ", lat, lng)
-            this.changeCordsOfDeparture(lat, lng);
+            let cords = this.determineCords(place);
+            this.changeCordsOfDeparture(cords.lat, cords.lng);
 
         }
     };
@@ -68,16 +59,8 @@ export default class App extends Component {
     handleArrival = () => {
         let place = this.arrival.getPlace();
         if (place) {
-            if (!place.geometry) {
-                // User entered the name of a Place that was not suggested and
-                // pressed the Enter key, or the Place Details request failed.
-                console.log("No details available for input: '" + place.name + "'");
-                return;
-            }
-            let lat = place.geometry.location.lat();
-            let lng = place.geometry.location.lng();
-            console.log("latlng: ", lat, lng)
-            this.changeCordsOfArrival(lat, lng);
+            let cords = this.determineCords(place);
+            this.changeCordsOfArrival(cords.lat, cords.lng);
 
         }
     };
@@ -93,10 +76,29 @@ export default class App extends Component {
         console.log("LOG State: ", this.state)
     };
 
-    submitCordsAndGetResult=(e)=>{
-        console.log("SUBMIT GEDRÜCKT ", e)
-        this.returnData = postCords(this.state);
-    }
+    determineCords = (place) => {
+        if (!place.geometry) {
+            // User entered the name of a Place that was not suggested and
+            // pressed the Enter key, or the Place Details request failed.
+            console.log("No details available for input: '" + place.name + "'");
+            return;
+        }
+        let cords = {
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng()
+        };
+        return cords;
+    };
+
+    submitCordsAndGetResult = async () => {
+        console.log("SUBMIT GEDRÜCKT ")
+        let returnData = await postCords(this.state);
+        this.handleResults(returnData.data)
+    };
+
+    handleResults = (data) => {
+        this.setState({resultData: data});
+    };
 
     render() {
         return (
@@ -108,7 +110,7 @@ export default class App extends Component {
                 <MenuBar/>
                 <Title/>
                 <Search submitCords={this.submitCordsAndGetResult}/>
-                <Results/>
+                <Results resultData={this.state.resultData}/>
                 <Footer/>
             </div>
         )
