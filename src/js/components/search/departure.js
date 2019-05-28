@@ -1,13 +1,14 @@
-import React, {Component} from 'react';
-import Script from 'react-load-script';
-import {Segment, Grid, Form, Button} from 'semantic-ui-react'
-import Header from "semantic-ui-react/dist/commonjs/elements/Header";
+import React from 'react';
+import {Form} from "semantic-ui-react";
 
 
-const Departure = () => (
- <div>
-
- </div>
-);
-
-export default Departure
+export const Departure = (style) => {
+ return(
+     <Form>
+      <Form.Input id={'departure'}
+                  placeholder={'Departure'}
+                  style={style}
+      />
+     </Form>
+ )
+}

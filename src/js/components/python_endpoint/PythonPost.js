@@ -1,20 +1,38 @@
-import React, {Component} from "react";
+import React from "react";
 import axios from "axios";
-import {Button, Grid} from "semantic-ui-react";
-import Result from "../result/Result";
 
 
-export default async function postCords() {
-        const cords = {
-            d_lat: 52.65182,
-            d_lng: 8.126700000000028,
-            a_lat: 52.50386,
-            a_lng: 13.509410000000003
-        };
-        console.log("Posting now: " + cords.d_lat);
-        let response = await axios.post(`http://127.0.0.1:8000/postLatLng/`, {cords});
-            //.then(res =>a
-             //   this.data = res,
-       console.log(response.data)
-        return response;
+export async function postCords(props) {
+
+    // const cords = {
+    //     d_lat: props.departure.lat,
+    //     d_lng: props.departure.lng,
+    //     a_lat: props.arrival.lat,
+    //     a_lng: props.arrival.lng
+    // };
+
+    const cords = {
+        d_lat: 53.07929619999999,
+        d_lng: 8.801693600000021,
+        a_lat: 52.52000659999999,
+        a_lng: 13.404953999999975
     };
+
+
+    const ValuesOfCords = Object.values(cords);
+    if (!(ValuesOfCords.includes(undefined))) {
+
+        console.log("Posting now: ", cords);
+        let response = await axios.post(`http://127.0.0.1:8000/postLatLng/`, {cords})
+            .then(res => {
+                    response = res
+                    return response
+                }
+            );
+        if(response !== undefined) {
+            return response;
+        }
+    } else {
+        console.log("Contains undefined")
+    }
+}
