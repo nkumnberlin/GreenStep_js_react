@@ -29,13 +29,15 @@ class APIrequest:
     #extras = can be used for setting eg a departuretime, if nothing should happen, just send a empty String
     def callGoogleDirectionsAPI(self, origin, destination, mode, extras):
         #print(origin+"\n"+destination)
-        dist_response = requests.get(
+        response = requests.get(
             "https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + " &destination=" + destination
             + " &mode=" + mode + extras +"&key=AIzaSyDo6leoat6ziQnl9n6oIsgYwSz5BopUfPM")
-        #print (dist_response.raw_body)
-        json_decode_dist = json.loads(dist_response.text)
-        #print (json_decode_dist)
-        return json_decode_dist["routes"][0]["legs"][0]["distance"]["value"], json_decode_dist["routes"][0]["legs"][0]["duration"]["value"]
+        json_decode = json.loads(response.text)
+        #print (json_decode)
+        if(json_decode["status"]=="ZERO_RESULTS"):
+            return 0, 0, 0
+        else:
+            return json_decode["routes"][0]["legs"][0]["distance"]["value"], json_decode["routes"][0]["legs"][0]["duration"]["value"], json_decode
 
     #deprecated, schnelle antowrten von Google jedoch in Europa nur fuer Fahrzeuge
     def callGoogleDistanceAPI(self, origin, destination, mode):
