@@ -14,7 +14,6 @@ export default class Results extends Component {
             return array;
         });
         return Math.max(...em);
-        ;
     };
 
     static daysHoursMinutes(time) {
@@ -31,6 +30,7 @@ export default class Results extends Component {
         const Description = ["Plane", "Driving", "Cycling", "Transit"];
         const Header = ["Transportation", "Time", "Travel Distance", "Emission(kg)"];
         const colWidth = 3;
+
         const renderHeader = Header.map((key) => {
             return (
                 <Grid.Column key={key} width={colWidth}>

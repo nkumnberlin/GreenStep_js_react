@@ -12,6 +12,30 @@ import {postCords} from "./python_endpoint/PythonPost.js";
 import Script from "react-load-script";
 
 
+const place = {
+    0:
+        {
+            long_name: "Berkeley", short_name:
+                "Berkeley"
+        },
+    1:
+        {
+            long_name: "Alameda County", short_name:
+                "Alameda County"
+        },
+    2:
+        {
+            long_name: "Kalifornien", short_name:
+                "CA"
+        },
+    3:
+        {
+            long_name: "USA", short_name:
+                "US"
+        }
+}
+
+
 export default class App extends Component {
     constructor(props) {
         super(props)
@@ -19,9 +43,12 @@ export default class App extends Component {
         this.state = {
             departure: {},
             arrival: {},
+            LocationDeparture: {},
+            LocationArrival: {},
             resultData: {}
         }
     }
+
 
     fields = ['address_components', 'geometry', 'icon', 'name'];
 
@@ -36,12 +63,18 @@ export default class App extends Component {
         this.arrival.addListener('place_changed', this.handleArrival);
     };
 
+    getLocation = place =>{
+        let tmpLocation = place.name;
+        return tmpLocation;
+    };
+
     handleDeparture = () => {
         let place = this.departure.getPlace();
         if (place) {
             let cords = this.determineCords(place);
             this.changeCordsOfDeparture(cords.lat, cords.lng);
-
+            this.setDepartureLocation(place);
+            console.log("LOG State Departure: ", this.state)
         }
     };
 
@@ -52,8 +85,11 @@ export default class App extends Component {
                 lng: lng
             }
         });
-        console.log("LOG State: ", this.state)
+    };
 
+    setDepartureLocation = place => {
+        let tmpLocation = this.getLocation(place)
+        this.setState({LocationDeparture: tmpLocation})
     };
 
     handleArrival = () => {
@@ -61,10 +97,10 @@ export default class App extends Component {
         if (place) {
             let cords = this.determineCords(place);
             this.changeCordsOfArrival(cords.lat, cords.lng);
-
+            this.setArrivalLocation(place);
+            console.log("LOG State Arrival: ", this.state)
         }
     };
-
 
     changeCordsOfArrival = (lat, lng) => {
         this.setState({
@@ -73,13 +109,15 @@ export default class App extends Component {
                 lng: lng
             }
         });
-        console.log("LOG State: ", this.state)
+    };
+
+    setArrivalLocation = place => {
+       let tmpLocation = this.getLocation(place);
+        this.setState({LocationArrival: tmpLocation})
     };
 
     determineCords = (place) => {
         if (!place.geometry) {
-            // User entered the name of a Place that was not suggested and
-            // pressed the Enter key, or the Place Details request failed.
             console.log("No details available for input: '" + place.name + "'");
             return;
         }
@@ -107,6 +145,7 @@ export default class App extends Component {
     };
 
     render() {
+        const {LocationDeparture, LocationArrival, resultData} = this.state
         return (
             <div>
                 <Script
@@ -116,7 +155,11 @@ export default class App extends Component {
                 <MenuBar/>
                 <Title/>
                 <Search submitCords={this.submitCordsAndGetResult}/>
-                <Results resultData={this.state.resultData}/>
+                <Results
+                    resultData={resultData}
+                    locationDeparture={LocationDeparture}
+                    locationArrival={LocationArrival}
+                />
                 <Footer/>
             </div>
         )

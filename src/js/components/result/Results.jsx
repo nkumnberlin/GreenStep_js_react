@@ -1,10 +1,11 @@
-import React, {Component} from 'react'
-import {Segment, Placeholder, Header, Container, Grid, Divider} from 'semantic-ui-react'
+import React, {Component, Fragment} from 'react'
+import {Segment, Step, Icon, Image, Placeholder, Header, Container, Grid, Divider} from 'semantic-ui-react'
 import Result from "./Result.js";
 
 export default class Results extends Component {
     constructor(props) {
         super(props)
+
     }
 
     // resultData = {
@@ -19,41 +20,52 @@ export default class Results extends Component {
     componentDidUpdate(prevProps) {
         console.log("prev props: ", prevProps, "current props: ", this.props);
         if (prevProps !== this.props) {
-
-            this.render()
+            // this.render()
         }
     }
 
 
     render() {
+        const StepContent = {
+            Icons: ['truck', 'search', 'credit card'],
+            Header: ["Planning", 'Searching', 'Donating'],
+            Description: ["Plan your Route!", "Choose the best Route!", "Compensate your Emission!"]
+        };
+        const locationArrival = this.props.locationArrival;
+        const locationDeparture = this.props.locationDeparture;
 
 
-        const placeholderIntern = (
-            <Grid.Column>
-                <Segment raised>
-                    <Placeholder>
-                        <Placeholder.Header image>
-                            <Placeholder.Line/>
-                            <Placeholder.Line/>
-                        </Placeholder.Header>
-                        <Placeholder.Paragraph>
-                            <Placeholder.Line length='medium'/>
-                            <Placeholder.Line length='short'/>
-                        </Placeholder.Paragraph>
-                    </Placeholder>
-                </Segment>
-            </Grid.Column>);
-
-        const gridStructure = (
-            <React.Fragment>
-                <Grid columns={3} stackable>
-                    {placeholderIntern}
-                    {placeholderIntern}
-                    {placeholderIntern}
-                </Grid>
-            </React.Fragment>
-
+        const renderSteps = Object.keys(StepContent).map((key, value) => {
+            return (<Step key={key}>
+                    <Icon name={StepContent.Icons[value]}/>
+                    <Step.Content>
+                        <Step.Title>{StepContent.Header[value]}</Step.Title>
+                        <Step.Description>{StepContent.Description[value]}</Step.Description>
+                    </Step.Content>
+                </Step>
+            )
+        });
+        const Steps = (
+            <Fragment>
+                <div>
+                    <Segment>
+                        <Container textAlign={'center'}>
+                            <Header as='h4'> GREENSTEP </Header>
+                            <p> Let us give you the exact Route for your GREENSTEP</p>
+                        </Container>
+                    </Segment>
+                    <Step.Group fluid>
+                        {renderSteps}
+                    </Step.Group>
+                </div>
+                <div>
+                    <Segment attached>
+                        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png'/>
+                    </Segment>
+                </div>
+            </Fragment>
         );
+
 
         const renderResult = (
             Object.keys(this.props.resultData).map((value) => {
@@ -66,7 +78,7 @@ export default class Results extends Component {
                             </Header>
                         </Divider>
                         <Container textAlign="center">
-                            <p> For your wanted Route you have the following choices </p>
+                            <p> For your wanted Route from {locationDeparture} to {locationArrival} you have the following choices </p>
                         </Container>
                         <React.Fragment key={value}>
                             <Segment>
@@ -81,8 +93,14 @@ export default class Results extends Component {
         );
 
 
-        return <Segment> {this.props.resultData.data === undefined ? gridStructure : renderResult }</Segment>
-
+        return (
+            <React.Fragment>
+                <Segment> {this.props.resultData.data === undefined ?
+                    Steps
+                    :
+                    renderResult}
+                </Segment>
+            </React.Fragment>)
     }
 
 }

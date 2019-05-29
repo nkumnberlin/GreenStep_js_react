@@ -11,7 +11,9 @@
 
 /* backgrounds */
 .cd-section:nth-child(1) {
-    background-image: url("../Images/grassBackground.jpg");
+    /*background-image: url("../Images/test.jpg");*/
+
+    /*background-image: url("../Images/grassBackground.jpg");*/
 }
 
 .cd-section:nth-child(2) {
@@ -47,6 +49,7 @@ body {
     font-family: 'Roboto Mono', monospace;
     font-weight: normal;
     font-style: normal;
+    /*background-color: rgba(46, 105, 59, 0.73);*/
 }
 
 .ui.header{
