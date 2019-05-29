@@ -20,8 +20,8 @@ export default class Search extends Component {
         };
 
         return (
-            <div>
-                <Segment padded className={'search'}>
+            <div className={'search prob'}>
+                <Segment padded >
                     <Header textAlign={'center'} as='h3'> Plan your Trip and Compensate your Emission </Header>
                     <Grid>
                         <Grid.Row>

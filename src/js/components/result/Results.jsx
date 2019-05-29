@@ -94,8 +94,8 @@ export default class Results extends Component {
 
 
         return (
-            <React.Fragment>
-                <Segment> {this.props.resultData.data === undefined ?
+            <React.Fragment >
+                <Segment className={'results prob'}> {this.props.resultData.data === undefined ?
                     Steps
                     :
                     renderResult}

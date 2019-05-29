@@ -5,35 +5,11 @@ import Footer from './footer/Footer.js';
 import Results from './result/Results.jsx';
 import Title from './title/Title.js';
 import '../../style.css'
-import PythonResponse from "./python_endpoint/PythonResponse.js"
 import Search from "./search/Search.js"
-import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import {postCords} from "./python_endpoint/PythonPost.js";
 import Script from "react-load-script";
+import Vision from './Vision/vision.jsx'
 
-
-const place = {
-    0:
-        {
-            long_name: "Berkeley", short_name:
-                "Berkeley"
-        },
-    1:
-        {
-            long_name: "Alameda County", short_name:
-                "Alameda County"
-        },
-    2:
-        {
-            long_name: "Kalifornien", short_name:
-                "CA"
-        },
-    3:
-        {
-            long_name: "USA", short_name:
-                "US"
-        }
-}
 
 
 export default class App extends Component {
@@ -160,6 +136,7 @@ export default class App extends Component {
                     locationDeparture={LocationDeparture}
                     locationArrival={LocationArrival}
                 />
+                <Vision/>
                 <Footer/>
             </div>
         )

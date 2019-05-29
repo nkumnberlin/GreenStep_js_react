@@ -4,19 +4,19 @@ import axios from "axios";
 
 export async function postCords(props) {
 
-    // const cords = {
-    //     d_lat: props.departure.lat,
-    //     d_lng: props.departure.lng,
-    //     a_lat: props.arrival.lat,
-    //     a_lng: props.arrival.lng
-    // };
-
     const cords = {
-        d_lat: 53.07929619999999,
-        d_lng: 8.801693600000021,
-        a_lat: 52.52000659999999,
-        a_lng: 13.404953999999975
+        d_lat: props.departure.lat,
+        d_lng: props.departure.lng,
+        a_lat: props.arrival.lat,
+        a_lng: props.arrival.lng
     };
+
+    // const cords = {
+    //     d_lat: 53.07929619999999,
+    //     d_lng: 8.801693600000021,
+    //     a_lat: 52.52000659999999,
+    //     a_lng: 13.404953999999975
+    // };
 
 
     const ValuesOfCords = Object.values(cords);
