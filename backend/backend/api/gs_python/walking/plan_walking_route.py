@@ -6,6 +6,7 @@ Created on Sat May 25 18:38:13 2019
 """
 #pyCharm
 from APIrequests.APIrequest import APIrequest
+import json
 #react - not tested in react
 # from ..APIrequests.APIrequest import APIrequest
 
@@ -25,4 +26,4 @@ class walking_route:
         walking_dist, walking_time = APIrequest().callMapBox("walking", str(str(self.origin_lng) + "," +
         str(self.origin_lat) + ";" + str(self.dest_lng) + "," + str(self.dest_lat)))
         walking_emission = walking_dist / 1000 * self.emission_walking
-        return {"walking": {"dist": walking_dist, "time": walking_time, "emission": walking_emission}}
+        return json.dumps({"walking": {"dist": walking_dist, "time": walking_time, "emission": walking_emission}})

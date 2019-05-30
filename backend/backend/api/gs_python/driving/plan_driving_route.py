@@ -6,6 +6,7 @@ Created on Sat May 25 18:38:13 2019
 """
 #pyCharm
 from APIrequests.APIrequest import APIrequest
+import json
 #react - not tested in react
 # from ..APIrequests.APIrequest import APIrequest
 
@@ -23,4 +24,4 @@ class driving_route:
     def run_flight_planning(self):
         driving_dist, driving_time = APIrequest().callMapBox("driving", str(str(self.origin_lng) + "," + str(self.origin_lat) + ";" + str(self.dest_lng) + "," + str(self.dest_lat)))
         driving_emission_result = driving_dist / 1000 * self.emission_car
-        return {"driving": {"dist": driving_dist, "time": driving_time, "emission": driving_emission_result}}
+        return json.dumps({"driving": {"dist": driving_dist, "time": driving_time, "emission": driving_emission_result}})

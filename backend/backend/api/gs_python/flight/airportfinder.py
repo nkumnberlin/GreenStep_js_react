@@ -14,7 +14,8 @@ from distcalc.calc_geographic_points import distcalc
 class airportfinder:
 
     def find_next_airport(self, arr_lat, arr_lng, jsonload):
-        olddist = 10000000;
+        olddist = 10000000
+        nearest_airport = None
         for d in jsonload.values():
             lat= d["lat"]
             lng= d["lng"]
