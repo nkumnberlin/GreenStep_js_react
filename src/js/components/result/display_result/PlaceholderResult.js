@@ -24,6 +24,7 @@ export const Steps = (StepContent) => {
     )
 };
 
+
 export const renderSteps = (StepContent) => {
     Object.keys(StepContent).map((key, value) => {
         return (
