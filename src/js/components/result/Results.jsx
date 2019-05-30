@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import {Segment, Step, Icon, Image, Placeholder, Header, Container, Grid, Divider} from 'semantic-ui-react'
-import Result from "./display_result/Result.js";
+import GeneralResult from "./display_result/GeneralResult.jsx";
 
 export default class Results extends Component {
     constructor(props) {
@@ -14,6 +14,16 @@ export default class Results extends Component {
             // this.render()
         }
     }
+    createGeneralResult =(completeResults, value)=> (
+        <React.Fragment key={value}>
+            <Segment>
+                <Grid columns={4}>
+                    <GeneralResult completeResults={completeResults}
+                                   TravelChoices={this.props.TravelChoices}/>
+                </Grid>
+            </Segment>
+        </React.Fragment>
+    );
 
 
     render() {
@@ -57,6 +67,7 @@ export default class Results extends Component {
         );
 
 
+
         const renderResult = (
             Object.keys(this.props.resultData).map((value) => {
                 const completeResults = this.props.resultData[value];
@@ -70,15 +81,7 @@ export default class Results extends Component {
                         <Container textAlign="center">
                             <p> For your wanted Route from {locationDeparture} to {locationArrival} you have the following choices </p>
                         </Container>
-                        <React.Fragment key={value}>
-                            <Segment>
-                                <Grid columns={4}>
-                                    <Result completeResults={completeResults}
-                                            TravelChoices={this.props.TravelChoices}
-                                    />
-                                </Grid>
-                            </Segment>
-                        </React.Fragment>
+                        {this.createGeneralResult(completeResults, value)}
                     </React.Fragment>
                 )
             })

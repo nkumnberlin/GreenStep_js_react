@@ -3,8 +3,9 @@ import {Grid} from 'semantic-ui-react'
 import {daysHoursMinutes} from "../../data_handler/MillisecondsConverter.jsx";
 import {determineMaxEmission} from "../../data_handler/EmissionsConverter.jsx";
 import {ProgressBar} from "../../data_handler/ProgressBar.jsx";
+import {distanceInKm} from "../../data_handler/DistanceConverter.jsx";
 
-export default class Results extends Component {
+export default class GeneralResult extends Component {
     constructor(props) {
         super(props);
         this.maxEm = determineMaxEmission(this.props.completeResults);
@@ -23,7 +24,6 @@ export default class Results extends Component {
         });
 
         const renderContent = Object.values(this.props.completeResults).map((k, value) => {
-            let dist = (k.dist = k.dist / 1000).toFixed(1) + " km";
             return (
                 <Grid.Row key={k.dist}>
                     <Grid.Column
@@ -36,7 +36,7 @@ export default class Results extends Component {
                     </Grid.Column>
                     <Grid.Column
                         width={colWidth}>
-                        {dist}
+                        {distanceInKm(k.dist)}
                     </Grid.Column>
                     <Grid.Column
                         width={5}>

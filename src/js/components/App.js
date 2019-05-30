@@ -14,7 +14,6 @@ import Vision from './Vision/vision.jsx'
 export default class App extends Component {
     constructor(props) {
         super(props)
-
         this.state = {
             departure: {},
             arrival: {},
@@ -26,16 +25,14 @@ export default class App extends Component {
                 Header: ["Planning", 'Searching', 'Donating'],
                 Description: ["Plan your Route!", "Choose the best Route!", "Compensate your Emission!"]
             },
-            TravelChoices: ["Plane", "Car", "Bicycle", "Train"],
-            travelItemClicked: {
-                activeItem: ""
-            },
+            TravelChoices: ["Bicycle", "Car", "Plane", "Train", "Male"],
+            activeItem: "",
         }
     }
 
-    fields = ['address_components', 'geometry', 'icon', 'name'];
 
     initComponent = () => {
+        this.fields = ['address_components', 'geometry', 'icon', 'name'];
         this.departure = new google.maps.places.Autocomplete(
             document.getElementById('departure'));
         this.arrival = new google.maps.places.Autocomplete(
@@ -131,11 +128,13 @@ export default class App extends Component {
     };
 
     handleClickedItem = (item) => {
-        if (item.target.id !== "") {
-            console.log("LOL KLICKED ITEM!!", item.target.id)
-            this.setState({activeItem: item.target.id});
-        }
-        console.log(this.state);
+        let active = item.target.id
+        console.log("LOL KLICKED ITEM!!", active)
+        this.setState({
+            activeItem: active
+        });
+
+        console.log("AKTUALISIERT ITEM: ", this.state.activeItem);
     };
 
     render() {
@@ -151,7 +150,7 @@ export default class App extends Component {
                 <Search
                     submitCords={this.submitCordsAndGetResult}
                     clickedItem={this.handleClickedItem}
-                    activeItem={this.state.travelItemClicked.activeItem}
+                    activeItem={this.state.activeItem}
                     TravelChoices={this.state.TravelChoices}
                 />
                 <Results

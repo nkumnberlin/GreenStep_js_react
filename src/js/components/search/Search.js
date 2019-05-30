@@ -11,13 +11,31 @@ export default class Search extends Component {
         this.travelChoices = this.props.TravelChoices;
     }
 
+    createMenuButton = (key) => {
+        return (<Button basic
+                        animated
+                        onClick={this.props.clickedItem}
+                        id={this.travelChoices[key]}
+                        active={this.props.activeItem === this.travelChoices[key]}>
+                <Button.Content id={this.travelChoices[key]} visible>
+                    {this.travelChoices[key] === 'Male' ? "Walking" : this.travelChoices[key]}
+                </Button.Content>
+                <Button.Content id={this.travelChoices[key]} hidden>
+                    <Icon id={this.travelChoices[key]}
+                          name={this.travelChoices[key].toLowerCase()}
+                    />
+                </Button.Content>
+            </Button>
+        )
+    };
+
     render() {
         const form_style = {
             margin: '0 auto',
             maxWidth: 800,
         };
 
-        const grid_ArrAndDep = (
+        const ArrivalAndDeparture = (
             <Grid columns={2}>
                 <Grid.Row>
                     <Grid.Column>
@@ -37,35 +55,29 @@ export default class Search extends Component {
                 </Grid.Column>
             </Grid>
         );
-        
-        const menu_ButtonAnimated = (
+
+        const grid_MenuButton = (
+            <Grid columns={16}>
+                <Grid.Column width={4}> </Grid.Column>
+                <Button.Group size='large'>
+                    {Object.keys(this.travelChoices).map((key => {
+                        return (
+                            <Grid.Column key={key}>
+                                {this.createMenuButton(key)}
+                            </Grid.Column>
+                        )
+                    }))}
+                </Button.Group>
+                <Grid.Column width={4}> </Grid.Column>
+            </Grid>
+        );
+
+
+        const menu_Button = (
             <Segment>
                 <Header textAlign={'center'} as='h3'> How do you want to travel? </Header>
                 <br/>
-                <Grid columns={16}>
-                    <Grid.Column width={5}> </Grid.Column>
-                    <Button.Group size='large'>
-                        {Object.keys(this.travelChoices).map((key => {
-                            return (
-                                <Grid.Column key={key}>
-                                    <Button basic
-                                            animated
-                                            onClick={this.props.clickedItem}>
-                                        <Button.Content id={this.travelChoices[key]} visible>
-                                            {this.travelChoices[key]}
-                                        </Button.Content>
-                                        <Button.Content id={this.travelChoices[key]} hidden>
-                                            <Icon id={this.travelChoices[key]}
-                                                  name={this.travelChoices[key].toLowerCase()}
-                                            />
-                                        </Button.Content>
-                                    </Button>
-                                </Grid.Column>
-                            )
-                        }))}
-                    </Button.Group>
-                    <Grid.Column width={5}> </Grid.Column>
-                </Grid>
+                {grid_MenuButton}
                 <br/>
             </Segment>
 
@@ -76,9 +88,8 @@ export default class Search extends Component {
                 <Segment padded>
                     <Header textAlign={'center'} as='h3'> Plan your Trip and Compensate your Emission </Header>
                     <br/>
-                    {grid_ArrAndDep}
-                    {/*{menu_Divided}*/}
-                    {menu_ButtonAnimated}
+                    {ArrivalAndDeparture}
+                    {menu_Button}
                     {grid_Button}
                 </Segment>
             </div>
