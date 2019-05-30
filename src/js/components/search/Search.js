@@ -36,16 +36,18 @@ export default class Search extends Component {
         };
 
         const ArrivalAndDeparture = (
-            <Grid columns={2}>
-                <Grid.Row>
-                    <Grid.Column>
-                        <Departure style={form_style}/>
-                    </Grid.Column>
-                    <Grid.Column>
-                        <Arrival style={form_style}/>
-                    </Grid.Column>
-                </Grid.Row>
-            </Grid>
+            <Segment>
+                <Grid columns={2}>
+                    <Grid.Row>
+                        <Grid.Column>
+                            <Departure style={form_style}/>
+                        </Grid.Column>
+                        <Grid.Column>
+                            <Arrival style={form_style}/>
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
+            </Segment>
         );
 
         const grid_Button = (
@@ -86,6 +88,7 @@ export default class Search extends Component {
         return (
             <div className={'search prob'}>
                 <Segment padded>
+
                     <Header textAlign={'center'} as='h3'> Plan your Trip and Compensate your Emission </Header>
                     <br/>
                     {ArrivalAndDeparture}

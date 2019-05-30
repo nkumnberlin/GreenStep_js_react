@@ -25,7 +25,7 @@ export default class GeneralResult extends Component {
 
         const renderContent = Object.values(this.props.completeResults).map((k, value) => {
             return (
-                <Grid.Row key={k.dist}>
+                <Grid.Row key={k.dist} style={{padding: 2}}>
                     <Grid.Column
                         width={colWidth}>
                         {this.props.TravelChoices[value]}

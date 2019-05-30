@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react'
-import {Segment, Step, Icon, Image, Placeholder, Header, Container, Grid, Divider} from 'semantic-ui-react'
+import {Segment, Step, Icon, Header, Container, Grid, Divider} from 'semantic-ui-react'
 import GeneralResult from "./display_result/GeneralResult.jsx";
+import {Steps} from "./display_result/PlaceholderResult.js"
 
 export default class Results extends Component {
     constructor(props) {
@@ -34,37 +35,6 @@ export default class Results extends Component {
         const locationDeparture = "this.props.locationDeparture";
 
 
-        const renderSteps = Object.keys(StepContent).map((key, value) => {
-            return (
-                <Step key={key}>
-                    <Icon name={StepContent.Icons[value]}/>
-                    <Step.Content>
-                        <Step.Title>{StepContent.Header[value]}</Step.Title>
-                        <Step.Description>{StepContent.Description[value]}</Step.Description>
-                    </Step.Content>
-                </Step>
-            )
-        });
-        const Steps = (
-            <Fragment>
-                <div>
-                    <Segment>
-                        <Container textAlign={'center'}>
-                            <Header as='h4'> GREENSTEP </Header>
-                            <p> Let us give you the exact Route for your GREENSTEP</p>
-                        </Container>
-                    </Segment>
-                    <Step.Group fluid>
-                        {renderSteps}
-                    </Step.Group>
-                </div>
-                <div>
-                    <Segment attached>
-                        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png'/>
-                    </Segment>
-                </div>
-            </Fragment>
-        );
 
 
 
@@ -91,7 +61,7 @@ export default class Results extends Component {
         return (
             <React.Fragment >
                 <Segment className={'results prob'}> {this.props.resultData.data === undefined ?
-                    Steps
+                    Steps(StepContent)
                     :
                     renderResult}
                 </Segment>
