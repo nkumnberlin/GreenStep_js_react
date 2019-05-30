@@ -58,18 +58,20 @@ export default class App extends Component {
     };
 
     changeCordsOfDeparture = (lat, lng) => {
-        this.setState({
+        const departure = {
             departure: {
                 lat: lat,
                 lng: lng
             }
-        });
+        };
+        this.setState(departure);
     };
 
     setDepartureLocation = place => {
-        let tmpLocation = this.getLocation(place)
-        this.setState({LocationDeparture: tmpLocation})
+        let tmpLocation = {LocationDeparture: this.getLocation(place)};
+        this.setState(tmpLocation);
     };
+
 
     handleArrival = () => {
         let place = this.arrival.getPlace();
@@ -82,17 +84,18 @@ export default class App extends Component {
     };
 
     changeCordsOfArrival = (lat, lng) => {
-        this.setState({
+        const arrival = {
             arrival: {
                 lat: lat,
                 lng: lng
             }
-        });
+        };
+        this.setState(arrival);
     };
 
     setArrivalLocation = place => {
-        let tmpLocation = this.getLocation(place);
-        this.setState({LocationArrival: tmpLocation})
+        let tmpLocation = {LocationArrival: this.getLocation(place)};
+        this.setState(tmpLocation)
     };
 
     determineCords = (place) => {
@@ -121,24 +124,18 @@ export default class App extends Component {
         };
         this.handleResults(data)
 
+
     };
 
     handleResults = (data) => {
-        const resultData= this.state.resultData;
-        const newData = data;
-
-        console.log(index);
-        this.setState({resultData: data});
+        const newResultData = {resultData: data}
+        this.setState(newResultData);
     };
 
     handleClickedItem = (item) => {
-        let active = item.target.id
-        console.log("LOL KLICKED ITEM!!", active)
-        this.setState({
-            activeItem: active
-        });
-
-        console.log("AKTUALISIERT ITEM: ", this.state.activeItem);
+        const activeItem = {activeItem: item.target.id};
+        console.log("LOL KLICKED ITEM!!", activeItem)
+        this.setState(activeItem);
     };
 
     render() {

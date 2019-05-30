@@ -9,6 +9,7 @@ export default class Search extends Component {
     constructor(props) {
         super(props);
         this.travelChoices = this.props.TravelChoices;
+        console.log(props)
     }
 
     createMenuButton = (key) => {
@@ -17,6 +18,7 @@ export default class Search extends Component {
                         onClick={this.props.clickedItem}
                         id={this.travelChoices[key]}
                         active={this.props.activeItem === this.travelChoices[key]}>
+
                 <Button.Content id={this.travelChoices[key]} visible>
                     {this.travelChoices[key] === 'Male' ? "Walking" : this.travelChoices[key]}
                 </Button.Content>
