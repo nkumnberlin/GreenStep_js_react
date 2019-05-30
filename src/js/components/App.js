@@ -6,10 +6,9 @@ import Results from './result/Results.jsx';
 import Title from './title/Title.js';
 import '../../style.css'
 import Search from "./search/Search.js"
-import {postCords} from "./python_endpoint/PythonPost.js";
+import {postCords} from "./python_backend/PostCords.js";
 import Script from "react-load-script";
 import Vision from './Vision/vision.jsx'
-
 
 
 export default class App extends Component {
@@ -106,14 +105,16 @@ export default class App extends Component {
 
     submitCordsAndGetResult = async () => {
         console.log("SUBMIT GEDRÜCKT ")
-        let returnData = await postCords(this.state);
-        this.handleResults(returnData.data)
-        // let data = {data: {
-        //     cycling: {dist: 369270.6, time: 108861.3, emission: 1.1816659200000001},
-        //     driving: {dist: 407345.8, time: 15023.9, emission: 86.5609825},
-        //     flight: {dist: 308469.945250751, time: 25551.57089380632, emission: 55.36653014513517},
-        //     transit: {dist: 404634, time: 12424, emission: 16.18536}
-        // }}
+        // let returnData = await postCords(this.state);
+        // this.handleResults(returnData.data)
+        let data = {data: {
+            cycling: {dist: 369270.6, time: 108861.3, emission: 1.1816659200000001},
+            driving: {dist: 407345.8, time: 15023.9, emission: 86.5609825},
+            flight: {dist: 308469.945250751, time: 25551.57089380632, emission: 55.36653014513517},
+            transit: {dist: 404634, time: 12424, emission: 16.18536}
+        }};
+        this.handleResults(data)
+
     };
 
     handleResults = (data) => {

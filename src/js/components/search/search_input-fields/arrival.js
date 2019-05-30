@@ -2,7 +2,6 @@ import React from 'react';
 import {Form} from "semantic-ui-react";
 
 
-
 export const Arrival = (style) => {
     return(
         <Form>

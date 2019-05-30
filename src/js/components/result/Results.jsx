@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import {Segment, Step, Icon, Image, Placeholder, Header, Container, Grid, Divider} from 'semantic-ui-react'
-import Result from "./Result.js";
+import Result from "./display_result/Result.js";
 
 export default class Results extends Component {
     constructor(props) {
@@ -31,8 +31,10 @@ export default class Results extends Component {
             Header: ["Planning", 'Searching', 'Donating'],
             Description: ["Plan your Route!", "Choose the best Route!", "Compensate your Emission!"]
         };
-        const locationArrival = this.props.locationArrival;
-        const locationDeparture = this.props.locationDeparture;
+        // const locationArrival = this.props.locationArrival;
+        // const locationDeparture = this.props.locationDeparture;
+        const locationArrival = "this.props.locationArrival";
+        const locationDeparture = "this.props.locationDeparture";
 
 
         const renderSteps = Object.keys(StepContent).map((key, value) => {

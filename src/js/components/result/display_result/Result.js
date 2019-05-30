@@ -1,29 +1,12 @@
 import React, {Component, Fragment} from 'react'
-import {Divider, Progress, Container, Header, Segment, Grid} from 'semantic-ui-react'
+import {Progress, Grid} from 'semantic-ui-react'
+import {daysHoursMinutes} from "../../data_handler/MillisecondsConverter.jsx";
+import {determineMaxEmission} from "../../data_handler/EmissionsConverter.jsx";
 
 export default class Results extends Component {
     constructor(props) {
         super(props);
-        this.maxEm = this.determineMaxEmission();
-    }
-
-    determineMaxEmission = () => {
-        let em = Object.values(this.props.completeResults).map(key => {
-            let array = [];
-            array.push(key.emission);
-            return array;
-        });
-        return Math.max(...em);
-    };
-
-    static daysHoursMinutes(time) {
-        console.log(time)
-        let num = time / 60;
-        let hours = (num / 60);
-        let rhours = Math.floor(hours);
-        let minutes = (hours - rhours) * 60;
-        let rminutes = Math.round(minutes);
-        return rhours + "h " + rminutes + " min.";
+        this.maxEm = determineMaxEmission(this.props.completeResults);
     }
 
     render() {
@@ -52,7 +35,7 @@ export default class Results extends Component {
                         {Description[value]}
                     </Grid.Column>
                     <Grid.Column width={colWidth}>
-                        {Results.daysHoursMinutes(k.time)}
+                        {daysHoursMinutes(k.time)}
                     </Grid.Column>
                     <Grid.Column width={colWidth}>
                         {dist}
