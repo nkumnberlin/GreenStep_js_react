@@ -9,7 +9,7 @@ class flight_response:
                     #     dest_airport, flight_dist_sum, flight_time_sum, flight_emission_result):
         return {"flight": {"dist": f_data.flight_dist + f_data.departure_transit_json["transit"]["dist"] + f_data.arrival_transit_json["transit"]["dist"],
                            "time": f_data.flight_time + f_data.departure_transit_json["transit"]["time"]+ f_data.arrival_transit_json["transit"]["time"],
-                           "emission": f_data.flight_emission_result,
+                           "emission": f_data.flight_emission_result + f_data.departure_transit_json["transit"]["emission"]+ f_data.arrival_transit_json["transit"]["emission"],
                            "steps": self.create_step_by_step_route_json(f_data)}}
 
     def create_step_by_step_route_json(self, f_data):
