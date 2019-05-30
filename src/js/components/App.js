@@ -49,7 +49,7 @@ export default class App extends Component {
             let cords = this.determineCords(place);
             this.changeCordsOfDeparture(cords.lat, cords.lng);
             this.setDepartureLocation(place);
-            console.log("LOG State Departure: ", this.state)
+            console.log("LOG State FormField: ", this.state)
         }
     };
 

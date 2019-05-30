@@ -38,7 +38,8 @@ export default class Results extends Component {
 
 
         const renderSteps = Object.keys(StepContent).map((key, value) => {
-            return (<Step key={key}>
+            return (
+                <Step key={key}>
                     <Icon name={StepContent.Icons[value]}/>
                     <Step.Content>
                         <Step.Title>{StepContent.Header[value]}</Step.Title>
