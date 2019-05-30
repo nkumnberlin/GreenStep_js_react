@@ -11,7 +11,9 @@
 
 /* backgrounds */
 .cd-section:nth-child(1) {
-    background-image: url("../Images/grassBackground.jpg");
+    /*background-image: url("../Images/test.jpg");*/
+
+    background-image: url("../Images/cleanLeaf1920.jpg");
 }
 
 .cd-section:nth-child(2) {
@@ -22,13 +24,9 @@
     /* background image here */
 }
 
-.footer, .results, .title{
-    margin-top: 2em;
-    margin-bottom: 2em;
-}
 
-.search{
-    margin-bottom: 2em;
+.prob {
+    margin-top: 2em !important;
 }
 
 #progressBubble {
@@ -46,6 +44,7 @@ body {
     font-family: 'Roboto Mono', monospace;
     font-weight: normal;
     font-style: normal;
+    /*background-color: rgba(46, 105, 59, 0.73);*/
 }
 
 .ui.header{
@@ -65,7 +64,6 @@ body {
     font-weight: normal;
     font-style: normal;
 }
-
 .ui{
     font-family: 'Roboto Mono', monospace;
     font-weight: normal;

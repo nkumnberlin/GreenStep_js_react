@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Grid, Image} from 'semantic-ui-react'
+import {Grid} from 'semantic-ui-react'
 import {List} from 'semantic-ui-react'
 import {Header} from 'semantic-ui-react'
 import {Segment} from 'semantic-ui-react';
@@ -8,7 +8,7 @@ export default class Footer extends Component {
     render() {
 
         return (
-            <Segment className={'footer'}>
+            <Segment className={'footer prob'}>
                 <Grid columns={3} divided>
                     <Grid.Row>
                         <Grid.Column>
