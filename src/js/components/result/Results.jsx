@@ -5,17 +5,8 @@ import Result from "./display_result/Result.js";
 export default class Results extends Component {
     constructor(props) {
         super(props)
-
+        console.log("PROPS: ", props)
     }
-
-    // resultData = {
-    //     data: {
-    //         cycling: {dist: 369270.6, time: 108861.3, emission: 1.1816659200000001},
-    //         driving: {dist: 407345.8, time: 15023.9, emission: 86.5609825},
-    //         flight: {dist: 308469.945250751, time: 25551.57089380632, emission: 55.36653014513517},
-    //         transit: {dist: 404634, time: 12424, emission: 16.18536}
-    //     }
-    // };
 
     componentDidUpdate(prevProps) {
         console.log("prev props: ", prevProps, "current props: ", this.props);
@@ -26,11 +17,7 @@ export default class Results extends Component {
 
 
     render() {
-        const StepContent = {
-            Icons: ['truck', 'search', 'credit card'],
-            Header: ["Planning", 'Searching', 'Donating'],
-            Description: ["Plan your Route!", "Choose the best Route!", "Compensate your Emission!"]
-        };
+        const StepContent = this.props.StepContent;
         // const locationArrival = this.props.locationArrival;
         // const locationDeparture = this.props.locationDeparture;
         const locationArrival = "this.props.locationArrival";
@@ -86,7 +73,9 @@ export default class Results extends Component {
                         <React.Fragment key={value}>
                             <Segment>
                                 <Grid columns={4}>
-                                    <Result completeResults={completeResults}/>
+                                    <Result completeResults={completeResults}
+                                            TravelChoices={this.props.TravelChoices}
+                                    />
                                 </Grid>
                             </Segment>
                         </React.Fragment>

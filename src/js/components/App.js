@@ -20,10 +20,18 @@ export default class App extends Component {
             arrival: {},
             LocationDeparture: {},
             LocationArrival: {},
-            resultData: {}
+            resultData: {},
+            StepContent: {
+                Icons: ['truck', 'search', 'credit card'],
+                Header: ["Planning", 'Searching', 'Donating'],
+                Description: ["Plan your Route!", "Choose the best Route!", "Compensate your Emission!"]
+            },
+            TravelChoices: ["Plane", "Car", "Bicycle", "Train"],
+            travelItemClicked: {
+                activeItem: ""
+            },
         }
     }
-
 
     fields = ['address_components', 'geometry', 'icon', 'name'];
 
@@ -38,9 +46,8 @@ export default class App extends Component {
         this.arrival.addListener('place_changed', this.handleArrival);
     };
 
-    getLocation = place =>{
-        let tmpLocation = place.name;
-        return tmpLocation;
+    getLocation = place => {
+        return place.name;
     };
 
     handleDeparture = () => {
@@ -87,7 +94,7 @@ export default class App extends Component {
     };
 
     setArrivalLocation = place => {
-       let tmpLocation = this.getLocation(place);
+        let tmpLocation = this.getLocation(place);
         this.setState({LocationArrival: tmpLocation})
     };
 
@@ -96,29 +103,39 @@ export default class App extends Component {
             console.log("No details available for input: '" + place.name + "'");
             return;
         }
-        let cords = {
+
+        return {
             lat: place.geometry.location.lat(),
             lng: place.geometry.location.lng()
         };
-        return cords;
     };
 
     submitCordsAndGetResult = async () => {
         console.log("SUBMIT GEDRÜCKT ")
         // let returnData = await postCords(this.state);
         // this.handleResults(returnData.data)
-        let data = {data: {
-            cycling: {dist: 369270.6, time: 108861.3, emission: 1.1816659200000001},
-            driving: {dist: 407345.8, time: 15023.9, emission: 86.5609825},
-            flight: {dist: 308469.945250751, time: 25551.57089380632, emission: 55.36653014513517},
-            transit: {dist: 404634, time: 12424, emission: 16.18536}
-        }};
+        let data = {
+            data: {
+                cycling: {dist: 369270.6, time: 108861.3, emission: 1.1816659200000001},
+                driving: {dist: 407345.8, time: 15023.9, emission: 86.5609825},
+                flight: {dist: 308469.945250751, time: 25551.57089380632, emission: 55.36653014513517},
+                transit: {dist: 404634, time: 12424, emission: 16.18536}
+            }
+        };
         this.handleResults(data)
 
     };
 
     handleResults = (data) => {
         this.setState({resultData: data});
+    };
+
+    handleClickedItem = (item) => {
+        if (item.target.id !== "") {
+            console.log("LOL KLICKED ITEM!!", item.target.id)
+            this.setState({activeItem: item.target.id});
+        }
+        console.log(this.state);
     };
 
     render() {
@@ -131,11 +148,18 @@ export default class App extends Component {
                 </Script>
                 <MenuBar/>
                 <Title/>
-                <Search submitCords={this.submitCordsAndGetResult}/>
+                <Search
+                    submitCords={this.submitCordsAndGetResult}
+                    clickedItem={this.handleClickedItem}
+                    activeItem={this.state.travelItemClicked.activeItem}
+                    TravelChoices={this.state.TravelChoices}
+                />
                 <Results
                     resultData={resultData}
                     locationDeparture={LocationDeparture}
                     locationArrival={LocationArrival}
+                    StepContent={this.state.StepContent}
+                    TravelChoices={this.state.TravelChoices}
                 />
                 <Vision/>
                 <Footer/>
