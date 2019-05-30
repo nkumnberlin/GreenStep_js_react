@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-
+import json
 class crawl_steps:
-    def get_steps(self, json):
+    def get_steps(self, travel_json):
         #print(json)
         i = 0
         waypoints = []
-        steps = json["routes"][0]["legs"][0]["steps"]
+        steps = travel_json["routes"][0]["legs"][0]["steps"]
         for i in range(len(steps)):
             if (i == 0):
                 #print("i==0")
@@ -14,7 +14,7 @@ class crawl_steps:
                      "Values": {
                          "duration": steps[i]["duration"]["value"],
                          "distance": steps[i]["distance"]["value"],
-                         "start_location": json["routes"][0]["legs"][0]["start_address"],
+                         "start_location": travel_json["routes"][0]["legs"][0]["start_address"],
                          "end_location": steps[i + 1]["transit_details"]["departure_stop"]["name"]}})
             else:
                 try:
@@ -38,6 +38,6 @@ class crawl_steps:
                                               "duration": steps[i]["duration"]["value"],
                                               "distance": steps[i]["distance"]["value"],
                                               "start_location": steps[i - 1]["transit_details"]["arrival_stop"]["name"],
-                                              "end_location": json["routes"][0]["legs"][0]["end_address"]}})
+                                              "end_location": travel_json["routes"][0]["legs"][0]["end_address"]}})
                         pass
         return waypoints
