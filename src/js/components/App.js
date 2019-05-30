@@ -124,6 +124,10 @@ export default class App extends Component {
     };
 
     handleResults = (data) => {
+        const resultData= this.state.resultData;
+        const newData = data;
+
+        console.log(index);
         this.setState({resultData: data});
     };
 

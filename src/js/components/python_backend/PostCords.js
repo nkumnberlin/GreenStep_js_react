@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 
 
-export async function postCords(props) {
+export async function lopostCords(props) {
 
     // const cords = {
     //     d_lat: props.departure.lat,
