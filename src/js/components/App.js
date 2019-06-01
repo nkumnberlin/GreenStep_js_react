@@ -10,6 +10,158 @@ import {postCords} from "./python_backend/PostCords.js";
 import Script from "react-load-script";
 import Vision from './Vision/vision.jsx'
 
+const json_mockup = {
+    data: {
+        flight:
+            {
+                dist: 371803.945250751,
+                emission: 100.41958010305981,
+                steps: [
+                    {
+                        transit: {
+                            dist: 3602,
+                            time: 1197,
+                            emission: 0.1440799999999,
+                            steps:
+                                [
+                                    {
+                                        Values: {
+                                            distance: 163,
+                                            duration: 133,
+                                            end_location: "Bremen Am Brill (Bgm.-Smidt-Straße)",
+                                            start_location: "Wandschneiderstraße 8, 28195 Bremen, Germany",
+                                        },
+                                        travel_mode: "WALKING"
+                                    },
+                                    {
+                                        Values: {
+                                            distance: 163,
+                                            duration: 133,
+                                            end_location: "Bremen Am Brill (Bgm.-Smidt-Straße)",
+                                            start_location: "Wandschneiderstraße 8, 28195 Bremen, Germany",
+                                        },
+                                        travel_mode: "TRANSIT"
+                                    },
+                                    {
+                                        Values: {
+                                            distance: 163,
+                                            duration: 133,
+                                            end_location: "Bremen Am Brill (Bgm.-Smidt-Straße)",
+                                            start_location: "Wandschneiderstraße 8, 28195 Bremen, Germany",
+                                        },
+                                        travel_mode: "TRANSIT"
+                                    },
+                                    {
+                                        Values: {
+                                            distance: 163,
+                                            duration: 133,
+                                            end_location: "Bremen Am Brill (Bgm.-Smidt-Straße)",
+                                            start_location: "Wandschneiderstraße 8, 28195 Bremen, Germany",
+                                        },
+                                        travel_mode: "WALKING"
+                                    }
+                                ]
+                        }
+                    },
+                    {
+                        flying: {
+                            dist: 3602,
+                            time: 1197,
+                            emission: 0.1440799999999,
+                            steps:
+                                [
+                                    {
+                                        Values: {
+                                            distance: 163,
+                                            duration: 133,
+                                            end_location: "Bremen Am Brill (Bgm.-Smidt-Straße)",
+                                            start_location: "Wandschneiderstraße 8, 28195 Bremen, Germany",
+                                        },
+                                        travel_mode: "WALKING"
+                                    },
+                                    {
+                                        Values: {
+                                            distance: 163,
+                                            duration: 133,
+                                            end_location: "Bremen Am Brill (Bgm.-Smidt-Straße)",
+                                            start_location: "Wandschneiderstraße 8, 28195 Bremen, Germany",
+                                        },
+                                        travel_mode: "TRANSIT"
+                                    },
+                                    {
+                                        Values: {
+                                            distance: 163,
+                                            duration: 133,
+                                            end_location: "Bremen Am Brill (Bgm.-Smidt-Straße)",
+                                            start_location: "Wandschneiderstraße 8, 28195 Bremen, Germany",
+                                        },
+                                        travel_mode: "TRANSIT"
+                                    },
+                                    {
+                                        Values: {
+                                            distance: 163,
+                                            duration: 133,
+                                            end_location: "Bremen Am Brill (Bgm.-Smidt-Straße)",
+                                            start_location: "Wandschneiderstraße 8, 28195 Bremen, Germany",
+                                        },
+                                        travel_mode: "WALKING"
+                                    }
+                                ]
+                        }
+                    },
+                    {
+                        transit: {
+                            dist: 3602,
+                            time: 1197,
+                            emission: 0.1440799999999,
+                            steps:
+                                [
+                                    {
+                                        Values: {
+                                            distance: 163,
+                                            duration: 133,
+                                            end_location: "Bremen Am Brill (Bgm.-Smidt-Straße)",
+                                            start_location: "Wandschneiderstraße 8, 28195 Bremen, Germany",
+                                        },
+                                        travel_mode: "WALKING"
+                                    },
+                                    {
+                                        Values: {
+                                            distance: 163,
+                                            duration: 133,
+                                            end_location: "Bremen Am Brill (Bgm.-Smidt-Straße)",
+                                            start_location: "Wandschneiderstraße 8, 28195 Bremen, Germany",
+                                        },
+                                        travel_mode: "TRANSIT"
+                                    },
+                                    {
+                                        Values: {
+                                            distance: 163,
+                                            duration: 133,
+                                            end_location: "Bremen Am Brill (Bgm.-Smidt-Straße)",
+                                            start_location: "Wandschneiderstraße 8, 28195 Bremen, Germany",
+                                        },
+                                        travel_mode: "TRANSIT"
+                                    },
+                                    {
+                                        Values: {
+                                            distance: 163,
+                                            duration: 133,
+                                            end_location: "Bremen Am Brill (Bgm.-Smidt-Straße)",
+                                            start_location: "Wandschneiderstraße 8, 28195 Bremen, Germany",
+                                        },
+                                        travel_mode: "WALKING"
+                                    }
+                                ]
+                        }
+                    }
+                ],
+                time: 32200.57089380632
+            }
+    }
+
+};
+
 
 export default class App extends Component {
     constructor(props) {
@@ -114,15 +266,20 @@ export default class App extends Component {
         console.log("SUBMIT GEDRÜCKT ")
         // let returnData = await postCords(this.state);
         // this.handleResults(returnData.data)
-        let data = {
-            data: {
-                cycling: {dist: 369270.6, time: 108861.3, emission: 1.1816659200000001},
-                driving: {dist: 407345.8, time: 15023.9, emission: 86.5609825},
-                flight: {dist: 308469.945250751, time: 25551.57089380632, emission: 55.36653014513517},
-                transit: {dist: 404634, time: 12424, emission: 16.18536}
-            }
-        };
-        this.handleResults(data)
+        //   let data = {
+        //       data: {
+        //           cycling: {dist: 369270.6, time: 108861.3, emission: 1.1816659200000001},
+        //           driving: {dist: 407345.8, time: 15023.9, emission: 86.5609825},
+        //           flight: {dist: 308469.945250751,  emission: 55.36653014513517, steps: [
+        //
+        //
+        //           ]
+        //           time: 25551.57089380632,},
+        //           transit: {dist: 404634, time: 12424, emission: 16.18536}
+        //       }
+        //   };
+          this.handleResults(json_mockup)
+        console.log("RESULTS: ", json_mockup)
 
 
     };

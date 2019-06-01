@@ -1,8 +1,25 @@
 import React from "react";
 import axios from "axios";
 
+async function getDistance(cords) {
 
-export async function lopostCords(props) {
+    const ValuesOfCords = Object.values(cords);
+    if (!(ValuesOfCords.includes(undefined))) {
+
+        console.log("Posting now: ", cords);
+        let response = await axios.post(`http://127.0.0.1:8000/getDistance/`, {cords})
+            .then(res => {
+                    response = res;
+                    return response
+                }
+            );
+        if (response !== undefined) {
+            return response;
+        }
+    }
+}
+
+export async function postCords(props) {
 
     // const cords = {
     //     d_lat: props.departure.lat,
@@ -21,11 +38,16 @@ export async function lopostCords(props) {
 
     const ValuesOfCords = Object.values(cords);
     if (!(ValuesOfCords.includes(undefined))) {
+    //
+    //     let currentDistance = getDistance(cords);
+    //     console.log("CURRENT DISTANCE IS: ", currentDistance);
+    //     return currentDistance;
+    // }
 
         console.log("Posting now: ", cords);
-        let response = await axios.post(`http://127.0.0.1:8000/postLatLng/`, {cords})
+        let response = await axios.post(`http://127.0.0.1:8000/getTravelData/`, {cords})
             .then(res => {
-                    response = res
+                    response = res;
                     return response
                 }
             );
