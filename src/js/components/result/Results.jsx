@@ -52,7 +52,6 @@ export default class Results extends Component {
                 const completeResults = this.props.resultData[value];
                 return (
                     <React.Fragment key={value}>
-                        {console.log("IN Render: ", value)}
                         <Divider horizontal>
                             <Header as='h4'>
                                 Results
@@ -61,7 +60,7 @@ export default class Results extends Component {
                         <Container textAlign="center">
                             <p> For your wanted Route from {locationDeparture} to {locationArrival} you have the following choices </p>
                         </Container>
-                        {this.createGeneralResult(completeResults, value)}
+                        {/*{this.createGeneralResult(completeResults, value)}*/}
                         {this.createSpecificResult(completeResults, value)}
                     </React.Fragment>
                 )
