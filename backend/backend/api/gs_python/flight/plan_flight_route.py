@@ -15,7 +15,7 @@ from transit.plan_transit_route import transit_route_address
 # not tested in react
 # from .distcalc.calc_geographic_points import distcalc
 # from ..APIrequests.APIrequest import APIrequest, call_flight_api
-class planflightroute:
+class flight_route:
     emission_flight_1000 = 0.2794
     emission_flight_5000 = 0.2439
     emission_flight_9999 = 0.3234

@@ -1,7 +1,7 @@
 # coding=utf-8
 # Pycharm
 from APIrequests.APIrequest import APIrequest
-from flight.plan_flight_route import planflightroute
+from flight.plan_flight_route import flight_route
 from cycling.plan_cycling_route import cycling_route
 from driving.plan_driving_route import driving_route
 from transit.plan_transit_route import transit_route_cords
@@ -32,7 +32,7 @@ class main:
         print(cycling_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_cycle_planning())
         print(driving_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_drive_planning())
         print(transit_route_cords(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_transit_planning())
-        print(planflightroute(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_flight_planning())
+        print(flight_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_flight_planning())
 
     # def create_json(self):
     # flight_dist_sum, flight_time_sum, flight_emission_sum = self.call_flight_sth()
