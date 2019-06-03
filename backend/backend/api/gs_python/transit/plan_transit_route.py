@@ -40,4 +40,4 @@ class transit_route_address:
     def run_transit_planning(self):
         transit_dist, transit_time , json_response = APIrequest().callGoogleDirectionsAPI(self.origin, self.dest, "transit", "&departure_time=1558951200")
         transit_emission_result = transit_dist / 1000 * self.emission_transit
-        return {"transit": {"dist": transit_dist, "time": transit_time, "emission": transit_emission_result, "steps": crawl_steps().get_steps(json_response)}}
+        return {"transit": {"dist": transit_dist, "time": transit_time, "emission": transit_emission_result, "travel_mode": "TRANSIT", "steps": crawl_steps().get_steps(json_response)}}

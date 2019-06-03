@@ -28,9 +28,9 @@ class main:
 
     # Entry
     def __get__(self):
-        print(walking_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_walking_planning())
-        print(cycling_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_cycling_planning())
-        print(driving_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_flight_planning())
+        print(walking_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_walk_planning())
+        print(cycling_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_cycle_planning())
+        print(driving_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_drive_planning())
         print(transit_route_cords(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_transit_planning())
         print(planflightroute(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_flight_planning())
 
