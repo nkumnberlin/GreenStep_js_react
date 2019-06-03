@@ -17,9 +17,9 @@ class SpecificResult extends Component {
                     tmpArray.push({
                         currentDataName: keyStart.travel_mode,
                         upper_travelMode: key_steps.travel_mode,
-                        upper_dist: keyStart.dist,
-                        upper_emission: keyStart.emission,
-                        upper_time: keyStart.time,
+                        upper_dist: key_steps.dist,
+                        upper_emission: key_steps.emission,
+                        upper_time: key_steps.time,
                         stepsOfLowerTravel: key_steps.steps,
                     });
                 })
@@ -54,10 +54,13 @@ class SpecificResult extends Component {
             return (
                 <Fragment key={key.upper_emission}>
                     <Segment>
+                        {key.currentDataName}
+                    </Segment>
+                    <Segment>
                         <Segment>
-                            {key.currentDataName}
+                            {key.upper_travelMode}
                         </Segment>
-                        {key.upper_dist + " " + key.upper_emission + " " + key.upper_time + " " + key.upper_travelMode}
+                        {key.upper_dist + " " + key.upper_emission + " " + key.upper_time}
                     </Segment>
                     <Segment>
                         {subSteps}
