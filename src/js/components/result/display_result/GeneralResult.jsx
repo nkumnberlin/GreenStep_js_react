@@ -1,9 +1,7 @@
 import React, {Component, Fragment} from 'react'
 import {Grid} from 'semantic-ui-react'
-import {daysHoursMinutes} from "../../data_handler/MillisecondsConverter.jsx";
-import {determineMaxEmission} from "../../data_handler/EmissionsConverter.jsx";
+import {daysHoursMinutes, determineMaxEmission, distanceInKm } from "../../data_handler/Converter.jsx";
 import {ProgressBar} from "../../data_handler/ProgressBar.jsx";
-import {distanceInKm} from "../../data_handler/DistanceConverter.jsx";
 
 export default class GeneralResult extends Component {
     constructor(props) {

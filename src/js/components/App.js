@@ -380,6 +380,7 @@ export default class App extends Component {
         this.setState(tmpLocation)
     };
 
+    // ?:
     determineCords = (place) => {
         if (!place.geometry) {
             console.log("No details available for input: '" + place.name + "'");
@@ -448,6 +449,7 @@ export default class App extends Component {
                     StepContent={this.state.StepContent}
                     TravelChoices={this.state.TravelChoices}
                 />
+
                 <Vision/>
                 <Footer/>
             </div>

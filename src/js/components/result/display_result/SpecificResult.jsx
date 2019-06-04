@@ -9,30 +9,40 @@ class SpecificResult extends Component {
     }
 
     extractAllSteps = results => {
-        let stepsOfObject;
-        let tmpArray = [];
-        Object.values(results).map((keyStart) => {
-            Object.values(keyStart.steps).map((keyFirstStep) => {
-                Object.values(keyFirstStep).map((key_steps, value) => {
-                    tmpArray.push({
-                        currentDataName: keyStart.travel_mode,
-                        upper_travelMode: key_steps.travel_mode,
-                        upper_dist: key_steps.dist,
-                        upper_emission: key_steps.emission,
-                        upper_time: key_steps.time,
-                        stepsOfLowerTravel: key_steps.steps,
-                    });
-                })
-            });
-        });
-        if (tmpArray) {
-            stepsOfObject = tmpArray;
-        }
+        console.log(results)
+        const stepsOfObject = Object.values(results.flight.steps).map(transit =>
+            this.handleFlightTransits(transit, results.flight.travel_mode)
+        );
+
+        console.log("STEPS OF OB", stepsOfObject)
         return stepsOfObject
     };
 
+    handleFlightTransits = (transits, flightMode) => {
+        let tmpArray = [];
+        let stepsOfObject;
+        Object.values(transits).map((key_steps, value) => {
+            tmpArray.push({
+                currentDataName: flightMode,
+                upper_travelMode: key_steps.travel_mode,
+                upper_dist: key_steps.dist,
+                upper_emission: key_steps.emission,
+                upper_time: key_steps.time,
+                stepsOfLowerTravel: key_steps.steps,
+            })
+
+        })
+        if (tmpArray) {
+            stepsOfObject = tmpArray;
+        }
+        return stepsOfObject;
+    };
+
     extractSubSteps = (steps) => {
+        console.log("steps: " , steps)
+
         return Object.values(steps).map((key, value) => {
+
             return (
                 <Segment>{
                     key.travel_mode + " " +
