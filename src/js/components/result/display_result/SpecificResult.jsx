@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
-import {Grid, Segment} from 'semantic-ui-react'
-import traverse from 'traverse'
+import {distanceInKm, daysHoursMinutes, adjustEmissionValues} from "../../data_handler/Converter.jsx";
+import {Segment} from 'semantic-ui-react'
 
 class SpecificResult extends Component {
     constructor(props) {
@@ -16,7 +16,6 @@ class SpecificResult extends Component {
 
     handleFlightTransits = (transits, flightMode) => {
         let tmpArray = [];
-        console.log("transits: ", transits, flightMode)
         Object.values(transits).map((key_steps) => {
             tmpArray.push({
                 currentDataName: flightMode,
@@ -30,14 +29,13 @@ class SpecificResult extends Component {
         return tmpArray;
     };
 
-    extractSubSteps = (steps) => {
+    extractSubStepsOfFlight = (steps) => {
         return Object.values(steps).map((key, value) => {
-            console.log("steps:", steps, "key: ", key)
             return (
-                <Segment>{
+                <Segment key={key.distance}>{
                     key.travel_mode + " " +
-                    key.distance + " " +
-                    key.duration + " " +
+                    distanceInKm(key.distance) + " " +
+                    daysHoursMinutes(key.duration) + " " +
                     key.start_location + " " +
                     key.end_location}
                 </Segment>
@@ -51,35 +49,88 @@ class SpecificResult extends Component {
             return Object.values(keyOfArray).map((key) => {
                 return (
                     <Fragment key={key.upper_emission}>
-                        {console.log(key)}
                         <Segment>
                             <Segment>
                                 {key.upper_travelMode}
                             </Segment>
-                            {key.upper_dist + " " + key.upper_emission + " " + key.upper_time}
+                            {distanceInKm(key.upper_dist) + " " + adjustEmissionValues(key.upper_emission) + " " + daysHoursMinutes(key.upper_time)}
                         </Segment>
-                        {/*<Segment>*/}
-                        {/*    {this.extractSubSteps(key.stepsOfLowerTravel)}*/}
-                        {/*</Segment>*/}
+                        <Segment>
+                            {this.extractSubStepsOfFlight(key.stepsOfLowerTravel)}
+                        </Segment>
                     </Fragment>
                 )
             })
         });
         return (
             <Fragment>
-            <Segment>
-                {"Flight"}
-            </Segment>
-            {flightRender}
+                <Segment>
+                    {"Flight"}
+                </Segment>
+                {flightRender}
             </Fragment>
         )
     };
 
+    extractTrainSteps = results => {
+        let tmpArray = [];
+        (Object.values(results.transit.steps).map(transit =>
+            tmpArray.push({
+                upper_travelMode: transit.travel_mode,
+                upper_dist: transit.distance,
+                upper_time: transit.duration,
+                start_location: transit.start_location,
+                end_location: transit.end_location,
+            })
+        ));
+        return tmpArray;
+    };
+
+    transitSubSteps = trainSteps => {
+        return Object.values(trainSteps).map((key) => {
+                return (
+                    <Segment key={key.upper_dist}>
+                        <Segment> {key.upper_travelMode}
+
+                            {distanceInKm(key.upper_dist) + " " + daysHoursMinutes(key.upper_time)
+                            + " " + key.start_location + " " + key.end_location}
+                        </Segment>
+                    </Segment>
+                )
+            })
+    };
+
+    renderTransitResults = () => {
+        let trainSteps = this.extractTrainSteps(this.completeResults);
+        const {transit} = this.completeResults;
+        return (
+            <Fragment>
+                <Segment>
+                    {"Train"}
+                </Segment>
+                <Segment>
+
+                    {distanceInKm(transit.dist) + daysHoursMinutes(transit.time) + adjustEmissionValues(transit.emission)}
+                </Segment>
+                    {this.transitSubSteps(trainSteps)}
+            </Fragment>
+        )
+
+    };
+
+    renderDynamicResults = typeOfTravel => {
+        switch (typeOfTravel.toString()) {
+            case "Plane":
+                return this.renderFlyingResults();
+            case "Train":
+                return this.renderTransitResults();
+        }
+    };
 
     render() {
         return (
             <div>
-                {this.renderFlyingResults()}
+                {this.renderDynamicResults(this.props.ActiveTravelItem)}
             </div>
         );
     }

@@ -1,5 +1,5 @@
 export const distanceInKm = (dist) => {
-    return ((dist / 1000).toFixed(1) + " km")
+    return ((dist / 1000).toFixed(1) + "km")
 };
 
 export const determineMaxEmission = (completeResults) => {
@@ -17,5 +17,9 @@ export const daysHoursMinutes =(time)=> {
     let rHours = Math.floor(hours);
     let minutes = (hours - rHours) * 60;
     let rMinutes = Math.round(minutes);
-    return rHours + "h " + rMinutes + " min.";
+    return rHours + "h" + rMinutes + "min.";
+};
+
+export const adjustEmissionValues = (emission) => {
+    return (Math.round(emission * 100)/100) + "kg"
 };

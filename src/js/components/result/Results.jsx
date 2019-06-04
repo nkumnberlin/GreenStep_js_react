@@ -32,6 +32,7 @@ export default class Results extends Component {
             <Segment>
                 <Grid columns={4}>
                     <SpecificResult completeResults={completeResults}
+                                    ActiveTravelItem={this.props.ActiveTravelItem}
                                    TravelChoices={this.props.TravelChoices}/>
                 </Grid>
             </Segment>
