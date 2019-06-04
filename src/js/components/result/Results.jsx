@@ -27,7 +27,7 @@ export default class Results extends Component {
         </React.Fragment>
     );
 
-    createSpecificResult = (completeResults, value) => (
+    createSpecificResult = (completeResults) => (
         <React.Fragment key={0}>
             <Segment>
                 <Grid columns={4}>

@@ -8,20 +8,16 @@ class SpecificResult extends Component {
         this.completeResults = this.props.completeResults;
     }
 
-    extractAllSteps = results => {
-        console.log(results)
-        const stepsOfObject = Object.values(results.flight.steps).map(transit =>
+    extractFlySteps = results => {
+        return (Object.values(results.flight.steps).map(transit =>
             this.handleFlightTransits(transit, results.flight.travel_mode)
-        );
-
-        console.log("STEPS OF OB", stepsOfObject)
-        return stepsOfObject
+        ));
     };
 
     handleFlightTransits = (transits, flightMode) => {
         let tmpArray = [];
-        let stepsOfObject;
-        Object.values(transits).map((key_steps, value) => {
+        console.log("transits: ", transits, flightMode)
+        Object.values(transits).map((key_steps) => {
             tmpArray.push({
                 currentDataName: flightMode,
                 upper_travelMode: key_steps.travel_mode,
@@ -30,19 +26,13 @@ class SpecificResult extends Component {
                 upper_time: key_steps.time,
                 stepsOfLowerTravel: key_steps.steps,
             })
-
-        })
-        if (tmpArray) {
-            stepsOfObject = tmpArray;
-        }
-        return stepsOfObject;
+        });
+        return tmpArray;
     };
 
     extractSubSteps = (steps) => {
-        console.log("steps: " , steps)
-
         return Object.values(steps).map((key, value) => {
-
+            console.log("steps:", steps, "key: ", key)
             return (
                 <Segment>{
                     key.travel_mode + " " +
@@ -55,34 +45,41 @@ class SpecificResult extends Component {
         })
     };
 
-    render() {
-
-        const upperSteps = this.extractAllSteps(this.completeResults);
-
-        const renderUpperSteps = Object.values(upperSteps).map((key, value) => {
-            const subSteps = this.extractSubSteps(key.stepsOfLowerTravel);
-            return (
-                <Fragment key={key.upper_emission}>
-                    <Segment>
-                        {key.currentDataName}
-                    </Segment>
-                    <Segment>
+    renderFlyingResults = () => {
+        let flySteps = this.extractFlySteps(this.completeResults);
+        let flightRender = Object.values(flySteps).map((keyOfArray) => {
+            return Object.values(keyOfArray).map((key) => {
+                return (
+                    <Fragment key={key.upper_emission}>
+                        {console.log(key)}
                         <Segment>
-                            {key.upper_travelMode}
+                            <Segment>
+                                {key.upper_travelMode}
+                            </Segment>
+                            {key.upper_dist + " " + key.upper_emission + " " + key.upper_time}
                         </Segment>
-                        {key.upper_dist + " " + key.upper_emission + " " + key.upper_time}
-                    </Segment>
-                    <Segment>
-                        {subSteps}
-                    </Segment>
-                </Fragment>
-            )
+                        {/*<Segment>*/}
+                        {/*    {this.extractSubSteps(key.stepsOfLowerTravel)}*/}
+                        {/*</Segment>*/}
+                    </Fragment>
+                )
+            })
         });
+        return (
+            <Fragment>
+            <Segment>
+                {"Flight"}
+            </Segment>
+            {flightRender}
+            </Fragment>
+        )
+    };
 
 
+    render() {
         return (
             <div>
-                {renderUpperSteps}
+                {this.renderFlyingResults()}
             </div>
         );
     }

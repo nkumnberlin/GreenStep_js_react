@@ -24,7 +24,7 @@ const json_mockup =
                             transit: {
                                 dist: 3602,
                                 time: 123,
-                                emission: 0.1440799999999,
+                                emission: 0.14407999999939,
                                 travel_mode: "transit",
                                 steps:
                                     [
@@ -67,7 +67,7 @@ const json_mockup =
                             flying: {
                                 dist: 3602,
                                 time: 1234,
-                                emission: 0.1440799999999,
+                                emission: 0.14407299999999,
                                 travel_mode: "flying",
                                 steps:
                                     [
@@ -110,7 +110,7 @@ const json_mockup =
                             transit: {
                                 dist: 3602,
                                 time: 12346,
-                                emission: 0.1440799999999,
+                                emission: 0.14401799999999,
                                 travel_mode: "transit",
                                 steps:
                                     [
@@ -162,7 +162,7 @@ const json_mockup =
                             transit: {
                                 dist: 3602,
                                 time: 1197,
-                                emission: 0.1440799999999,
+                                emission: 0.14406799999999,
                                 travel_mode: "transit",
                                 steps:
                                     [
@@ -205,7 +205,7 @@ const json_mockup =
                             flying: {
                                 dist: 3602,
                                 time: 1197,
-                                emission: 0.1440799999999,
+                                emission: 0.14407979999999,
                                 travel_mode: "flying",
                                 steps:
                                     [
@@ -248,7 +248,7 @@ const json_mockup =
                             transit: {
                                 dist: 3602,
                                 time: 1197,
-                                emission: 0.1440799999999,
+                                emission: 0.14407899999999,
                                 travel_mode: "transit",
                                 steps:
                                     [
