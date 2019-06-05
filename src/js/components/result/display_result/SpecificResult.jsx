@@ -51,13 +51,23 @@ class SpecificResult extends Component {
     // };
 
     renderFlyingResults = (currentType) => {
-        return(
+        return (
             <Fragment>
-                {console.log("DIES IS FLYING", currentType)}
                 {this.renderTotal(currentType)}
-                {this.renderIcons(currentType)}
+                {this.renderIconsOfFlight(currentType)}
+                {this.renderGoalOfFlight(currentType)}
             </Fragment>
         )
+    };
+
+    renderGoalOfFlight = currentType => {
+        return Object.values(currentType.steps).map((keyUpperSteps) => {
+            return Object.values(keyUpperSteps).map((keyLower) => {
+                return Object.values(keyLower.steps).map((key) => {
+                    {return this.renderStepsToGoal(key)}
+                })
+            })
+        })
     };
 
 
@@ -76,14 +86,12 @@ class SpecificResult extends Component {
         }
     };
 
-    renderAllResults = currentType => {
+    renderAllResultsExceptFlight = currentType => {
         return (
             <Fragment>
-                {console.log("DIES IS Train", currentType)}
-
                 {this.renderTotal(currentType)}
-                {this.renderIcons(currentType)}
-                {this.renderStepsToGoal(currentType)}
+                {this.renderIconsExceptFlight(currentType)}
+                {this.renderGoalExceptFlight(currentType)}
             </Fragment>
         )
     };
@@ -121,20 +129,21 @@ class SpecificResult extends Component {
         )
     };
 
-    renderIcons = currentType => {
+    renderIconsExceptFlight = currentType => {
         return (
             <Segment>
                 <br/>
                 <Grid centered>
                     {Object.values(currentType.steps).map((key, value) => {
-                        return (
+                        return (<Fragment>
                             <Icon.Group size={"huge"} key={key.distance}>
                                 <Icon name={this.iconTranslator(key.travel_mode)} style={{marginRight: 30}}/>
                                 {value === currentType.steps.length - 1 ?
                                     <Icon corner name={""}/>
                                     : <Icon corner name={"angle right"}/>
                                 }
-                            </Icon.Group>)
+                            </Icon.Group>
+                        </Fragment>)
                     })}
                 </Grid>
                 <br/>
@@ -142,12 +151,41 @@ class SpecificResult extends Component {
         )
     };
 
-    renderStepsToGoal = currentType => {
+    renderIconsOfFlight = currentType => {
+        return (
+            <Segment>
+                <br/>
+                <Grid centered>
+                    {Object.values(currentType.steps).map((keySteps, value) => {
+                        return Object.values(keySteps).map((key) => {
+                            return (<Fragment key={key.dist}>
+                                <Icon.Group size={"huge"}>
+                                    <Icon name={this.iconTranslator(key.travel_mode)} style={{marginRight: 30}}/>
+                                    {value === currentType.steps.length - 1 ?
+                                        <Icon corner name={""}/>
+                                        : <Icon corner name={"angle right"}/>
+                                    }
+                                </Icon.Group>
+                            </Fragment>)
+                        })
+                    })}
+                </Grid>
+                <br/>
+            </Segment>
+        )
+    };
+
+
+    renderGoalExceptFlight = currentType => {
         return Object.values(currentType.steps).map((key) => {
-            return (
-                <Segment  key={key.duration}>
-                    <br/>
-                    <br/>
+            {return this.renderStepsToGoal(key)}
+        })
+    };
+
+    renderStepsToGoal = key => (
+            <Segment key={key.duration}>
+                <br/>
+                <br/>
                 <Grid style={{padding: 2, marginBottom: 10}}>
                     <Grid.Column width={6}>
                         <Icon name={this.iconTranslator(key.travel_mode)}/>
@@ -169,17 +207,15 @@ class SpecificResult extends Component {
                         Distance: {distanceInKm(key.distance)}
                     </Grid.Column>
                 </Grid>
-                </Segment>
-            )
-        })
-    };
+            </Segment>
+    );
 
     renderDynamicResults = typeOfTravel => {
         switch (typeOfTravel.toString()) {
             case "Plane":
                 return this.renderFlyingResults(this.completeResults.flight);
             case "Train":
-                return this.renderAllResults(this.completeResults.transit);
+                return this.renderAllResultsExceptFlight(this.completeResults.transit);
         }
     };
 
