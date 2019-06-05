@@ -145,6 +145,7 @@ export default class App extends Component {
         const activeItem = {activeItem: item.target.id};
         console.log("LOL KLICKED ITEM!!", activeItem)
         this.setState(activeItem);
+        this.submitCordsAndGetResult();
     };
 
     render() {
@@ -158,7 +159,6 @@ export default class App extends Component {
                 <MenuBar/>
                 <Title/>
                 <Search
-                    submitCords={this.submitCordsAndGetResult}
                     clickedItem={this.handleClickedItem}
                     activeItem={this.state.activeItem}
                     TravelChoices={this.state.TravelChoices}
