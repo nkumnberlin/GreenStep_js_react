@@ -8,97 +8,58 @@ class SpecificResult extends Component {
         this.completeResults = this.props.completeResults;
     }
 
-    extractFlySteps = results => {
-        return (Object.values(results.flight.steps).map(transit =>
-            this.handleFlightTransits(transit, results.flight.travel_mode)
-        ));
-    };
+    // extractFlySteps = results => {
+    //     return (Object.values(results.flight.steps).map(transit =>
+    //         this.handleFlightTransits(transit, results.flight.travel_mode)
+    //     ));
+    // };
+    //
+    // handleFlightTransits = (transits, flightMode) => {
+    //     let tmpArray = [];
+    //     Object.values(transits).map((key) => {
+    //         let {0: startLoc, length: length, [length - 1]: endLoc} = key.steps;
+    //         tmpArray.push({
+    //             currentDataName: flightMode,
+    //             current_travelMode: key.travel_mode,
+    //             current_dist: key.dist,
+    //             current_time: key.time,
+    //             startLocation: startLoc.start_location,
+    //             endLocation: endLoc.end_location
+    //         })
+    //     });
+    //     return tmpArray;
+    // };
+    //
+    // prepareFlyingResults = () => {
+    //     let flySteps = this.extractFlySteps(this.completeResults);
+    //     const {dist, emission} = this.completeResults.flight;
+    //     let flightRender = Object.values(flySteps).map((keyOfArray) => {
+    //         return this.renderFlyingResults(keyOfArray);
+    //     });
+    //
+    //     return (
+    //         <Fragment>
+    //             <Segment>
+    //                 {"Flight"}
+    //                 <br/>
+    //                 Total <br/>
+    //                 Emission: {adjustEmissionValues(emission)} Distance: {distanceInKm(dist)}
+    //             </Segment>
+    //             {flightRender}
+    //         </Fragment>
+    //     )
+    // };
 
-    handleFlightTransits = (transits, flightMode) => {
-        let tmpArray = [];
-        Object.values(transits).map((key) => {
-            let {0: startLoc, length: length, [length - 1]: endLoc} = key.steps;
-            tmpArray.push({
-                currentDataName: flightMode,
-                current_travelMode: key.travel_mode,
-                current_dist: key.dist,
-                current_time: key.time,
-                startLocation: startLoc.start_location,
-                endLocation: endLoc.end_location
-            })
-        });
-        return tmpArray;
-    };
-
-    prepareFlyingResults = () => {
-        let flySteps = this.extractFlySteps(this.completeResults);
-        const {dist, emission} = this.completeResults.flight;
-        let flightRender = Object.values(flySteps).map((keyOfArray) => {
-            return this.renderFlyingResults(keyOfArray);
-        });
-
-        return (
+    renderFlyingResults = (currentType) => {
+        return(
             <Fragment>
-                <Segment>
-                    {"Flight"}
-                    <br/>
-                    Total <br/>
-                    Emission: {adjustEmissionValues(emission)} Distance: {distanceInKm(dist)}
-                </Segment>
-                {flightRender}
+                {console.log("DIES IS FLYING", currentType)}
+                {this.renderTotal(currentType)}
+                {this.renderIcons(currentType)}
             </Fragment>
         )
     };
 
-    renderFlyingResults = (keyOfArray) => {
-        return Object.values(keyOfArray).map((key) => {
-            return (
-                <Fragment key={key.current_emission}>
-                    <Segment>
-                        <Segment>
-                            {key.current_travelMode}
-                        </Segment>
-                        Start {key.startLocation + " "}
-                        <br/>
-                        {distanceInKm(key.current_dist) + "    " +
-                        daysHoursMinutes(key.current_time) + " "}
-                        <br/>
-                        End location:{key.endLocation}
-                    </Segment>
-                </Fragment>
-            )
-        })
-    }
-
-    extractTrainSteps = results => {
-        let tmpArray = [];
-        console.log("TEST RESULTS: ", results);
-        (Object.values(results.transit.steps).map(transit =>
-            tmpArray.push({
-                current_travelMode: transit.travel_mode,
-                current_dist: transit.distance,
-                current_time: transit.duration,
-                startLocation: transit.start_location,
-                endLocation: transit.end_location,
-            })
-        ));
-        return tmpArray;
-    };
-
-    transitSubSteps = trainSteps => {
-        console.log("train: ", trainSteps)
-        return Object.values(trainSteps).map((key) => {
-            return (
-                <Segment key={key.current_dist}>
-                    <Segment> {key.current_travelMode}
-
-                        {distanceInKm(key.current_dist) + " " + daysHoursMinutes(key.current_time)
-                        + " " + key.startLocation + " " + key.endLocation}
-                    </Segment>
-                </Segment>
-            )
-        })
-    };
 
     iconTranslator = travel_mode => {
         switch (travel_mode) {
@@ -116,9 +77,10 @@ class SpecificResult extends Component {
     };
 
     renderAllResults = currentType => {
-        let trainSteps = this.extractTrainSteps(this.completeResults);
         return (
             <Fragment>
+                {console.log("DIES IS Train", currentType)}
+
                 {this.renderTotal(currentType)}
                 {this.renderIcons(currentType)}
                 {this.renderStepsToGoal(currentType)}
@@ -127,7 +89,6 @@ class SpecificResult extends Component {
     };
 
     renderTotal = currentType => {
-        console.log(currentType);
         return (
             <Fragment>
                 <br/>
@@ -183,28 +144,40 @@ class SpecificResult extends Component {
 
     renderStepsToGoal = currentType => {
         return Object.values(currentType.steps).map((key) => {
-            console.log("key:",key)
             return (
-                <Fragment key={key.duration}>
-                    <Segment>
-                    <Icon name={this.iconTranslator(key.travel_mode)}/>
-                    Start Location: {key.start_location}
-                    </Segment>
-                    > End Location: {key.end_location}
+                <Segment  key={key.duration}>
                     <br/>
-                    <Icon name={'clock outline'}/> Duration: {daysHoursMinutes(key.duration)}
                     <br/>
-                    Distance: {distanceInKm(key.distance)}
-                </Fragment>
+                <Grid style={{padding: 2, marginBottom: 10}}>
+                    <Grid.Column width={6}>
+                        <Icon name={this.iconTranslator(key.travel_mode)}/>
+                        {key.start_location}
+                        <br/>
+                        <br/>
+                        <Icon name={'clock outline'}/> Duration: {daysHoursMinutes(key.duration)}
+                    </Grid.Column>
+                    <Grid.Column width={4}>
+                        <Container textAlign={'center'}>
+                            <br/>
+                            <Icon name={"angle right"}/>
+                        </Container>
+                    </Grid.Column>
+                    <Grid.Column width={6}>
+                        {key.end_location}
+                        <br/>
+                        <br/>
+                        Distance: {distanceInKm(key.distance)}
+                    </Grid.Column>
+                </Grid>
+                </Segment>
             )
         })
-
     };
 
     renderDynamicResults = typeOfTravel => {
         switch (typeOfTravel.toString()) {
             case "Plane":
-                return this.prepareFlyingResults();
+                return this.renderFlyingResults(this.completeResults.flight);
             case "Train":
                 return this.renderAllResults(this.completeResults.transit);
         }
