@@ -5,6 +5,7 @@ class crawl_steps:
         #print(json)
         i = 0
         waypoints = []
+        #print(travel_json)
         steps = travel_json["routes"][0]["legs"][0]["steps"]
         for i in range(len(steps)):
             if (i == 0):
