@@ -29,13 +29,9 @@ export default class Results extends Component {
 
     createSpecificResult = (completeResults) => (
         <React.Fragment key={0}>
-            <Segment>
-                <Grid columns={4}>
                     <SpecificResult completeResults={completeResults}
                                     ActiveTravelItem={this.props.ActiveTravelItem}
                                    TravelChoices={this.props.TravelChoices}/>
-                </Grid>
-            </Segment>
         </React.Fragment>
     );
 
@@ -59,7 +55,7 @@ export default class Results extends Component {
                             </Header>
                         </Divider>
                         <Container textAlign="center">
-                            <p> For your wanted Route from {locationDeparture} to {locationArrival} you have the following choices </p>
+                            <p> From {locationDeparture} to {locationArrival} would be this the CO2 - Emission </p>
                         </Container>
                         {this.createGeneralResult(completeResults, value)}
                         {this.createSpecificResult(completeResults, value)}
