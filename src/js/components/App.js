@@ -35,7 +35,7 @@ export default class App extends Component {
 
 
 
-    initComponent = () => {
+    initComponentx = () => {
         this.fields = ['address_components', 'geometry', 'icon', 'name'];
         this.departure = new google.maps.places.Autocomplete(
             document.getElementById('departure'));

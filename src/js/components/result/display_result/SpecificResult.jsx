@@ -138,6 +138,7 @@ class SpecificResult extends Component {
                                     : <Icon corner name={"angle right"}/>
                                 }
                             </Icon.Group>
+                              {daysHoursMinutes(key.duration)}
                         </Fragment>)
                     })}
                 </Grid>
