@@ -11,6 +11,21 @@ export const determineMaxEmission = (completeResults) => {
     return Math.max(...em);
 };
 
+export const iconTranslator = travel_mode => {
+    switch (travel_mode) {
+        case "WALKING":
+            return "male";
+        case "TRANSIT":
+            return "train";
+        case "FLYING":
+            return "plane";
+        case "CYCLING":
+            return "bicycle";
+        case "DRIVING":
+            return "car";
+    }
+};
+
 export const daysHoursMinutes =(time)=> {
     let num = time / 60;
     let hours = (num / 60);

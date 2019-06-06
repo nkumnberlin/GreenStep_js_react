@@ -42,10 +42,14 @@ export default class Search extends Component {
                 <Grid columns={2}>
                     <Grid.Row>
                         <Grid.Column>
+                            <br/>
                             <Departure style={form_style}/>
+                            <br/>
                         </Grid.Column>
                         <Grid.Column>
+                            <br/>
                             <Arrival style={form_style}/>
+                            <br/>
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
@@ -86,8 +90,8 @@ export default class Search extends Component {
                     <Header textAlign={'center'} as='h3'> Plan your Trip and Compensate your Emission </Header>
                     <br/>
                     {ArrivalAndDeparture}
+                    <br/>
                     {menu_Button}
-
                 </Segment>
             </div>
         );

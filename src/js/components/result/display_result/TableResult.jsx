@@ -3,7 +3,7 @@ import {Grid} from 'semantic-ui-react'
 import {daysHoursMinutes, determineMaxEmission, distanceInKm } from "../../data_handler/Converter.jsx";
 import {ProgressBar} from "../../data_handler/ProgressBar.jsx";
 
-export default class GeneralResult extends Component {
+export default class TableResult extends Component {
     constructor(props) {
         super(props);
         this.maxEm = determineMaxEmission(this.props.completeResults);

@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import {Segment, Step, Icon, Header, Container, Grid, Divider} from 'semantic-ui-react'
-import GeneralResult from "./display_result/GeneralResult.jsx";
+import TableResult from "./display_result/TableResult.jsx";
 import {Steps} from "./display_result/PlaceholderResult.js"
 import SpecificResult from "./display_result/SpecificResult.jsx";
 
@@ -20,8 +20,8 @@ export default class Results extends Component {
         <React.Fragment key={value}>
             <Segment>
                 <Grid columns={4}>
-                    <GeneralResult completeResults={completeResults}
-                                   TravelChoices={this.props.TravelChoices}/>
+                    <TableResult completeResults={completeResults}
+                                 TravelChoices={this.props.TravelChoices}/>
                 </Grid>
             </Segment>
         </React.Fragment>
