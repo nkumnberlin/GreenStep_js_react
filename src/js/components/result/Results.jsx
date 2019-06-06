@@ -38,10 +38,10 @@ export default class Results extends Component {
 
     render() {
         const StepContent = this.props.StepContent;
-        // const locationArrival = this.props.locationArrival;
-        // const locationDeparture = this.props.locationDeparture;
-        const locationArrival = "this.props.locationArrival";
-        const locationDeparture = "this.props.locationDeparture";
+        const locationArrival = this.props.locationArrival;
+        const locationDeparture = this.props.locationDeparture;
+        // const locationArrival = "this.props.locationArrival";
+        // const locationDeparture = "this.props.locationDeparture";
 
 
         const renderResult = (
