@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react'
-import {Segment, Step, Icon, Header, Container, Grid, Divider} from 'semantic-ui-react'
+import {Segment, Step, Icon, Header, Container, Grid, Divider, Loader, Image} from 'semantic-ui-react'
 import TableResult from "./display_result/TableResult.jsx";
-import {Steps} from "./display_result/PlaceholderResult.js"
+import {Steps,StepsLoader} from "./display_result/PlaceholderResult.js"
 import SpecificResult from "./display_result/SpecificResult.jsx";
 
 export default class Results extends Component {
@@ -16,7 +16,8 @@ export default class Results extends Component {
             // this.render()
         }
     }
-    createGeneralResult =(completeResults, value)=> (
+
+    createGeneralResult = (completeResults, value) => (
         <React.Fragment key={value}>
             <Segment>
                 <Grid columns={4}>
@@ -29,20 +30,19 @@ export default class Results extends Component {
 
     createSpecificResult = (completeResults) => (
         <React.Fragment key={0}>
-                    <SpecificResult completeResults={completeResults}
-                                    ActiveTravelItem={this.props.ActiveTravelItem}
-                                   TravelChoices={this.props.TravelChoices}/>
+            <SpecificResult completeResults={completeResults}
+                            ActiveTravelItem={this.props.ActiveTravelItem}
+                            TravelChoices={this.props.TravelChoices}/>
         </React.Fragment>
     );
 
 
     render() {
         const StepContent = this.props.StepContent;
-        const locationArrival = this.props.locationArrival;
-        const locationDeparture = this.props.locationDeparture;
-        // const locationArrival = "this.props.locationArrival";
-        // const locationDeparture = "this.props.locationDeparture";
-
+        // const locationArrival = this.props.locationArrival;
+        // const locationDeparture = this.props.locationDeparture;
+        const locationArrival = "this.props.locationArrival";
+        const locationDeparture = "this.props.locationDeparture";
 
         const renderResult = (
             Object.keys(this.props.resultData).map((value) => {
@@ -66,9 +66,10 @@ export default class Results extends Component {
 
 
         return (
-            <React.Fragment >
-                <Segment className={'results prob'}> {this.props.resultData.data === undefined ?
-                    Steps(StepContent)
+            <React.Fragment>
+                <Segment className={'results prob'}> {
+                    this.props.loading  ?
+                        StepsLoader(StepContent)
                     :
                     renderResult}
                 </Segment>

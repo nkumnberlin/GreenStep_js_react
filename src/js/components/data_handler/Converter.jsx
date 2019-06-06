@@ -11,6 +11,8 @@ export const determineMaxEmission = (completeResults) => {
     return Math.max(...em);
 };
 
+
+
 export const iconTranslator = travel_mode => {
     switch (travel_mode) {
         case "WALKING":
