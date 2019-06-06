@@ -8,6 +8,7 @@ Created on Thu May  9 09:22:41 2019
 # from threading import Thread
 import requests
 import json
+import time
 
 class APIrequest:
     #deprecatwed, we are getting the coords, form the frontend
@@ -70,3 +71,10 @@ class call_flight_api:
                 return False
         except KeyError:
             return False
+
+class get_time:
+    reference_time = 1559728800
+    def get_next_noon(self):
+        # 06/05/2019 @ 10:00am (UTC)
+        # timedelta = time from noon away
+        return self.reference_time + (int(int(time.time()) % self.reference_time / 86400) + 1) * 86400

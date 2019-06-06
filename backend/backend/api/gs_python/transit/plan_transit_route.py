@@ -5,7 +5,7 @@ Created on Sat May 25 18:38:13 2019
 @author: tristanwachtel
 """
 #pyCharm
-from APIrequests.APIrequest import APIrequest
+from APIrequests.APIrequest import APIrequest, get_time
 from transit.crawl_transit_steps import crawl_steps
 import json
 #react - not tested in react
@@ -24,7 +24,7 @@ class transit_route_cords:
         self.dest_lat = dest_lat
 
     def run_transit_planning(self):
-        transit_dist, transit_time, json_response= APIrequest().callGoogleDirectionsAPI(str(str(self.origin_lat) + " " + str(self.origin_lng)), str(str(self.dest_lat) + " " + str(self.dest_lng)), "transit", "&departure_time=1558951200")
+        transit_dist, transit_time, json_response= APIrequest().callGoogleDirectionsAPI(str(str(self.origin_lat) + " " + str(self.origin_lng)), str(str(self.dest_lat) + " " + str(self.dest_lng)), "transit", "&departure_time=" + str(get_time().get_next_noon()))
         transit_emission_result = transit_dist / 1000 * self.emission_transit
         if(transit_dist==0 & transit_time==0 & json_response==0):
             return json.dumps(0)
@@ -38,6 +38,6 @@ class transit_route_address:
         self.dest = dest
 
     def run_transit_planning(self):
-        transit_dist, transit_time , json_response = APIrequest().callGoogleDirectionsAPI(self.origin, self.dest, "transit", "&departure_time=1558951200")
+        transit_dist, transit_time , json_response = APIrequest().callGoogleDirectionsAPI(self.origin, self.dest, "transit", "&departure_time=" + str(get_time().get_next_noon()))
         transit_emission_result = transit_dist / 1000 * self.emission_transit
-        return {"transit": {"dist": transit_dist, "time": transit_time, "emission": transit_emission_result, "steps": crawl_steps().get_steps(json_response)}}
+        return {"transit": {"dist": transit_dist, "time": transit_time, "emission": transit_emission_result, "travel_mode": "TRANSIT", "steps": crawl_steps().get_steps(json_response)}}

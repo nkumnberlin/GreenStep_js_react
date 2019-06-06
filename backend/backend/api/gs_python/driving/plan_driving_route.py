@@ -21,7 +21,7 @@ class driving_route:
         self.dest_lng = dest_lng
         self.dest_lat = dest_lat
 
-    def run_flight_planning(self):
+    def run_drive_planning(self):
         driving_dist, driving_time = APIrequest().callMapBox("driving", str(str(self.origin_lng) + "," + str(self.origin_lat) + ";" + str(self.dest_lng) + "," + str(self.dest_lat)))
         driving_emission_result = driving_dist / 1000 * self.emission_car
-        return json.dumps({"driving": {"dist": driving_dist, "time": driving_time, "emission": driving_emission_result}})
+        return json.dumps({"drive": {"dist": driving_dist, "time": driving_time, "emission": driving_emission_result, "travel_mode": "DRIVING"}})
