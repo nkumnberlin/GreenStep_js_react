@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useRef} from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import MenuBar from './menubar/MenuBar.js';
 import Footer from './footer/Footer.js';
@@ -9,6 +9,7 @@ import Search from "./search/Search.js"
 import {postCords} from "./python_backend/PostCords.js";
 import Script from "react-load-script";
 import Vision from './Vision/vision.jsx'
+
 
 const mock_data ={"data":{"cycling":{"dist":369270.6,"time":108861.3,"emission":1.1816659200000001,"travel_mode":"CYCLING"},"driving":{"dist":395843.6,"time":14995.9,"emission":84.11676499999999,"travel_mode":"DRIVING"},"flight":{"dist":372822.945250751,"time":32493.57089380632,"emission":100.4603401030598,"travel_mode":"FLYING","steps":[{"transit":{"dist":4621,"time":1550,"emission":0.18484000000000003,"travel_mode":"TRANSIT","steps":[{"travel_mode":"WALKING","duration":133,"distance":163,"start_location":"Wandschneiderstraße 8, 28195 Bremen, Germany","end_location":"Bremen Am Brill (Bgm.-Smidt-Straße)"},{"travel_mode":"TRANSIT","duration":360,"distance":2551,"start_location":"Bremen Am Brill (Bgm.-Smidt-Straße)","end_location":"Bremen Solinger Straße"},{"travel_mode":"WALKING","duration":1409,"distance":1907,"start_location":"Bremen Solinger Straße","end_location":"Bremen Airport (BRE), Flughafenallee 20, 28199 Bremen, Germany"}]}},{"flight":{"dist":357340.945250751,"time":28600.57089380632,"emission":64.32137014513518,"travel_mode":"FLYING","steps":[{"travel_mode":"FLYING","duration":28600.57089380632,"distance":357340.945250751,"start_location":"BRE","end_location":"TXL"}]}},{"transit":{"dist":10861,"time":2343,"emission":0.43444000000000005,"travel_mode":"TRANSIT","steps":[{"travel_mode":"WALKING","duration":58,"distance":80,"start_location":"Berlin Tegel Airport (TXL), Zufahrt zum Flughafen Tegel, 13405 Berlin, Germany","end_location":"Airport Tegel Berlin Bus Station"},{"travel_mode":"TRANSIT","duration":2220,"distance":10724,"start_location":"Airport Tegel Berlin Bus Station","end_location":"Spandauer Straße/Marienkirche"},{"travel_mode":"WALKING","duration":64,"distance":57,"start_location":"Spandauer Straße/Marienkirche","end_location":"B2 7, 10178 Berlin, Germany"}]}}]},"transit":{"dist":404631,"time":12604,"emission":16.18524,"steps":[{"travel_mode":"WALKING","duration":714,"distance":969,"start_location":"Wandschneiderstraße 8, 28195 Bremen, Germany","end_location":"Bremen Central Station"},{"travel_mode":"TRANSIT","duration":3300,"distance":115121,"start_location":"Bremen Central Station","end_location":"Hamburg Central Station"},{"travel_mode":"TRANSIT","duration":6240,"distance":285721,"start_location":"Hamburg Central Station","end_location":"Berlin Central Station"},{"travel_mode":"WALKING","duration":58,"distance":57,"start_location":"Berlin Central Station","end_location":"Berlin Central Station"},{"travel_mode":"TRANSIT","duration":240,"distance":2372,"start_location":"Berlin Central Station","end_location":"S Hackescher Markt (Berlin)"},{"travel_mode":"WALKING","duration":309,"distance":391,"start_location":"S Hackescher Markt (Berlin)","end_location":"B2 7, 10178 Berlin, Germany"}]},"walking":{"dist":348326.2,"time":246397,"emission":0.0,"travel_mode":"WALKING"}}}
 export default class App extends Component {
@@ -27,6 +28,7 @@ export default class App extends Component {
             },
             TravelChoices: ["Bicycle", "Car", "Plane", "Train", "Male"],
             activeItem: "",
+            activeMenuItem: ""
         }
     }
 
@@ -148,6 +150,14 @@ export default class App extends Component {
         this.submitCordsAndGetResult();
     };
 
+    handleMenuItemClick = (e, {item}) => {
+        const itemValue ={activeMenuItem: e.target.id};
+        this.setState(itemValue);
+    };
+
+
+
+
     render() {
         const {LocationDeparture, LocationArrival, resultData} = this.state
         return (
@@ -156,7 +166,9 @@ export default class App extends Component {
                     url="https://maps.googleapis.com/maps/api/js?key=AIzaSyDo6leoat6ziQnl9n6oIsgYwSz5BopUfPM&libraries=places"
                     onLoad={this.initComponent}>
                 </Script>
-                <MenuBar/>
+                <MenuBar
+                    activeMenuItem={this.state.activeMenuItem}
+                    changeMenuItem={this.handleMenuItemClick}/>
                 <Title/>
                 <Search
                     clickedItem={this.handleClickedItem}

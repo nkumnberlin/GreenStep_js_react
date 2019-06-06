@@ -61,6 +61,12 @@ class SpecificResult extends Component {
             <Fragment>
                 {this.renderTotal(currentType)}
                 {this.renderIconsOfFlight(currentType)}
+                <br/>
+                <Divider horizontal>
+                    <Header as='h4'>
+                        Steps
+                    </Header>
+                </Divider>
                 {this.renderGoalOfFlight(currentType)}
             </Fragment>
         )
@@ -82,6 +88,13 @@ class SpecificResult extends Component {
 
     renderIconsOfFlight = currentType => {
         return (
+            <>
+                <br/>
+            <Divider horizontal>
+                <Header as='h4'>
+                    Change
+                </Header>
+            </Divider>
             <Segment>
                 <br/>
                 <Grid centered>
@@ -101,16 +114,23 @@ class SpecificResult extends Component {
                 </Grid>
                 <br/>
             </Segment>
-        )
+        </>)
     };
 
     renderIconsExceptFlight = currentType => {
         return (
             <Segment>
+                <Divider horizontal>
+                    <Header as='h4'>
+                        Change
+                    </Header>
+                </Divider>
                 <br/>
                 <Grid centered>
                     {Object.values(currentType.steps).map((key, value) => {
                         return (<Fragment key={key.distance}>
+                            <Divider horizontal>
+                            </Divider>
                             <Icon.Group size={"huge"}>
                                 <Icon name={this.iconTranslator(key.travel_mode)} style={{marginRight: 30}}/>
                                 {value === currentType.steps.length - 1 ?
@@ -158,7 +178,6 @@ class SpecificResult extends Component {
     renderSteps = key => (
         <Fragment>
             <br/>
-            <br/>
             <Grid style={{padding: 2, marginBottom: 10}}>
                 <Grid.Column width={6}>
                     <Icon size='large' name={this.iconTranslator(key.travel_mode)}/>
@@ -181,16 +200,20 @@ class SpecificResult extends Component {
                 </Grid.Column>
             </Grid>
         </Fragment>
-
-
-    )
+    );
 
     renderAllResultsExceptFlight = currentType => {
         return (
             <Fragment>
                 {this.renderTotal(currentType)}
                 {this.renderIconsExceptFlight(currentType)}
-                {this.renderGoalExceptFlight(currentType)}
+                <br/>
+                <Divider horizontal>
+                    <Header as='h4'>
+                        Steps
+                    </Header>
+                </Divider>
+                {this.renderGoalExceptFlight(currentType)})
             </Fragment>
         )
     };
@@ -221,21 +244,3 @@ class SpecificResult extends Component {
 }
 
 export default SpecificResult;
-
-
-/*
-Feature deactivated
- */
-// extractSubStepsOfFlight = (steps) => {
-//     return Object.values(steps).map((key, value) => {
-//         return (
-//             <Segment key={key.distance}>{
-//                 key.travel_mode + " " +
-//                 distanceInKm(key.distance) + " " +
-//                 daysHoursMinutes(key.duration) + " " +
-//                 key.startLocation + " " +
-//                 key.endLocation}
-//             </Segment>
-//         )
-//     })
-// };

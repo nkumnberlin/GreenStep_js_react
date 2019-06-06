@@ -52,14 +52,6 @@ export default class Search extends Component {
             </Segment>
         );
 
-        const grid_Button = (
-            <Grid column={1}>
-                <Grid.Column verticalAlign={'middle'} textAlign={'center'}>
-                    <Button onClick={this.props.submitCords} positive> Submit </Button>
-                </Grid.Column>
-            </Grid>
-        );
-
         const grid_MenuButton = (
             <Grid columns={16}>
                 <Grid.Column width={4}> </Grid.Column>
@@ -95,7 +87,7 @@ export default class Search extends Component {
                     <br/>
                     {ArrivalAndDeparture}
                     {menu_Button}
-                    {grid_Button}
+
                 </Segment>
             </div>
         );
