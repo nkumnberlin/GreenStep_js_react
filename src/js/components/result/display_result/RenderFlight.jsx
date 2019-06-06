@@ -30,6 +30,7 @@ class RenderFlight extends Component {
                     <br/>
                     <Grid centered>
                         {Object.values(currentType.steps).map((keySteps, value) => {
+                            console.log("Steps: ", keySteps)
                             return Object.values(keySteps).map((key) => {
                                 return (<Fragment key={key.dist}>
                                     {renderIconsTransitFlight(currentType, key, value)}

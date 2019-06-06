@@ -10,17 +10,12 @@ export default class Results extends Component {
         console.log("PROPS: ", props)
     }
 
-    componentDidUpdate(prevProps) {
-        console.log("prev props: ", prevProps, "current props: ", this.props);
-        if (prevProps !== this.props) {
-            // this.render()
-        }
-    }
+
 
     createGeneralResult = (completeResults, value) => (
         <React.Fragment key={value}>
             <Segment>
-                <Grid columns={4}>
+                <Grid columns={completeResults.length}>
                     <TableResult completeResults={completeResults}
                                  TravelChoices={this.props.TravelChoices}/>
                 </Grid>
@@ -39,16 +34,17 @@ export default class Results extends Component {
 
     render() {
         const StepContent = this.props.StepContent;
-        // const locationArrival = this.props.locationArrival;
-        // const locationDeparture = this.props.locationDeparture;
-        const locationArrival = "this.props.locationArrival";
-        const locationDeparture = "this.props.locationDeparture";
+        const locationArrival = this.props.locationArrival;
+        const locationDeparture = this.props.locationDeparture;
+        // const locationArrival = "this.props.locationArrival";
+        // const locationDeparture = "this.props.locationDeparture";
 
         const renderResult = (
             Object.keys(this.props.resultData).map((value) => {
                 const completeResults = this.props.resultData[value];
                 return (
                     <React.Fragment key={value}>
+                        <Segment>
                         <Divider horizontal>
                             <Header as='h4'>
                                 Results
@@ -59,6 +55,7 @@ export default class Results extends Component {
                         </Container>
                         {this.createGeneralResult(completeResults, value)}
                         {this.createSpecificResult(completeResults, value)}
+                        </Segment>
                     </React.Fragment>
                 )
             })
@@ -67,12 +64,10 @@ export default class Results extends Component {
 
         return (
             <React.Fragment>
-                <Segment className={'results prob'}> {
-                    this.props.loading  ?
+                {this.props.loading  ?
                         StepsLoader(StepContent)
                     :
                     renderResult}
-                </Segment>
             </React.Fragment>)
     }
 

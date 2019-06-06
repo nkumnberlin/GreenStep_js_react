@@ -3,42 +3,23 @@ import {Segment, Container, Image, Step, Header, Icon, Loader} from 'semantic-ui
 
 export const Steps = (StepContent) => {
     return (
-        <Fragment>
-            <div>
-                <Segment>
-                    <Container textAlign={'center'}>
-                        <Header as='h3'> GREENSTEP </Header>
-                        <p> Let us give you the exact Route for your GREENSTEP</p>
-                    </Container>
-                </Segment>
-                <Step.Group fluid>
-                    {renderSteps(StepContent)}
-                </Step.Group>
-            </div>
-            <div>
-                <Segment attached>
-                    <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png'/>
-                </Segment>
-            </div>
-        </Fragment>
+        <>
+            <Segment>
+                <Container textAlign={'center'}>
+                    <Header as='h3'> GREENSTEP </Header>
+                    <p> Let us give you the exact Route for your GREENSTEP</p>
+                </Container>
+            </Segment>
+            {/*<Step.Group fluid>*/}
+            {/*    {renderSteps(StepContent)}*/}
+            {/*</Step.Group>*/}
+        </>
     )
 };
-
 
 export const StepsLoader = (StepContent) => {
     return (
         <Fragment>
-            <div>
-                <Segment>
-                    <Container textAlign={'center'}>
-                        <Header as='h3'> GREENSTEP </Header>
-                        <p> Let us give you the exact Route for your GREENSTEP</p>
-                    </Container>
-                </Segment>
-                <Step.Group fluid>
-                    {renderSteps(StepContent)}
-                </Step.Group>
-            </div>
             <div>
                 <Segment attached>
                     <Loader active/>

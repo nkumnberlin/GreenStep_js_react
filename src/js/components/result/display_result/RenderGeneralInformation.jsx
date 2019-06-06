@@ -4,6 +4,7 @@ import {adjustEmissionValues, daysHoursMinutes,
     distanceInKm, iconTranslator} from "../../data_handler/Converter.jsx";
 
 export const renderTotal = currentType => {
+    console.log("CURRENT :", currentType);
     return (
         <Fragment>
             <br/>

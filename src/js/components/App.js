@@ -4,9 +4,11 @@ import MenuBar from './menubar/MenuBar.js';
 import Footer from './footer/Footer.js';
 import Results from './result/Results.jsx';
 import Title from './title/Title.js';
+import {Steps} from './result/display_result/PlaceholderResult.js'
 import '../../style.css'
 import Search from "./search/Search.js"
-import {postCords} from "./python_backend/PostCords.js";
+import {postCords}  from "./python_backend/PostCords.js";
+import controlDistance from "./python_backend/PostCords.js"
 import Script from "react-load-script";
 import Vision from './Vision/vision.jsx'
 
@@ -26,7 +28,7 @@ export default class App extends Component {
                 Header: ["Planning", 'Searching', 'Donating'],
                 Description: ["Plan your Route!", "Choose the best Route!", "Compensate your Emission!"]
             },
-            TravelChoices: ["Bicycle", "Car", "Plane", "Train", "Male"],
+            TravelChoices: [],
             activeItem: "",
             activeMenuItem: "",
             loadingStatusChange: this.changeLoading,
@@ -138,17 +140,37 @@ export default class App extends Component {
     };
 
     changeLoading = () => {
-        console.log("ERSTER:", this.state.loading);
-        let resultData = "";
-        this.setState({loading: true});
-        postCords(this.state).then((result) => {
+        this.setState({loading:true});
+        this.chooseCorrectPost().then((result)=>{
+            console.log("RESULT VON APP:_" , result)
             this.setState({loading: false});
-            resultData = result;
-            this.handleResults(resultData.data)
-            console.log("ZWEITER:", this.state.loading)
+                const resultData = result;
+                this.handleResults(resultData.data)
         });
     };
 
+    chooseCorrectPost = async () => {
+        const lengthOfOption = this.state.TravelChoices.length;
+        const {TravelChoices} = this.state;
+        console.log("WAT IS TRYPE: " , typeof(TravelChoices))
+        console.log(TravelChoices.hasOwnProperty("Car") )
+        switch (lengthOfOption) {
+            case 1: return postCords(this.state,`http://127.0.0.1:8000/getWalking/`);
+            case 2: return TravelChoices.hasOwnProperty("Car") ?
+                    postCords(this.state,`http://127.0.0.1:8000/getTransitAndDriving/`) :
+                    postCords(this.state,`http://127.0.0.1:8000/getWalkingCycling/`);
+            case 3: return postCords(this.state,`http://127.0.0.1:8000/getTransitDrivingAndFlying/`);
+        }
+    };
+
+    checkLocation = () =>{
+        controlDistance(this.state).then(response=>{
+            console.log("DIES IS RES:", response)
+            this.setState({TravelChoices: response});
+            console.log("AKTUALSIIERTER STATE:", this.state.TravelChoices)
+
+        });
+    };
 
 
     render() {
@@ -167,7 +189,11 @@ export default class App extends Component {
                     clickedItem={this.handleClickedItem}
                     activeItem={this.state.activeItem}
                     TravelChoices={this.state.TravelChoices}
+                    locationArrival={this.state.LocationArrival}
+                    locationDeparture={this.state.LocationDeparture}
+                    checkLocation={this.checkLocation}
                 />
+                {Steps(this.state.StepContent)}
                 <Results
                     resultData={resultData}
                     locationDeparture={LocationDeparture}
