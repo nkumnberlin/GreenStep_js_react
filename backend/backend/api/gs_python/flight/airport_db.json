@@ -18406,5 +18406,17 @@
       "lat":60.193901062,
       "lng":11.100399971,
       "tz":"Europe/Oslo"
+   },
+   "LEBL":{
+      "icao":"LEBL",
+      "iata":"BCN",
+      "name":"Barcelnga International Airport",
+      "city":"Barcelnga",
+      "state":"Catalngia",
+      "country":"ES",
+      "elevation":12,
+      "lat":41.2971000671,
+      "lng":2.0784599781,
+      "tz":"Europe/Madrid"
    }
 }

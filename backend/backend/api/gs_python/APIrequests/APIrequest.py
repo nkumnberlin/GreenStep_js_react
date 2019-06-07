@@ -24,6 +24,7 @@ class APIrequest:
         dist_response = requests.get(
         "https://api.mapbox.com/directions/v5/mapbox/"+mode+"/"+address+".json?access_token=pk.eyJ1IjoiZ3JlZW5zdGVwIiwiYSI6ImNqdmgydWRjcTBlN2YzenMyMGpzZDV4YngifQ.FvoK7EqazIuCYmLpaF_BXg")
         json_decode_dist = json.loads(dist_response.text)
+        #print(json_decode_dist)
         return json_decode_dist["routes"][0]["distance"], json_decode_dist["routes"][0]["duration"]
 
     #used for transit-planning
@@ -51,6 +52,8 @@ class APIrequest:
 
 class call_flight_api:
     def check_planned_route(self, iata_origin, iata_dest):
+        #print(iata_origin)
+        #print(iata_dest)
         flight_route_response = requests.get(
             "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/DE/EUR/"
             "de-DE/" + iata_origin + "/" + iata_dest + "/2019-10-01?inboundpartialdate=2019-10-10",
@@ -70,6 +73,8 @@ class call_flight_api:
             else:
                 return False
         except KeyError:
+            return False
+        except IndexError:
             return False
 
 class get_time:

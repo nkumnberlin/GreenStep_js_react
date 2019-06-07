@@ -6,6 +6,7 @@ from cycling.plan_cycling_route import cycling_route
 from driving.plan_driving_route import driving_route
 from transit.plan_transit_route import transit_route_cords
 from walking.plan_walking_route import walking_route
+from distcalc.calc_geographic_points import distcalc_coords
 
 
 # react
@@ -28,10 +29,10 @@ class main:
 
     # Entry
     def __get__(self):
-        print(walking_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_walk_planning())
-        print(cycling_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_cycle_planning())
-        print(driving_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_drive_planning())
-        print(transit_route_cords(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_transit_planning())
+        #print(walking_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_walk_planning())
+        #print(cycling_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_cycle_planning())
+        #print(driving_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_drive_planning())
+        #print(transit_route_cords(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_transit_planning())
         print(flight_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_flight_planning())
 
     # def create_json(self):
@@ -44,8 +45,15 @@ class main:
     # {"dist": cycling_dist,"time": cycling_time,"emission": cycling_emission}, "transit":
     # {"dist": transit_dist,"time": transit_time,"emission": transit_emission}}
 
-
-main(13.4662245, 52.5052512, 6.750218299, 51.2214798).__get__()
+#a_lat= 41.90278349999999
+a_lat= 41.390205
+#a_lng= 12.496365500000024
+a_lng= 2.154007
+d_lat= 52.52000659999999
+d_lng= 13.404953999999975
+#main(13.4662245, 52.5052512, 6.750218299, 51.2214798).__get__()
+main(d_lng, d_lat, a_lng, a_lat).__get__()
+#print(distcalc_coords(d_lng,d_lat,a_lng,a_lat).__get__())
 
 # print("Emmitted Emission: \n - Cycling: " + str(
 #     emission_calc_cycling) + "kg CO2 p.P\t actual distance in meter: " + str(cycling_dist) + "\n - Driving: " + str(

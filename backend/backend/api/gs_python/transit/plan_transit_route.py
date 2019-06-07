@@ -29,7 +29,7 @@ class transit_route_cords:
         if(transit_dist==0 & transit_time==0 & json_response==0):
             return json.dumps(0)
         else:
-            return json.dumps({"transit": {"dist": transit_dist, "time": transit_time, "emission": transit_emission_result, "steps": crawl_steps().get_steps(json_response)}})
+            return json.dumps({"transit": {"dist": transit_dist, "time": transit_time, "emission": transit_emission_result, "travel_mode": "TRANSIT",  "steps": crawl_steps().get_steps(json_response)}})
 
 class transit_route_address:
     emission_transit = 0.04
