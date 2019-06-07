@@ -30,9 +30,9 @@ class main:
     # Entry
     def __get__(self):
         #print(walking_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_walk_planning())
-        #print(cycling_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_cycle_planning())
-        #print(driving_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_drive_planning())
-        #print(transit_route_cords(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_transit_planning())
+        print(cycling_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_cycle_planning())
+        print(driving_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_drive_planning())
+        print(transit_route_cords(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_transit_planning())
         print(flight_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_flight_planning())
 
     # def create_json(self):
@@ -46,13 +46,13 @@ class main:
     # {"dist": transit_dist,"time": transit_time,"emission": transit_emission}}
 
 #a_lat= 41.90278349999999
-a_lat= 41.390205
+#a_lat= 41.390205
 #a_lng= 12.496365500000024
-a_lng= 2.154007
-d_lat= 52.52000659999999
-d_lng= 13.404953999999975
-#main(13.4662245, 52.5052512, 6.750218299, 51.2214798).__get__()
-main(d_lng, d_lat, a_lng, a_lat).__get__()
+#a_lng= 2.154007
+#d_lat= 52.52000659999999
+#d_lng= 13.404953999999975
+main(13.4662245, 52.5052512, 6.750218299, 51.2214798).__get__()
+#main(d_lng, d_lat, a_lng, a_lat).__get__()
 #print(distcalc_coords(d_lng,d_lat,a_lng,a_lat).__get__())
 
 # print("Emmitted Emission: \n - Cycling: " + str(
