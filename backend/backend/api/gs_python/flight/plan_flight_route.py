@@ -67,7 +67,7 @@ class flight_route:
         f_data.flight_dist = self.correct_values_for_stopover(distcalc().distanceInKmBetweenEarthCoordinates(f_data.origin_airport["lat"], f_data.origin_airport["lng"],
                                                                      f_data.dest_airport["lat"], f_data.dest_airport["lng"]))
         takeoff_time = 30  # min
-        f_data.flight_time = (f_data.flight_dist / 800 + takeoff_time) * 60  # time is always in seconds
+        f_data.flight_time = ((f_data.flight_dist / 1000 / 800) * 60 + takeoff_time) * 60  # time is always in seconds
         f_data.departure_transit_json = transit_route_address(str(self.origin_lat) + " " + str(self.origin_lng),
                                                        str(f_data.origin_airport["iata"]) + " airport").run_transit_planning()
         f_data.arrival_transit_json = transit_route_address(str(f_data.dest_airport["iata"]) + " airport",
