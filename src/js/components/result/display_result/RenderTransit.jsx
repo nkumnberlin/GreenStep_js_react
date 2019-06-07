@@ -7,6 +7,7 @@ import {Segment, Grid, Header, Divider} from 'semantic-ui-react'
 class RenderTransit extends Component {
 
     renderResultsTransit = currentType => {
+        console.log("TRAIN RENDER: ", currentType);
         return (
             <Fragment>
                 {renderTotal(currentType)}

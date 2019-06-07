@@ -25,16 +25,12 @@ def getWalkingData(request):
 		walking_data = json.loads(walking_data)
 		walking_data = walking_data['walk']
 		travelData = {
-		"cycling": 0,
-		"driving": 0,
-		"flight": 0,
-		"transit": 0,
 		"walking": walking_data
 		}
 		return Response(status=status.HTTP_200_OK, data={"data": travelData})
 
 @api_view(["POST"])
-def getCyclingData(request):
+def getWalkingCyclingData(request):
 	if request.method == 'POST':
 		info = json.dumps(request.data, ensure_ascii=False)
 		decode = json.loads(info)
@@ -49,11 +45,8 @@ def getCyclingData(request):
 		bicycle_data = json.loads(bicycle_data)
 		bicycle_data = bicycle_data['cycle']
 		travelData = {
-		"cycling": bicycle_data,
-		"driving": 0,
-		"flight": 0,
-		"transit": 0,
-		"walking": walking_data
+		"walking": walking_data,
+		"cycling": bicycle_data
 		}
 		return Response(status=status.HTTP_200_OK, data={"data": travelData})
 
@@ -73,11 +66,8 @@ def getTransitAndDrivingData(request):
 		train_data = json.loads(train_data)
 		train_data = train_data['transit']
 		travelData = {
-		"cycling": 0,
 		"driving": car_data,
-		"flight": 0,
 		"transit": train_data,
-		"walking": 0
 		}
 		return Response(status=status.HTTP_200_OK, data={"data": travelData})
 		
@@ -100,11 +90,9 @@ def getTransitDrivingAndFlyingData(request):
 		plane_data = json.loads(plane_data)	
 		plane_data = plane_data['flight']
 		travelData = {
-		"cycling": 0,
 		"driving": car_data,
-		"flight": plane_data,
 		"transit": train_data,
-		"walking": 0
+		"flight": plane_data,
 		}
 		return Response(status=status.HTTP_200_OK, data={"data": travelData})
 

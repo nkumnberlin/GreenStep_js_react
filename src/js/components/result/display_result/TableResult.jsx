@@ -24,6 +24,7 @@ export default class TableResult extends Component {
 
 
         const renderContent = Object.values(this.props.completeResults).map((k, value) => {
+            console.log("MAP: ", k, "  von ", this.props.completeResults)
             return (
                 <Grid.Row key={k.dist} style={{padding: 2}}>
                     <Grid.Column
