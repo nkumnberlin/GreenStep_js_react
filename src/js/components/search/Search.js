@@ -99,10 +99,11 @@ export default class Search extends Component {
                     <br/>
                     {ArrivalAndDeparture}
                     <br/>
-                    {grid_Button}
+                    {/*{grid_Button}*/}
                     <br/>
                     {console.log("Leng:", this.props.TravelChoices.length)}
-                    {this.props.TravelChoices.length !== 0 ? menu_Button : null}
+                    {menu_Button}
+                    {/*{this.props.TravelChoices.length !== 0 ? menu_Button : null}*/}
                 </Segment>
             </div>
         );
