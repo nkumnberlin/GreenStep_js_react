@@ -34,10 +34,11 @@ export default class Results extends Component {
 
     render() {
         const StepContent = this.props.StepContent;
-        const locationArrival = this.props.locationArrival;
-        const locationDeparture = this.props.locationDeparture;
-        // const locationArrival = "this.props.locationArrival";
-        // const locationDeparture = "this.props.locationDeparture";
+        // const locationArrival = this.props.locationArrival;
+        // const locationDeparture = this.props.locationDeparture;
+        const locationArrival = "this.props.locationArrival";
+        const locationDeparture = "this.props.locationDeparture";
+        console.log("PROPS: ", this.props.resultData)
 
         const renderResult = (
             Object.keys(this.props.resultData).map((value) => {
@@ -64,10 +65,11 @@ export default class Results extends Component {
 
         return (
             <React.Fragment>
-                {this.props.loading  ?
-                        StepsLoader(StepContent)
-                    :
-                    renderResult}
+                {/*{this.props.loading  ?*/}
+                {/*        StepsLoader(StepContent)*/}
+                {/*    :*/}
+                {/*    renderResult}*/}
+                {renderResult}
             </React.Fragment>)
     }
 
