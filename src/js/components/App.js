@@ -28,7 +28,7 @@ export default class App extends Component {
                 Header: ["Planning", 'Searching', 'Donating'],
                 Description: ["Plan your Route!", "Choose the best Route!", "Compensate your Emission!"]
             },
-            TravelChoices: ["Male", "Bicycle","Car","Transit","Plane"],
+            TravelChoices: ["Male", "Bicycle","Car","Train","Plane"],
             activeItem: "",
             activeMenuItem: "",
             loadingStatusChange: this.changeLoading,
@@ -140,7 +140,7 @@ export default class App extends Component {
     };
 
     changeLoading = () => {
-        this.setState({loading:true});
+        // this.setState({loading:true});
         // this.chooseCorrectPost().then((result)=>{
         //     console.log("RESULT VON APP:_" , result)
         //     this.setState({loading: false});
