@@ -4,6 +4,7 @@ import 'semantic-ui-css/semantic.min.css';
 import {adjustEmissionValues, daysHoursMinutes,
     distanceInKm, iconTranslator} from "../data_handler/Converter.jsx";
 import {GridVerticallyDivided} from "./ComparisonGrid.jsx"
+import {equalsTrain} from './ComparisonCalculator.js'
 
 export default class Comparison extends Component {
 
@@ -12,6 +13,7 @@ export default class Comparison extends Component {
 	}
 
 	render() {
+		console.log("Fahrten Berlin-Köln: " + equalsTrain(200));
 		return(
 			<Fragment>
 				{GridVerticallyDivided()}
