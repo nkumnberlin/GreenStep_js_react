@@ -18,30 +18,30 @@ export default class MyFootprint extends Component {
 	render() {
 		return(
 			<Fragment>
-				<div class="ui segments">
-				  <div class="ui segment">
+				<div className="ui segments">
+				  <div className="ui segment">
 				    <h3>Mein CO2 Fußabdruck</h3>
 				  </div>
-				  <div class="ui segment">
-				    <p class="footprint-title">Meine Streckenemission: {/*adjustEmissionValues(currentType.emission)*/}</p>
-					    <div class="ui grid">
-	  						<div class="two wide column">
+				  <div className="ui segment">
+				    <p className="footprint-title">Meine Streckenemission: {/*adjustEmissionValues(currentType.emission)*/}</p>
+					    <div className="ui grid">
+	  						<div className="two wide column">
 	  							<Progress percent={this.state.percentTrip} color="teal">0,031t CO2</Progress>
 	  						</div>
 	  					</div>
 				  </div>
-				  <div class="ui segment">
-				    <p class="footprint-title">So viel sollte eine Person maximal pro Jahr verursachen, um den Klimawandel zu stoppen:</p>
-				    	<div class="ui grid">
-	  						<div class="two wide column">
+				  <div className="ui segment">
+				    <p className="footprint-title">So viel sollte eine Person maximal pro Jahr verursachen, um den Klimawandel zu stoppen:</p>
+				    	<div className="ui grid">
+	  						<div className="two wide column">
 	  							<Progress percent={100} color="green">0,600t CO2</Progress>
 	  						</div>
 	  					</div>
 				  </div>
-				  <div class="ui segment">
-				    <p class="footprint-title">So viel CO2 verursacht eine Person in der EU im Durchschnitt pro Jahr:</p>
-				    	<div class="ui grid">
-	  						<div class="sixteen wide column">
+				  <div className="ui segment">
+				    <p className="footprint-title">So viel CO2 verursacht eine Person in der EU im Durchschnitt pro Jahr:</p>
+				    	<div className="ui grid">
+	  						<div className="sixteen wide column">
 	  							<Progress percent={100} color="red">8,4t CO2</Progress>
 	  						</div>
 	  					</div>
