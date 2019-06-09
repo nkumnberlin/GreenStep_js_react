@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import { Button, Progress, Grid } from 'semantic-ui-react'
+import { Segment, Button, Progress, Grid, Image } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css';
 import {adjustEmissionValues, daysHoursMinutes,
     distanceInKm, iconTranslator} from "../data_handler/Converter.jsx";
@@ -12,11 +12,10 @@ export default class Comparison extends Component {
 	}
 
 	render() {
-
 		return(
 			<Fragment>
-				{GridVerticallyDivided}
+				{GridVerticallyDivided()}
 			</Fragment>
 		)
-	}
+	};
 }
