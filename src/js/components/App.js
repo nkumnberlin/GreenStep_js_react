@@ -208,6 +208,9 @@ export default class App extends Component {
                 />
                 
                 <MyFootprint
+                    beschreibung={"bär"}
+                    resultData={this.state.resultData.data}
+                    clickedItem={this.state.activeItem}
                 />
 
                 <Comparison

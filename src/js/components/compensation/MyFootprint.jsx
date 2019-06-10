@@ -1,53 +1,80 @@
 import React, {Component, Fragment} from 'react';
-import { Button, Progress } from 'semantic-ui-react'
+import {Segment, Progress, Header, Grid} from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css';
-import {adjustEmissionValues, daysHoursMinutes,
-    distanceInKm, iconTranslator} from "../data_handler/Converter.jsx";
-
+import {MyFootprintSegment} from "../compensation/MyFootprintSegment.jsx";
+import {adjustEmissionValues} from "../data_handler/Converter.jsx";
 
 export default class MyFootprint extends Component {
+    constructor(props) {
+        super(props)
+    }
 
-	state = { 
-		percentTrip: 3
-	}
+    renderFootprint = (data) => {
+        const perc_amount = (data.emission / 1200) * 100;
+        const prog_values = {
+        1:    [perc_amount, 100, 100],
+         2:  ["Meine Streckenemission", "So viel sollte eine Person maximal pro Jahr verursachen, um den Klimawandel zu stoppen:", "So viel CO2 verursacht eine Person in der EU im Durchschnitt pro Jahr:"],
+          3: [3, 3, 16],
+           4:["teal", "green", "red"],
+           5: [adjustEmissionValues(data.emission), 1.200, 8.400]
+        };
+        //Strecke / erlaubte Jahresmenge
 
-	constructor(props) {
-		super(props)
-	}
+        MyFootprintSegment(prog_values)
+    };
 
-	render() {
-		return(
-			<Fragment>
-				<div className="ui segments">
-				  <div className="ui segment">
-				    <h3>Mein CO2 Fußabdruck</h3>
-				  </div>
-				  <div className="ui segment">
-				    <p className="footprint-title">Meine Streckenemission: {/*adjustEmissionValues(currentType.emission)*/}</p>
-					    <div className="ui grid">
-	  						<div className="two wide column">
-	  							<Progress percent={this.state.percentTrip} color="teal">0,031t CO2</Progress>
-	  						</div>
-	  					</div>
-				  </div>
-				  <div className="ui segment">
-				    <p className="footprint-title">So viel sollte eine Person maximal pro Jahr verursachen, um den Klimawandel zu stoppen:</p>
-				    	<div className="ui grid">
-	  						<div className="two wide column">
-	  							<Progress percent={100} color="green">0,600t CO2</Progress>
-	  						</div>
-	  					</div>
-				  </div>
-				  <div className="ui segment">
-				    <p className="footprint-title">So viel CO2 verursacht eine Person in der EU im Durchschnitt pro Jahr:</p>
-				    	<div className="ui grid">
-	  						<div className="sixteen wide column">
-	  							<Progress percent={100} color="red">8,4t CO2</Progress>
-	  						</div>
-	  					</div>
-				  </div>
-				</div>
-			</Fragment>
-		)
-	};
+
+    prepareFootprint = (data) => {
+        //"Meine Streckenemission", width, percentage, Beschreibungprogressba
+        console.log("IST IN FOOTPR")
+        return (
+            <Fragment>
+                <Segment.Group>
+                    <Segment>
+                        <Header as={"h3"}>Mein CO2 Fußabdruck</Header>
+                    </Segment>
+                    {this.renderFootprint(data)}
+                </Segment.Group>
+            </Fragment>
+        )
+
+    }
+
+
+    renderDynamicResults = typeOfTravel => {
+        if (this.props.resultData !== undefined) {
+            const {driving, walking, cycling, flight, transit} = this.props.resultData;
+            switch (typeOfTravel.toString()) {
+                case "Plane":
+                    return (
+                        this.prepareFootprint(flight)
+                    )
+                case "Train":
+                    return (
+                        this.prepareFootprint(transit)
+                    )
+                case "Male":
+                    return (
+                        this.prepareFootprint(walking)
+                    )
+                case "Car":
+                    return (
+                        this.prepareFootprint(driving)
+                    )
+                case "Bicycle":
+                    return (
+                        this.prepareFootprint(cycling)
+                    )
+            }
+        }
+    };
+
+
+    render() {
+        return (
+            <>
+                {this.renderDynamicResults(this.props.clickedItem)}
+            </>
+        )
+    };
 }
