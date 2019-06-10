@@ -18,7 +18,7 @@ class RenderTransit extends Component {
                         Steps
                     </Header>
                 </Divider>
-                {this.renderGoalTransit(currentType)})
+                {this.renderGoalTransit(currentType)}
             </Fragment>
         )
     };
