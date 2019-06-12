@@ -6,7 +6,7 @@ from cycling.plan_cycling_route import cycling_route
 from driving.plan_driving_route import driving_route
 from transit.plan_transit_route import transit_route_cords
 from walking.plan_walking_route import walking_route
-from distcalc.calc_geographic_points import distcalc_coords
+from distcalc.calc_geographic_points import distcalc
 
 
 # react
@@ -29,11 +29,16 @@ class main:
 
     # Entry
     def __get__(self):
-        #print(walking_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_walk_planning())
-        print(cycling_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_cycle_planning())
-        print(driving_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_drive_planning())
-        print(transit_route_cords(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_transit_planning())
-        print(flight_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_flight_planning())
+        dist = distcalc().distanceInKmBetweenEarthCoordinates(self.origin_lat, self.origin_lng, self.dest_lat, self.dest_lng)
+        if dist < 5000:
+            print(walking_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_walk_planning())
+        if dist < 50000:
+            print(cycling_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_cycle_planning())
+        if dist < 30000000:
+            print(driving_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_drive_planning())
+            print(transit_route_cords(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_transit_planning())
+        if dist > 300000:
+            print(flight_route(self.origin_lng, self.origin_lat, self.dest_lng, self.dest_lat).run_flight_planning())
 
     # def create_json(self):
     # flight_dist_sum, flight_time_sum, flight_emission_sum = self.call_flight_sth()
@@ -51,7 +56,16 @@ class main:
 #a_lng= 2.154007
 #d_lat= 52.52000659999999
 #d_lng= 13.404953999999975
-main(13.4662245, 52.5052512, 6.750218299, 51.2214798).__get__()
+api = APIrequest()
+#11.559998, 48.1402669
+#14.4989344, 40.7461572
+d_lng, d_lat =  api.callGooglePointAPI("Berlin")
+print(d_lat, d_lng)
+# 12.1815795, 53.1470739
+a_lng, a_lat = api.callGooglePointAPI("London")
+print(a_lat, a_lng)
+
+main(d_lng, d_lat, a_lng, a_lat).__get__()
 #main(d_lng, d_lat, a_lng, a_lat).__get__()
 #print(distcalc_coords(d_lng,d_lat,a_lng,a_lat).__get__())
 

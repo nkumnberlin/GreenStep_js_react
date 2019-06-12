@@ -15131,18 +15131,6 @@
       "lng":4.7638897896,
       "tz":"Europe/Amsterdam"
    },
-   "EDOP":{
-      "icao":"EDOP",
-      "iata":"SZW",
-      "name":"Schwerin Parchim Airport",
-      "city":"",
-      "state":"Mecklenburg-Vorpommern",
-      "country":"DE",
-      "elevation":166,
-      "lat":53.4269981384,
-      "lng":11.7833995819,
-      "tz":"Europe/Berlin"
-   },
    "KBLV":{
       "icao":"KBLV",
       "iata":"BLV",

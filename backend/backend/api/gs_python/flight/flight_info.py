@@ -7,3 +7,6 @@ class flight_data:
     departure_transit_json: object
     origin_airport: object
     dest_airport: object
+    dist_sum: float
+    time_sum: float
+    emission_sum: float

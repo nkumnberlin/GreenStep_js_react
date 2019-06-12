@@ -26,10 +26,7 @@ class transit_route_cords:
     def run_transit_planning(self):
         transit_dist, transit_time, json_response= APIrequest().callGoogleDirectionsAPI(str(str(self.origin_lat) + " " + str(self.origin_lng)), str(str(self.dest_lat) + " " + str(self.dest_lng)), "transit", "&departure_time=" + str(get_time().get_next_noon()))
         transit_emission_result = transit_dist / 1000 * self.emission_transit
-        if(transit_dist==0 & transit_time==0 & json_response==0):
-            return json.dumps(0)
-        else:
-            return json.dumps({"transit": {"dist": transit_dist, "time": transit_time, "emission": transit_emission_result, "travel_mode": "TRANSIT",  "steps": crawl_steps().get_steps(json_response)}})
+        return json.dumps({"transit": {"dist": transit_dist, "time": transit_time, "emission": transit_emission_result, "travel_mode": "TRANSIT",  "steps": crawl_steps().get_steps(json_response, str(str(self.origin_lat) + " " + str(self.origin_lng)), str(str(self.dest_lat) + " " + str(self.dest_lng)))}})
 
 class transit_route_address:
     emission_transit = 0.04
@@ -40,4 +37,5 @@ class transit_route_address:
     def run_transit_planning(self):
         transit_dist, transit_time , json_response = APIrequest().callGoogleDirectionsAPI(self.origin, self.dest, "transit", "&departure_time=" + str(get_time().get_next_noon()))
         transit_emission_result = transit_dist / 1000 * self.emission_transit
-        return {"transit": {"dist": transit_dist, "time": transit_time, "emission": transit_emission_result, "travel_mode": "TRANSIT", "steps": crawl_steps().get_steps(json_response)}}
+        return {"transit": {"dist": transit_dist, "time": transit_time, "emission": transit_emission_result, "travel_mode": "TRANSIT", "steps": crawl_steps().get_steps(json_response, self.origin, self.dest)}}
+#print(transit_route_cords(12.2783002853, 53.9182014465, 12.1815795, 53.1470739).run_transit_planning())

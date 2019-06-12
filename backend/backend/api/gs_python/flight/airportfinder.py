@@ -39,6 +39,16 @@ class airportfinder:
                 airports.append(d)
         return airports
 
+    def find_alt_airport_list(self, arr_lat, arr_lng, jsonload):
+        nearest_airport = []
+        for d in jsonload.values():
+            lat = d["lat"]
+            lng = d["lng"]
+            newdistance = distcalc().distanceInKmBetweenEarthCoordinates(arr_lat, arr_lng, lat, lng)
+            if newdistance < 150000:
+                nearest_airport.append([{"distance":newdistance},d])
+        # print(sorted(nearest_airport, key=lambda k: k[0]['distance']))
+        return sorted(nearest_airport, key=lambda k: k[0]['distance'])
 #a=airportfinder()
-#jsonload = json.load(open("/Users/tristanwachtel/Desktop/B5.3 USWS/Scripts/largeairportDB.json"))
+#jsonload = json.load(open("/Users/tristanwachtel/Desktop/B5.3 USWS/Scripts/airport_db.json"))
 #a.find_next_airport(47.4962048, 19.0395666, jsonload)

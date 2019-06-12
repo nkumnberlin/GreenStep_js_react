@@ -7,7 +7,8 @@ from flight.flight_response_creator import flight_response
 from flight.flight_info import flight_data
 from distcalc.calc_geographic_points import distcalc
 from APIrequests.APIrequest import call_flight_api
-from transit.plan_transit_route import transit_route_address
+from transit.plan_transit_route import transit_route_cords
+from driving.plan_driving_route import driving_route
 
 
 # react
@@ -31,7 +32,6 @@ class flight_route:
     def run_flight_planning(self):
         f_data = flight_data()
         self.planflight(f_data)
-        self.calc_emission(f_data)
         return flight_response().create_response(f_data)
 
     def calc_emission(self, f_data):
@@ -53,52 +53,124 @@ class flight_route:
         # dest_iata, dest_city, dest_airport_lat, dest_airport_lng \
         f_data.dest_airport = airportfinder().find_next_airport(self.dest_lat, self.dest_lng, jsonload)
         # print ((origin_airport["iata"]+"\t"+ dest_airport["iata"]))
-        flight_possible = call_flight_api().check_planned_route(f_data.origin_airport["iata"], f_data.dest_airport["iata"])
+        flight_possible = self.check_planned_route(f_data.origin_airport["iata"], f_data.dest_airport["iata"])
         # print (flight_possible)
         if flight_possible == True:
-            return self.getValues(f_data)
+            self.getValues(f_data)
         # tbd: else ist mit Fehlern behaftet - erledigt ?
         # - mgl Anpassung des Algorithmus, dass er weniger Anfragen durchführen muss
         else:
-            return self.search_for_alt_city_airports(f_data.origin_airport, f_data.dest_airport,
-                                                     jsonload, f_data)
+            self.search_for_alt_airports(jsonload, f_data)
 
     def getValues(self, f_data):
-        f_data.flight_dist = self.correct_values_for_stopover(distcalc().distanceInKmBetweenEarthCoordinates(f_data.origin_airport["lat"], f_data.origin_airport["lng"],
-                                                                     f_data.dest_airport["lat"], f_data.dest_airport["lng"]))
+        f_data.flight_dist = self.correct_values_for_stopover(
+            distcalc().distanceInKmBetweenEarthCoordinates(f_data.origin_airport["lat"], f_data.origin_airport["lng"],
+                                                           f_data.dest_airport["lat"], f_data.dest_airport["lng"]))
         takeoff_time = 30  # min
         f_data.flight_time = ((f_data.flight_dist / 1000 / 800) * 60 + takeoff_time) * 60  # time is always in seconds
-        f_data.departure_transit_json = transit_route_address(str(self.origin_lat) + " " + str(self.origin_lng),
-                                                       str(f_data.origin_airport["iata"]) + " airport").run_transit_planning()
-        f_data.arrival_transit_json = transit_route_address(str(f_data.dest_airport["iata"]) + " airport",
-                                                     str(self.dest_lat) + " " + str(
-                                                         self.dest_lng)).run_transit_planning()
+        self.calc_emission(f_data)
+        self.sum_travel_values(f_data)
 
-        #return f_data.departure_transit_json["transit"]["dist"], arrival_transit_json["transit"]["dist"], flight_dist, \
-        #       departure_transit_json["transit"]["time"], \
-        #       arrival_transit_json["transit"]["time"], flight_time, arrival_transit_json["transit"]["steps"], \
-        #       departure_transit_json["transit"]["steps"], \
-        #       origin_airport, dest_airport
+    def sum_travel_values(self, f_data):
+        f_data.dist_sum = f_data.flight_dist
+        f_data.time_sum = f_data.flight_time
+        f_data.emission_sum = f_data.flight_emission_result
+        f_data.departure_transit_json = transit_route_cords(self.origin_lng, self.origin_lat,
+                                                            f_data.origin_airport["lng"],
+                                                            f_data.origin_airport["lat"]).run_transit_planning()
+        # print(f_data.departure_transit_json )
+        di = "dist"
+        dr = "drive"
+        e = "emission"
+        ti = "time"
+        tr = "transit"
+        if json.loads(f_data.departure_transit_json)["transit"]["steps"][0]["distance"] == 0:
+            f_data.departure_transit_json = driving_route(self.origin_lng, self.origin_lat,
+                                                          f_data.origin_airport["lng"],
+                                                          f_data.origin_airport["lat"]).run_drive_planning()
+            f_data.dist_sum += self.get_param(f_data.departure_transit_json, dr, di)
+            f_data.time_sum += self.get_param(f_data.departure_transit_json, dr, ti)
+            f_data.emission_sum += self.get_param(f_data.departure_transit_json, dr, e)
+        else:
+            f_data.dist_sum += self.get_param(f_data.departure_transit_json, tr, di)
+            f_data.time_sum += self.get_param(f_data.departure_transit_json, tr, ti)
+            f_data.emission_sum += self.get_param(f_data.departure_transit_json, tr, e)
 
-    def search_for_alt_city_airports(self, origin_airport, dest_airport, jsonload, f_data):
+        f_data.arrival_transit_json = transit_route_cords(f_data.dest_airport["lng"], f_data.dest_airport["lat"],
+                                                          self.dest_lng, self.dest_lat).run_transit_planning()
+        if json.loads(f_data.arrival_transit_json)["transit"]["steps"][0]["distance"] == 0:
+            f_data.arrival_transit_json = driving_route(f_data.dest_airport["lng"], f_data.dest_airport["lat"],
+                                                        self.dest_lng, self.dest_lat).run_drive_planning()
+            f_data.dist_sum += self.get_param(f_data.arrival_transit_json, dr, di)
+            f_data.time_sum += self.get_param(f_data.arrival_transit_json, dr, ti)
+            f_data.emission_sum += self.get_param(f_data.arrival_transit_json, dr, e)
+        else:
+            f_data.dist_sum += self.get_param(f_data.arrival_transit_json, tr, di)
+            f_data.time_sum += self.get_param(f_data.arrival_transit_json, tr, ti)
+            f_data.emission_sum += self.get_param(f_data.arrival_transit_json, tr, e)
+
+    def get_param(self, data_json, f1, f2):
+        return json.loads(data_json)[f1][f2]
+
+    def search_for_alt_airports(self, jsonload, f_data):
         # Alternative Planung mit o^d SkyScanner-Aufrufen
-        origin_airports = airportfinder().find_city_airport(origin_airport["city"], jsonload)
-        dest_airports = airportfinder().find_city_airport(dest_airport["city"], jsonload)
+        origin_airports = airportfinder().find_alt_airport_list(self.origin_lat, self.origin_lng, jsonload)
+        dest_airports = airportfinder().find_alt_airport_list(self.dest_lat, self.dest_lng, jsonload)
         flight_possible = False
         for o_airport in origin_airports:
             for d_airport in dest_airports:
-                flight_possible = call_flight_api().check_planned_route(o_airport["iata"], d_airport["iata"])
+                flight_possible = self.check_planned_route(o_airport[1]["iata"], d_airport[1]["iata"])
                 f_data.origin_airport=o_airport
                 f_data.dest_airport=d_airport
                 if flight_possible:
-                    # print(flight_possible)
-                    return self.getValues(f_data)
+                    #print(flight_possible)
+                    f_data.origin_airport = o_airport[1]
+                    f_data.dest_airport = d_airport[1]
+                    self.getValues(f_data)
+                    break
+                else:
+                    continue
+            if flight_possible:
+                break
         if flight_possible == False:
-            # print ("Nothing found")
-            return 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+             self.zero_results(f_data)
 
-    #https://www.icao.int/environmental-protection/CarbonOffset/Documents/Methodology%20ICAO%20Carbon%20Calculator_v7-2014.pdf
-    #adding flight
+    # def search_for_alt_airports(self, origin_airport, dest_airport, jsonload, f_data):
+    #     # Alternative Planung mit o^d SkyScanner-Aufrufen
+    #     origin_airports = airportfinder().find_city_airport(origin_airport["city"], jsonload)
+    #     dest_airports = airportfinder().find_city_airport(dest_airport["city"], jsonload)
+    #     flight_possible = False
+    #     for o_airport in origin_airports:
+    #         for d_airport in dest_airports:
+    #             print(o_airport)
+    #             print(d_airport)
+    #             flight_possible = self.check_planned_route(o_airport["iata"], d_airport["iata"])
+    #             f_data.origin_airport=o_airport
+    #             f_data.dest_airport=d_airport
+    #
+    #             if flight_possible:
+    #                 print("hello")
+    #                 self.getValues(f_data)
+    #                 break
+    #             else:
+    #                 print("here")
+    #                 continue
+    #     if flight_possible == False:
+    #         airportfinder().find_alt_airport(self.origin_lat, self.origin_lng, jsonload)
+    #         airportfinder().find_alt_airport(self.dest_lat, self.dest_lng, jsonload)
+    #         self.zero_results(f_data)
+
+    def zero_results(self, f_data):
+        f_data.flight_dist = 0
+        f_data.flight_time = 0
+        f_data.departure_transit_json = 0
+        f_data.arrival_transit_json = 0
+        f_data.dist_sum = 0
+        f_data.time_sum = 0
+        f_data.emission_sum = 0
+
+    # https://www.icao.int/environmental-protection/CarbonOffset/Documents/Methodology%20ICAO%20Carbon%20Calculator_v7-2014.pdf
+    # adding flight
     def correct_values_for_stopover(self, distance):
         if (distance<550000):
             distance += 50000
@@ -107,3 +179,16 @@ class flight_route:
         else:
             distance += 125000
         return distance
+
+    def check_planned_route(self, origin_iata, destination_iata):
+        skyscanner_json = call_flight_api().check_planned_route(origin_iata, destination_iata)
+        # print(skyscanner_json)
+        try:
+            # print (json_decode_flightroute["Quotes"][0]["QuoteId"])
+            # wenn "QuoteId":1,  im JSON-Response vorhanden dann: verfügbaren Routen
+            if skyscanner_json["Quotes"][0]["QuoteId"] != 0:
+                return True
+            else:
+                return False
+        except (KeyError, IndexError, TypeError):
+            return False
