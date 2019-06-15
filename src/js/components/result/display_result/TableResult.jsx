@@ -9,6 +9,7 @@ export default class TableResult extends Component {
         this.maxEm = determineMaxEmission(this.props.completeResults);
     }
 
+
     render() {
        const Header = ["Transportation", "Time", "Travel Distance", "Emission(kg)"];
         const colWidth = 3;

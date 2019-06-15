@@ -53,13 +53,12 @@ export default class MyFootprint extends Component {
                 </Segment.Group>
             </Fragment>
         )
-
-    }
-
+    };
 
     renderDynamicResults = typeOfTravel => {
         if (this.props.resultData !== undefined) {
             const {driving, walking, cycling, flight, transit} = this.props.resultData;
+
             switch (typeOfTravel.toString()) {
                 case "Plane":
                     return (
@@ -87,9 +86,11 @@ export default class MyFootprint extends Component {
 
 
     render() {
+        console.log("RENDEEEER " + this.props.resultData);
         return (
             <>
                 {this.renderDynamicResults(this.props.clickedItem)}
+
             </>
         )
     };

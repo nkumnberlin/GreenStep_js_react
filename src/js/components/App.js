@@ -214,6 +214,8 @@ export default class App extends Component {
                 />
 
                 <Comparison
+                    clickedItem={this.state.activeItem}
+                    resultData={this.state.resultData}
                 />
                 <Vision/>
                 <Footer/>

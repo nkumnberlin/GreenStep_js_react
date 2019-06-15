@@ -5,6 +5,8 @@ import {adjustEmissionValues, daysHoursMinutes,
     distanceInKm, iconTranslator} from "../data_handler/Converter.jsx";
 import {GridVerticallyDivided} from "./ComparisonGrid.jsx"
 import {equalsTrain} from './ComparisonCalculator.js'
+import {determineMaxEmission} from '../data_handler/Converter.jsx';
+import TableResult from '../result/display_result/TableResult.jsx';
 
 export default class Comparison extends Component {
 
@@ -12,12 +14,26 @@ export default class Comparison extends Component {
 		super(props)
 	}
 
+	renderComparison = typeOfTravel => {
+		if(typeOfTravel !== "") {	
+			console.log("Fahrten Berlin-Köln: " + equalsTrain(200));
+			return(
+				<Fragment>
+					{GridVerticallyDivided()}
+				</Fragment>
+			)
+		}
+	};
+
+
 	render() {
-		console.log("Fahrten Berlin-Köln: " + equalsTrain(200));
+		<TableResult/>
+			
+
 		return(
-			<Fragment>
-				{GridVerticallyDivided()}
-			</Fragment>
+			<>
+				{this.renderComparison(this.props.clickedItem)}
+			</>
 		)
 	};
 }
