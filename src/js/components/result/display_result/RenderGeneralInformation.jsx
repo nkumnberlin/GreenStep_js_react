@@ -38,7 +38,6 @@ export const renderTotal = currentType => {
 };
 
 
-
 export const renderSteps = key => (
     <Fragment>
         <br/>

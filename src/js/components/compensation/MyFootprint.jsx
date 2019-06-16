@@ -86,7 +86,6 @@ export default class MyFootprint extends Component {
 
 
     render() {
-        console.log("RENDEEEER " + this.props.resultData);
         return (
             <>
                 {this.renderDynamicResults(this.props.clickedItem)}
