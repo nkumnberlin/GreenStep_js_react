@@ -7,6 +7,8 @@ export const GridVerticallyDivided = (prop) => {
     let emission = Math.round(Number.parseFloat(prop) * 100) / 100;
     let amountRides = utils.equalsTrain(emission);
     let perc_Allowed = utils.allowedPercentage(emission);
+    let waterBottles = utils.equalsWaterBottles(emission);
+
     return(
       <Fragment>
         <Segment>
@@ -26,7 +28,7 @@ export const GridVerticallyDivided = (prop) => {
               </Grid.Column>
               <Grid.Column>
                 <p>
-                  dem Inhalt von x Wasserflaschen (1,5 Liter).
+                 Dem Inhalt von <span className="boldText">{waterBottles}</span> Wasserflaschen (1,5 Liter).
                 </p>
               </Grid.Column>
             </Grid.Row>
