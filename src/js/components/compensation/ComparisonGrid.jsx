@@ -18,17 +18,17 @@ export const GridVerticallyDivided = (prop) => {
             <Grid.Row columns={3}>
               <Grid.Column>
                 <p>
-                  <Icon name="train" size="large"/><span className="boldText">{amountRides}</span> train rides from Berlin to Cologne.
+                  <Icon name="train" size="big"/><span className="boldText">{amountRides}</span> train rides from Berlin to Cologne.
                 </p>
               </Grid.Column>
               <Grid.Column>
                 <p>
-                  <Icon name="male" size="large"/><span className="boldText">{perc_Allowed}</span>% of the officially allowed CO2 emission of a citizen in Germany per year.
+                  <Icon name="male" size="big"/><span className="boldText">{perc_Allowed}</span>% of the officially allowed CO2 emission of a citizen in Germany per year.
                 </p>
               </Grid.Column>
               <Grid.Column>
                 <p>
-                 <Icon name="tint" size="large"/>The content of <span className="boldText">{waterBottles}</span> water bottles (1,5 Liter).
+                 <Icon name="tint" size="big"/>The content of <span className="boldText">{waterBottles}</span> water bottles (1,5 Liter).
                 </p>
               </Grid.Column>
             </Grid.Row>

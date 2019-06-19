@@ -88,3 +88,8 @@ body {
 .compOrg {
     color: green;
 }
+
+#carbonHeader {
+    text-align: center;
+    font-weight: bold;
+}

@@ -22,14 +22,14 @@ export default class MyFootprint extends Component {
             },
             1: {
                 perc_amount: 100,
-                descr: "One person should max. cause this much C02 in order to stop climate change:",
+                descr: "How much CO2 an EU citizen should max. cause per year in order to stop climate change:",
                 width:3,
                 color: "green",
                 emission: "1200kg",
             },
             2: {
                 perc_amount:100,
-                descr: "This is how much CO2 one EU citizen actually causes on average per year:",
+                descr: "How much CO2 one EU citizen actually causes on average per year:",
                 width: 16,
                 color: "red",
                 emission: "8400kg",
@@ -47,7 +47,7 @@ export default class MyFootprint extends Component {
             <Fragment>
                 <Segment.Group>
                     <Segment>
-                        <Header as={"h3"}>Mein CO2 Fußabdruck</Header>
+                        <Header as={"h3"} id="carbonHeader">My Carbon Footprint</Header>
                     </Segment>
                     {this.renderFootprint(data)}
                 </Segment.Group>
