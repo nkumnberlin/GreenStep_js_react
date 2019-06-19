@@ -17,7 +17,7 @@
 	}
 
 	export function allowedPercentage(co2) {
-		let percentage = Math.round(co2 / allowedCO2*100) / 100 * 100;
+		let percentage = Math.round(co2 / allowedCO2*100 / 100 * 100);
 		return percentage;
 	}
 

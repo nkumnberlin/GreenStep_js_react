@@ -6,7 +6,7 @@ export const ListExampleHeader = (props) => {
     return (
       <Fragment>
         <Segment>
-          <Header as={"h1"} textAlign="center" id="compHeader">Possibilites for Compensation:</Header>
+          <Header as={"h1"} textAlign="center" id="compHeader">How you can compensate<Icon name="hand point down outline" size="small" /> </Header>
           <List>
             <List.Item>
               <List.Header as="h2"><Icon name="external alternate" size="small"/><a href="https://www.atmosfair.de/en/offset/" target="_blank" className="compOrg">Atmosfair</a></List.Header>
@@ -33,3 +33,6 @@ export const ListExampleHeader = (props) => {
     )
   }
 };
+
+
+// tree

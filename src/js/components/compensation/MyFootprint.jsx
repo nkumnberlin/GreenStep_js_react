@@ -15,27 +15,26 @@ export default class MyFootprint extends Component {
         const prog_values = {
             0: {
                 perc_amount: perc_amount,
-                descr: "Meine Streckenemission" ,
+                descr: "My route's emission" ,
                 width: 3,
                 color: "teal",
                 emission: adjustEmissionValues(data.emission),
             },
             1: {
                 perc_amount: 100,
-                descr: "So viel sollte eine Person maximal pro Jahr verursachen, um den Klimawandel zu stoppen:",
+                descr: "One person should max. cause this much C02 in order to stop climate change:",
                 width:3,
                 color: "green",
                 emission: "1200kg",
             },
             2: {
                 perc_amount:100,
-                descr: "So viel CO2 verursacht eine Person in der EU im Durchschnitt pro Jahr:",
+                descr: "This is how much CO2 one EU citizen actually causes on average per year:",
                 width: 16,
                 color: "red",
                 emission: "8400kg",
             }
         };
-        //Strecke / erlaubte Jahresmenge
 
         return MyFootprintSegment(prog_values)
     };
