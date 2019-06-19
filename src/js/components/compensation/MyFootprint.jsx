@@ -3,6 +3,7 @@ import {Segment, Progress, Header, Grid} from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css';
 import {MyFootprintSegment} from "../compensation/MyFootprintSegment.jsx";
 import {adjustEmissionValues} from "../data_handler/Converter.jsx";
+import {ListExampleHeader} from './CompensationList.jsx';
 
 export default class MyFootprint extends Component {
     constructor(props) {
@@ -89,7 +90,7 @@ export default class MyFootprint extends Component {
         return (
             <>
                 {this.renderDynamicResults(this.props.clickedItem)}
-
+                
             </>
         )
     };

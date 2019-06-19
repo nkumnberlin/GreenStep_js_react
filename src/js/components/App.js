@@ -219,7 +219,7 @@ export default class App extends Component {
                     resultData={this.state.resultData.data}
                 />
 
-                {ListExampleHeader()}
+                {ListExampleHeader(this.state.resultData.data)}
 
                 <Vision/>
                 <Footer/>
