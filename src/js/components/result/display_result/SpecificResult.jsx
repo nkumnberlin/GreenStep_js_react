@@ -1,16 +1,24 @@
 import React, {Component, Fragment} from 'react';
-import {distanceInKm, daysHoursMinutes, adjustEmissionValues} from "../../data_handler/Converter.jsx";
 import RenderTransit from './RenderTransit.jsx'
 import RenderFlight from './RenderFlight.jsx'
 import RenderOthers from './RenderOthers.jsx'
-import {Segment, Grid, Header, Container, Icon, Divider} from 'semantic-ui-react'
 
 class SpecificResult extends Component {
     constructor(props) {
         super(props);
         this.completeResults = this.props.completeResults;
     }
-        renderDynamicResults = typeOfTravel => {
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log("IN SPECIFIC")
+
+        console.log("prevpro:", prevProps)
+        console.log("prevstate:", prevState)
+        console.log("this props:", this.props)
+
+    }
+
+    renderDynamicResults = typeOfTravel => {
         switch (typeOfTravel.toString()) {
             case "Plane":
                 return (

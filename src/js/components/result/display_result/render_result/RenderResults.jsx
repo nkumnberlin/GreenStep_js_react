@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import {Container, Divider, Grid, Header, Icon, Segment} from "semantic-ui-react";
 import {adjustEmissionValues, daysHoursMinutes,
-    distanceInKm, iconTranslator} from "../../data_handler/Converter.jsx";
+    distanceInKm, iconTranslator} from "../../../data_handler/Converter.jsx";
 
 export const renderTotal = currentType => {
     console.log("CURRENT :", currentType);

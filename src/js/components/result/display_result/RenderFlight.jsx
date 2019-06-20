@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import {renderTotal, renderIconsTransitFlight,
     renderHeaderOfIcon, renderStepsToGoal, renderStepsToGoalSecondary,
-    renderStepsToGoalTertiary} from './RenderGeneralInformation.jsx'
+    renderStepsToGoalTertiary} from './render_result/RenderResults.jsx'
 import {Segment, Grid, Header,  Divider} from 'semantic-ui-react'
 
 

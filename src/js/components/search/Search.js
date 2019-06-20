@@ -1,5 +1,5 @@
-import React, {Component, Fragment} from 'react';
-import {Segment, Grid, Button, Menu, Icon} from 'semantic-ui-react'
+import React, {Component} from 'react';
+import {Segment, Grid, Button} from 'semantic-ui-react'
 import Header from "semantic-ui-react/dist/commonjs/elements/Header";
 import {Departure} from './search_input-fields/Departure.js'
 import {Arrival} from "./search_input-fields/Arrival";
@@ -8,25 +8,20 @@ import {Arrival} from "./search_input-fields/Arrival";
 export default class Search extends Component {
     constructor(props) {
         super(props);
-        this.travelChoices = this.props.TravelChoices;
     }
 
 
     createMenuButton = (key) => {
         const {TravelChoices} = this.props;
         return (<Button basic
-                        animated
                         onClick={this.props.clickedItem}
                         id={TravelChoices[key]}
                         active={this.props.activeItem === TravelChoices[key]}
             >
-                <Button.Content id={TravelChoices[key]} visible>
+                <Button.Content id={TravelChoices[key]} >
                     {TravelChoices[key] === 'Male' ? "Walking" : TravelChoices[key]}
                 </Button.Content>
-                <Button.Content id={TravelChoices[key]} hidden>
-                    <Icon name={TravelChoices[key].toLowerCase()}
-                    />
-                </Button.Content>
+
             </Button>
         )
     };
@@ -101,9 +96,7 @@ export default class Search extends Component {
                     <br/>
                     {grid_Button}
                     <br/>
-                    {console.log("Leng:", this.props.TravelChoices.length)}
-                    {menu_Button}
-                    {/*{this.props.TravelChoices.length !== 0 ? menu_Button : null}*/}
+                    {this.props.TravelChoices.length === 0 ? null : menu_Button}
                 </Segment>
             </div>
         );

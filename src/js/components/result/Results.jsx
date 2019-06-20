@@ -1,16 +1,20 @@
-import React, {Component, Fragment} from 'react'
-import {Segment, Step, Icon, Header, Container, Grid, Divider, Loader, Image} from 'semantic-ui-react'
+import React, {Component} from 'react'
+import {Segment, Header, Container, Grid, Divider} from 'semantic-ui-react'
 import TableResult from "./display_result/TableResult.jsx";
-import {Steps,StepsLoader} from "./display_result/PlaceholderResult.js"
+import {ReceiveResults} from "./display_result/Placeholder.js"
 import SpecificResult from "./display_result/SpecificResult.jsx";
 
 export default class Results extends Component {
     constructor(props) {
         super(props)
-        console.log("PROPS: ", props)
     }
 
-
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log("IN RESULTS")
+        if(this.props !== prevProps){
+            this.render();
+        }
+    }
 
     createGeneralResult = (completeResults, value) => (
         <React.Fragment key={value}>
@@ -33,12 +37,11 @@ export default class Results extends Component {
 
 
     render() {
-        const StepContent = this.props.StepContent;
+
         // const locationArrival = this.props.locationArrival;
         // const locationDeparture = this.props.locationDeparture;
         const locationArrival = "this.props.locationArrival";
         const locationDeparture = "this.props.locationDeparture";
-        console.log("PROPS: ", this.props.resultData)
 
         const renderResult = (
             Object.keys(this.props.resultData).map((value) => {
@@ -54,7 +57,7 @@ export default class Results extends Component {
                         <Container textAlign="center">
                             <p> From {locationDeparture} to {locationArrival} would be this the CO2 - Emission </p>
                         </Container>
-                        {this.createGeneralResult(completeResults, value)}
+                        {/*{this.createGeneralResult(completeResults, value)}*/}
                         {this.createSpecificResult(completeResults, value)}
                         </Segment>
                     </React.Fragment>
@@ -65,11 +68,10 @@ export default class Results extends Component {
 
         return (
             <React.Fragment>
-                {/*{this.props.loading  ?*/}
-                {/*        StepsLoader(StepContent)*/}
-                {/*    :*/}
-                {/*    renderResult}*/}
-                {renderResult}
+                {this.props.loading  ?
+                     ReceiveResults()
+                    :
+                    renderResult}
             </React.Fragment>)
     }
 

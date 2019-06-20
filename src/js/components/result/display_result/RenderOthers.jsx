@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {iconTranslator} from "../../data_handler/Converter.jsx";
-import {renderTotal, renderHeaderOfIcon,} from './RenderGeneralInformation.jsx'
+import {renderTotal, renderHeaderOfIcon,} from './render_result/RenderResults.jsx'
 import {Segment, Grid,  Icon} from 'semantic-ui-react'
 
 
@@ -15,6 +15,7 @@ class RenderOthers extends Component {
             </>
         )
     };
+
 
 
     renderIconsOthers = (currentType) => {
