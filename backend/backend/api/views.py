@@ -28,9 +28,9 @@ def getWalkingData(request):
 		"walking": walking_data
 		}
 		return Response(status=status.HTTP_200_OK, data={"data": travelData})
-
+		
 @api_view(["POST"])
-def getWalkingCyclingData(request):
+def getCyclingData(request):
 	if request.method == 'POST':
 		info = json.dumps(request.data, ensure_ascii=False)
 		decode = json.loads(info)
@@ -38,41 +38,16 @@ def getWalkingCyclingData(request):
 		d_lng = decode['cords']['d_lng']
 		a_lat = decode['cords']['a_lat']
 		a_lng = decode['cords']['a_lng']
-		walking_data = walking_route(d_lng,d_lat,a_lng,a_lat).run_walk_planning()
-		walking_data = json.loads(walking_data)
-		walking_data = walking_data['walk']
 		bicycle_data= cycling_route(d_lng,d_lat,a_lng,a_lat).run_cycle_planning()
 		bicycle_data = json.loads(bicycle_data)
 		bicycle_data = bicycle_data['cycle']
 		travelData = {
-		"walking": walking_data,
 		"cycling": bicycle_data
-		}
-		return Response(status=status.HTTP_200_OK, data={"data": travelData})
-
-@api_view(["POST"])
-def getTransitAndDrivingData(request):
-	if request.method == 'POST':
-		info = json.dumps(request.data, ensure_ascii=False)
-		decode = json.loads(info)
-		d_lat = decode['cords']['d_lat']
-		d_lng = decode['cords']['d_lng']
-		a_lat = decode['cords']['a_lat']
-		a_lng = decode['cords']['a_lng']
-		car_data = driving_route(d_lng,d_lat,a_lng,a_lat).run_drive_planning()
-		car_data = json.loads(car_data)
-		car_data = car_data['drive']
-		train_data = transit_route_cords(d_lng,d_lat,a_lng,a_lat).run_transit_planning()
-		train_data = json.loads(train_data)
-		train_data = train_data['transit']
-		travelData = {
-		"driving": car_data,
-		"transit": train_data,
 		}
 		return Response(status=status.HTTP_200_OK, data={"data": travelData})
 		
 @api_view(["POST"])
-def getTransitDrivingAndFlyingData(request):
+def getDrivingData(request):
 	if request.method == 'POST':
 		info = json.dumps(request.data, ensure_ascii=False)
 		decode = json.loads(info)
@@ -83,18 +58,45 @@ def getTransitDrivingAndFlyingData(request):
 		car_data = driving_route(d_lng,d_lat,a_lng,a_lat).run_drive_planning()
 		car_data = json.loads(car_data)
 		car_data = car_data['drive']
+		travelData = {
+		"driving": car_data
+		}
+		return Response(status=status.HTTP_200_OK, data={"data": travelData})
+
+@api_view(["POST"])
+def getTransitData(request):
+	if request.method == 'POST':
+		info = json.dumps(request.data, ensure_ascii=False)
+		decode = json.loads(info)
+		d_lat = decode['cords']['d_lat']
+		d_lng = decode['cords']['d_lng']
+		a_lat = decode['cords']['a_lat']
+		a_lng = decode['cords']['a_lng']
 		train_data = transit_route_cords(d_lng,d_lat,a_lng,a_lat).run_transit_planning()
 		train_data = json.loads(train_data)
 		train_data = train_data['transit']
+		travelData = {
+		"transit": train_data
+		}
+		return Response(status=status.HTTP_200_OK, data={"data": travelData})		
+
+@api_view(["POST"])
+def getPlaneData(request):
+	if request.method == 'POST':
+		info = json.dumps(request.data, ensure_ascii=False)
+		decode = json.loads(info)
+		d_lat = decode['cords']['d_lat']
+		d_lng = decode['cords']['d_lng']
+		a_lat = decode['cords']['a_lat']
+		a_lng = decode['cords']['a_lng']
 		plane_data = flight_route(d_lng,d_lat,a_lng,a_lat).run_flight_planning()
 		plane_data = json.loads(plane_data)	
 		plane_data = plane_data['flight']
 		travelData = {
-		"driving": car_data,
-		"transit": train_data,
-		"flight": plane_data,
+		"flight": plane_data
 		}
-		return Response(status=status.HTTP_200_OK, data={"data": travelData})
+		return Response(status=status.HTTP_200_OK, data={"data": travelData})		
+		
 
 @api_view(["POST"])
 def getTravelData(request):
@@ -141,3 +143,70 @@ def getDistance(request):
 		print("ER IST IN GET DISTANCE")
 		distanceData = distcalc_coords(d_lat,d_lng,a_lat,a_lng).__get__()
 		return Response(status=status.HTTP_200_OK, data={"distance": distanceData})
+		
+# @api_view(["POST"])
+# def getWalkingCyclingData(request):
+	# if request.method == 'POST':
+		# info = json.dumps(request.data, ensure_ascii=False)
+		# decode = json.loads(info)
+		# d_lat = decode['cords']['d_lat']
+		# d_lng = decode['cords']['d_lng']
+		# a_lat = decode['cords']['a_lat']
+		# a_lng = decode['cords']['a_lng']
+		# walking_data = walking_route(d_lng,d_lat,a_lng,a_lat).run_walk_planning()
+		# walking_data = json.loads(walking_data)
+		# walking_data = walking_data['walk']
+		# bicycle_data= cycling_route(d_lng,d_lat,a_lng,a_lat).run_cycle_planning()
+		# bicycle_data = json.loads(bicycle_data)
+		# bicycle_data = bicycle_data['cycle']
+		# travelData = {
+		# "walking": walking_data,
+		# "cycling": bicycle_data
+		# }
+		# return Response(status=status.HTTP_200_OK, data={"data": travelData})
+
+# @api_view(["POST"])
+# def getTransitAndDrivingData(request):
+	# if request.method == 'POST':
+		# info = json.dumps(request.data, ensure_ascii=False)
+		# decode = json.loads(info)
+		# d_lat = decode['cords']['d_lat']
+		# d_lng = decode['cords']['d_lng']
+		# a_lat = decode['cords']['a_lat']
+		# a_lng = decode['cords']['a_lng']
+		# car_data = driving_route(d_lng,d_lat,a_lng,a_lat).run_drive_planning()
+		# car_data = json.loads(car_data)
+		# car_data = car_data['drive']
+		# train_data = transit_route_cords(d_lng,d_lat,a_lng,a_lat).run_transit_planning()
+		# train_data = json.loads(train_data)
+		# train_data = train_data['transit']
+		# travelData = {
+		# "driving": car_data,
+		# "transit": train_data,
+		# }
+		# return Response(status=status.HTTP_200_OK, data={"data": travelData})
+		
+# @api_view(["POST"])
+# def getTransitDrivingAndFlyingData(request):
+	# if request.method == 'POST':
+		# info = json.dumps(request.data, ensure_ascii=False)
+		# decode = json.loads(info)
+		# d_lat = decode['cords']['d_lat']
+		# d_lng = decode['cords']['d_lng']
+		# a_lat = decode['cords']['a_lat']
+		# a_lng = decode['cords']['a_lng']
+		# car_data = driving_route(d_lng,d_lat,a_lng,a_lat).run_drive_planning()
+		# car_data = json.loads(car_data)
+		# car_data = car_data['drive']
+		# train_data = transit_route_cords(d_lng,d_lat,a_lng,a_lat).run_transit_planning()
+		# train_data = json.loads(train_data)
+		# train_data = train_data['transit']
+		# plane_data = flight_route(d_lng,d_lat,a_lng,a_lat).run_flight_planning()
+		# plane_data = json.loads(plane_data)	
+		# plane_data = plane_data['flight']
+		# travelData = {
+		# "driving": car_data,
+		# "transit": train_data,
+		# "flight": plane_data,
+		# }
+		# return Response(status=status.HTTP_200_OK, data={"data": travelData})

@@ -871,3 +871,7 @@
          Site Overrides
 *******************************/
 
+.ui.inverted.green.segment {
+  background-color: #FFFFFF !important;
+  color: #FFFFFF !important;
+}

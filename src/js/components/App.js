@@ -2,17 +2,18 @@ import React, {Component, useRef} from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import MenuBar from './menubar/MenuBar.js';
 import Results from './result/Results.jsx';
-import Title,{LowerTitle}  from './title/Title.js';
+import Title, {LowerTitle} from './title/Title.js';
 import {GreenstepHeader} from './result/display_result/Placeholder.js'
 import '../../style.css'
 import Search from "./search/Search.js"
-import {postCords}  from "./python_backend/PostCords.js";
+import {postCords} from "./python_backend/PostCords.js";
 import controlDistance from "./python_backend/PostCords.js"
 import Script from "react-load-script";
 import Vision from './Vision/vision.jsx'
 import MyFootprint from './compensation/MyFootprint.jsx'
 import Comparison from './compensation/Comparison.jsx'
 import {ListExampleHeader} from './compensation/CompensationList.jsx';
+
 
 
 export default class App extends Component {
@@ -106,70 +107,66 @@ export default class App extends Component {
 
     // ?:
     determineCords = (place) => {
-        return place.geometry  ?  {
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng()
-        }:
+        return place.geometry ? {
+                lat: place.geometry.location.lat(),
+                lng: place.geometry.location.lng()
+            } :
             console.log("No details available for input: '" + place.name + "'");
     };
 
-    // submitCordsAndGetResult = async () => {
-    //     console.log("SUBMIT GEDRÜCKT ")
-    //     let returnData = await postCords(this.state);
-    //     this.handleResults(returnData.data)
-    //
-    //     // this.handleResults(mock_data)
-    //     // console.log("RESULTS: ", json_mockup)
-    //
-    //
-    // };
+
+
+    handleClickedItem = (item) => {
+        console.log("ES WURDE GEKLICKT ITEM TARGET: ", item.target)
+        this.resetResultData();
+        this.setState(({activeItem: item.target.id}), () => {
+            this.changeLoading();
+            console.log("ES WURDE GEKLICKT:", this.state.activeItem)
+        });
+    };
+
+    resetResultData = () => {
+        this.setState({ resultData: {}});
+    };
+
+    handleMenuItemClick = (e, {item}) => {
+        const itemValue = {activeMenuItem: e.target.id};
+        this.setState(itemValue);
+    };
+
+    changeLoading = () => {
+        this.setState({loading: true});
+        this.chooseCorrectPost().then((result) => {
+            console.log("RESULT VON APP:_", result)
+            this.setState({loading: false});
+            const resultData = result;
+            this.handleResults(resultData.data)
+        });
+        // this.handleResults(mock_data);
+    };
+
+    chooseCorrectPost = async () => {
+        switch (this.state.activeItem.toString()) {
+            case "Plane":
+                return postCords(this.state, `http://127.0.0.1:8000/getPlane/`);
+            case "Train":
+                return postCords(this.state, `http://127.0.0.1:8000/getTransit/`);
+            case "Male":
+                return postCords(this.state, `http://127.0.0.1:8000/getWalking/`);
+            case "Car":
+                return postCords(this.state, `http://127.0.0.1:8000/getDriving/`);
+            case "Bicycle":
+                return postCords(this.state, `http://127.0.0.1:8000/getCycling/`);
+        }
+    };
 
     handleResults = (data) => {
         const newResultData = {resultData: data};
         this.setState(newResultData);
     };
 
-    handleClickedItem = (item) => {
-        console.log("ES WURDE GEKLICKT ITEM TARGET: ", item.target)
-        const activeItem = {activeItem: item.target.id};
-        this.setState((activeItem), () =>{
-            this.changeLoading();
-            console.log("ES WURDE GEKLICKT:" ,  activeItem)
-        });
-    };
-
-    handleMenuItemClick = (e, {item}) => {
-        const itemValue ={activeMenuItem: e.target.id};
-        this.setState(itemValue);
-    };
-
-    changeLoading = () => {
-        this.setState({loading:true});
-        this.chooseCorrectPost().then((result)=>{
-            console.log("RESULT VON APP:_" , result)
-            this.setState({loading: false});
-                const resultData = result;
-                this.handleResults(resultData.data)
-        });
-        // this.handleResults(mock_data);
-    };
-
-    chooseCorrectPost = async () => {
-        const lengthOfOption = this.state.TravelChoices.length;
-        const {TravelChoices} = this.state;
-        console.log("WAT IS TRYPE: " , typeof(TravelChoices))
-        console.log(TravelChoices.hasOwnProperty("Car") )
-        switch (lengthOfOption) {
-            case 1: return postCords(this.state,`http://127.0.0.1:8000/getWalking/`);
-            case 2: return TravelChoices.hasOwnProperty("Car") ?
-                    postCords(this.state,`http://127.0.0.1:8000/getTransitAndDriving/`) :
-                    postCords(this.state,`http://127.0.0.1:8000/getWalkingCycling/`);
-            case 3: return postCords(this.state,`http://127.0.0.1:8000/getTravelData/`);
-        }
-    };
-
-    checkLocation = () =>{
-        controlDistance(this.state).then(response=>{
+    checkLocation = () => {
+        controlDistance(this.state).then(response => {
             console.log("DIES IS RES:", response)
             this.setState({TravelChoices: response});
             console.log("AKTUALSIIERTER STATE:", this.state.TravelChoices)
@@ -212,13 +209,11 @@ export default class App extends Component {
                     TravelChoices={this.state.TravelChoices}
                     ActiveTravelItem={this.state.activeItem}
                 />
-                
+
                 <MyFootprint
-                    beschreibung={"bär"}
                     resultData={this.state.resultData.data}
                     clickedItem={this.state.activeItem}
                 />
-
 
 
                 {ListExampleHeader(this.state.resultData.data)}

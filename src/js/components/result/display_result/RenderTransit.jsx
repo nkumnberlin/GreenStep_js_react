@@ -47,7 +47,7 @@ class RenderTransit extends Component {
     renderGoalTransit = currentType => {
         return Object.values(currentType.steps).map((key) => {
             {
-                return key.travel_mode === "TRANSIT" ? renderStepsToGoalSecondary(key) :
+                return key.travel_mode === "DRIVING" ? renderStepsToGoalSecondary(key) :
                     key.travel_mode === "FLYING" ? renderStepsToGoalTertiary(key) :
                         renderStepsToGoal(key)
             }

@@ -39,7 +39,7 @@ export const GridVerticallyDivided = (prop) => {
                         <p>
                             <br/>
                             The content of
-                            <span>{waterBottles} </span> water bottles (1,5 Liter).
+                            <span> {waterBottles} </span> water bottles (1,5 Liter).
                         </p>
                     </Segment>
                 </Grid.Column>

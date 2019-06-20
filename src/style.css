@@ -73,20 +73,12 @@ body {
 
 span {
     font-weight: bold;
-    color: blue;
+    color: #4CAF50;
 }
 
 .compDes.description {
     color: black !important;
     font-size: 16px;
-}
-
-#compHeader {
-    color: green;
-}
-
-.compOrg {
-    color: green;
 }
 
 #carbonHeader {

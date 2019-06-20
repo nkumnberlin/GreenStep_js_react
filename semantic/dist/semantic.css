@@ -15759,6 +15759,11 @@ ol.ui.horizontal.list li:before,
 /*******************************
          Site Overrides
 *******************************/
+
+.ui.inverted.green.segment {
+  background-color: #FFFFFF !important;
+  color: #FFFFFF !important;
+}
 /*!
  * # Semantic UI 2.4.2 - Step
  * http://github.com/semantic-org/semantic-ui/

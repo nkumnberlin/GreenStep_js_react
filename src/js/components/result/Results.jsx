@@ -46,10 +46,9 @@ export default class Results extends Component {
         const renderResult = (
             Object.keys(this.props.resultData).map((value) => {
                 const completeResults = this.props.resultData[value];
-                console.log("komplet: " , completeResults)
                 return (
                     <React.Fragment key={value}>
-                        <Segment inverted color={'green'} tertiary>
+                        <Segment inverted color={'green'} >
                             <Divider horizontal>
                                 <Header as='h4'>
                                     Results
