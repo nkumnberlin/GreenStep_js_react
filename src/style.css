@@ -71,4 +71,25 @@ body {
 
 }
 
+.boldText {
+    font-weight: bold;
+    color: blue;
+}
 
+.compDes.description {
+    color: black !important;
+    font-size: 16px;
+}
+
+#compHeader {
+    color: green;
+}
+
+.compOrg {
+    color: green;
+}
+
+#carbonHeader {
+    text-align: center;
+    font-weight: bold;
+}

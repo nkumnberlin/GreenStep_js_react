@@ -2,9 +2,12 @@ import React, {Component} from 'react';
 import {Container, Header, Placeholder, Segment} from "semantic-ui-react";
 
 class Vision extends Component {
+
     render() {
+
+
         return (
-            <div className={'vision prob'}>
+            <div className={'Vision prob'}>
                 <Segment>
                     <Segment>
                         <Container textAlign={'center'}>

@@ -1,15 +1,14 @@
 import React, {Component, Fragment} from 'react'
 import {Grid} from 'semantic-ui-react'
-import {daysHoursMinutes} from "../../data_handler/MillisecondsConverter.jsx";
-import {determineMaxEmission} from "../../data_handler/EmissionsConverter.jsx";
+import {daysHoursMinutes, determineMaxEmission, distanceInKm } from "../../data_handler/Converter.jsx";
 import {ProgressBar} from "../../data_handler/ProgressBar.jsx";
-import {distanceInKm} from "../../data_handler/DistanceConverter.jsx";
 
-export default class GeneralResult extends Component {
+export default class TableResult extends Component {
     constructor(props) {
         super(props);
         this.maxEm = determineMaxEmission(this.props.completeResults);
     }
+
 
     render() {
        const Header = ["Transportation", "Time", "Travel Distance", "Emission(kg)"];
@@ -23,7 +22,10 @@ export default class GeneralResult extends Component {
             )
         });
 
+
+
         const renderContent = Object.values(this.props.completeResults).map((k, value) => {
+            console.log("MAP: ", k, "  von ", this.props.completeResults)
             return (
                 <Grid.Row key={k.dist} style={{padding: 2}}>
                     <Grid.Column

@@ -1,22 +1,19 @@
 import React, {Component} from 'react'
-import {Menu, Segment} from 'semantic-ui-react'
+import {Menu} from 'semantic-ui-react'
 
 export default class MenuBar extends Component {
-    menuItems = ['GreenStep', 'Vision', 'About us'];
-    state = {activeItem: this.menuItems[0]};
-    handleItemClick = (e, {name}) => this.setState({activeItem: name})
-
-
+    menuItems= ['Green Step', 'Vision', 'About Us'];
     render() {
-        const {activeItem} = this.state;
+        const {activeMenuItem} = this.props;
         return (
             <Menu>
                 {this.menuItems.map(menu =>
                     <Menu.Item
+                        id={this.menuItems.indexOf(menu)}
                         key={menu}
                         name={menu}
-                        active={activeItem === menu}
-                        onClick={this.handleItemClick}
+                        active={menu === this.menuItems[activeMenuItem]}
+                        onClick={this.props.changeMenuItem}
                     />
                 )}
             </Menu>

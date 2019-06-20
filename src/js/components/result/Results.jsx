@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react'
-import {Segment, Step, Icon, Header, Container, Grid, Divider} from 'semantic-ui-react'
-import GeneralResult from "./display_result/GeneralResult.jsx";
-import {Steps} from "./display_result/PlaceholderResult.js"
+import {Segment, Step, Icon, Header, Container, Grid, Divider, Loader, Image} from 'semantic-ui-react'
+import TableResult from "./display_result/TableResult.jsx";
+import {Steps,StepsLoader} from "./display_result/PlaceholderResult.js"
 import SpecificResult from "./display_result/SpecificResult.jsx";
 
 export default class Results extends Component {
@@ -10,31 +10,24 @@ export default class Results extends Component {
         console.log("PROPS: ", props)
     }
 
-    componentDidUpdate(prevProps) {
-        console.log("prev props: ", prevProps, "current props: ", this.props);
-        if (prevProps !== this.props) {
-            // this.render()
-        }
-    }
-    createGeneralResult =(completeResults, value)=> (
+
+
+    createGeneralResult = (completeResults, value) => (
         <React.Fragment key={value}>
             <Segment>
-                <Grid columns={4}>
-                    <GeneralResult completeResults={completeResults}
-                                   TravelChoices={this.props.TravelChoices}/>
+                <Grid columns={completeResults.length}>
+                    <TableResult completeResults={completeResults}
+                                 TravelChoices={this.props.TravelChoices}/>
                 </Grid>
             </Segment>
         </React.Fragment>
     );
 
-    createSpecificResult = (completeResults, value) => (
+    createSpecificResult = (completeResults) => (
         <React.Fragment key={0}>
-            <Segment>
-                <Grid columns={4}>
-                    <SpecificResult completeResults={completeResults}
-                                   TravelChoices={this.props.TravelChoices}/>
-                </Grid>
-            </Segment>
+            <SpecificResult completeResults={completeResults}
+                            ActiveTravelItem={this.props.ActiveTravelItem}
+                            TravelChoices={this.props.TravelChoices}/>
         </React.Fragment>
     );
 
@@ -45,24 +38,25 @@ export default class Results extends Component {
         // const locationDeparture = this.props.locationDeparture;
         const locationArrival = "this.props.locationArrival";
         const locationDeparture = "this.props.locationDeparture";
-
+        console.log("PROPS: ", this.props.resultData)
 
         const renderResult = (
             Object.keys(this.props.resultData).map((value) => {
                 const completeResults = this.props.resultData[value];
                 return (
                     <React.Fragment key={value}>
-                        {console.log("IN Render: ", value)}
+                        <Segment>
                         <Divider horizontal>
                             <Header as='h4'>
                                 Results
                             </Header>
                         </Divider>
                         <Container textAlign="center">
-                            <p> For your wanted Route from {locationDeparture} to {locationArrival} you have the following choices </p>
+                            <p> From {locationDeparture} to {locationArrival} would be this the CO2 - Emission </p>
                         </Container>
                         {this.createGeneralResult(completeResults, value)}
                         {this.createSpecificResult(completeResults, value)}
+                        </Segment>
                     </React.Fragment>
                 )
             })
@@ -70,12 +64,12 @@ export default class Results extends Component {
 
 
         return (
-            <React.Fragment >
-                <Segment className={'results prob'}> {this.props.resultData.data === undefined ?
-                    Steps(StepContent)
-                    :
-                    renderResult}
-                </Segment>
+            <React.Fragment>
+                {/*{this.props.loading  ?*/}
+                {/*        StepsLoader(StepContent)*/}
+                {/*    :*/}
+                {/*    renderResult}*/}
+                {renderResult}
             </React.Fragment>)
     }
 

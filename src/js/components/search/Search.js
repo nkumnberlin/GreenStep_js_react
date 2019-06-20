@@ -9,27 +9,28 @@ export default class Search extends Component {
     constructor(props) {
         super(props);
         this.travelChoices = this.props.TravelChoices;
-        console.log(props)
     }
 
+
     createMenuButton = (key) => {
+        const {TravelChoices} = this.props;
         return (<Button basic
                         animated
                         onClick={this.props.clickedItem}
-                        id={this.travelChoices[key]}
-                        active={this.props.activeItem === this.travelChoices[key]}>
-
-                <Button.Content id={this.travelChoices[key]} visible>
-                    {this.travelChoices[key] === 'Male' ? "Walking" : this.travelChoices[key]}
+                        id={TravelChoices[key]}
+                        active={this.props.activeItem === TravelChoices[key]}
+            >
+                <Button.Content id={TravelChoices[key]} visible>
+                    {TravelChoices[key] === 'Male' ? "Walking" : TravelChoices[key]}
                 </Button.Content>
-                <Button.Content id={this.travelChoices[key]} hidden>
-                    <Icon id={this.travelChoices[key]}
-                          name={this.travelChoices[key].toLowerCase()}
+                <Button.Content id={TravelChoices[key]} hidden>
+                    <Icon name={TravelChoices[key].toLowerCase()}
                     />
                 </Button.Content>
             </Button>
         )
     };
+
 
     render() {
         const form_style = {
@@ -42,29 +43,27 @@ export default class Search extends Component {
                 <Grid columns={2}>
                     <Grid.Row>
                         <Grid.Column>
+                            <br/>
                             <Departure style={form_style}/>
+                            <br/>
                         </Grid.Column>
                         <Grid.Column>
+                            <br/>
                             <Arrival style={form_style}/>
+                            <br/>
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
             </Segment>
         );
 
-        const grid_Button = (
-            <Grid column={1}>
-                <Grid.Column verticalAlign={'middle'} textAlign={'center'}>
-                    <Button onClick={this.props.submitCords} positive> Submit </Button>
-                </Grid.Column>
-            </Grid>
-        );
-
         const grid_MenuButton = (
-            <Grid columns={16}>
-                <Grid.Column width={4}> </Grid.Column>
+            <Grid centered columns={this.props.TravelChoices.length === 0 ?
+                this.props.TravelChoices.length + 1 :
+                this.props.TravelChoices.length
+            }>
                 <Button.Group size='large'>
-                    {Object.keys(this.travelChoices).map((key => {
+                    {Object.keys(this.props.TravelChoices).map((key => {
                         return (
                             <Grid.Column key={key}>
                                 {this.createMenuButton(key)}
@@ -72,10 +71,16 @@ export default class Search extends Component {
                         )
                     }))}
                 </Button.Group>
-                <Grid.Column width={4}> </Grid.Column>
             </Grid>
         );
 
+        const grid_Button = (
+            <Grid column={1}>
+                <Grid.Column verticalAlign={'middle'} textAlign={'center'}>
+                    <Button onClick={this.props.checkLocation} positive> Submit </Button>
+                </Grid.Column>
+            </Grid>
+        );
 
         const menu_Button = (
             <Segment>
@@ -90,12 +95,15 @@ export default class Search extends Component {
         return (
             <div className={'search prob'}>
                 <Segment padded>
-
                     <Header textAlign={'center'} as='h3'> Plan your Trip and Compensate your Emission </Header>
                     <br/>
                     {ArrivalAndDeparture}
+                    <br/>
+                    {/*{grid_Button}*/}
+                    <br/>
+                    {console.log("Leng:", this.props.TravelChoices.length)}
                     {menu_Button}
-                    {grid_Button}
+                    {/*{this.props.TravelChoices.length !== 0 ? menu_Button : null}*/}
                 </Segment>
             </div>
         );

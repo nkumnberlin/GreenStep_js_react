@@ -1,47 +1,45 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
+import {distanceInKm, daysHoursMinutes, adjustEmissionValues} from "../../data_handler/Converter.jsx";
+import RenderTransit from './RenderTransit.jsx'
+import RenderFlight from './RenderFlight.jsx'
+import RenderOthers from './RenderOthers.jsx'
+import {Segment, Grid, Header, Container, Icon, Divider} from 'semantic-ui-react'
 
 class SpecificResult extends Component {
     constructor(props) {
         super(props);
         this.completeResults = this.props.completeResults;
-        console.log("dies ist completeRes: ", this.completeResults)
     }
-    extractSteps = completeResults => {
-        Object.keys(completeResults).map((key) => {
-            console.log("div: " ,key);
-            Object.values(completeResults).map((ke, diveInSteps) => {
-                console.log("kkkk: ", ke, "divein", diveInSteps)
-                Object.values(ke.steps[diveInSteps]).map((StepsOfCurrentResult) => {
-                    console.log("diveInResults", ke, "val", StepsOfCurrentResult)
-                    // console.log("key",key)
-                    // console.log("diveInSteps", diveInSteps)
-
-                    // extractStep.push({StepsOfCurrentResult});
-                })
-            });
-        });
+        renderDynamicResults = typeOfTravel => {
+        switch (typeOfTravel.toString()) {
+            case "Plane":
+                return (
+                    <RenderFlight
+                        flight={this.completeResults.flight}/>);
+            case "Train":
+                return (
+                    <RenderTransit
+                        transit={this.completeResults.transit}/>);
+            case "Male":
+                return (
+                    <RenderOthers
+                        others={this.completeResults.walking}/>);
+            case "Car":
+                return (
+                    <RenderOthers
+                        others={this.completeResults.driving}/>);
+            case "Bicycle":
+                return (
+                    <RenderOthers
+                        others={this.completeResults.cycling}/>);
+        }
     };
 
-    // extractValuesOfSteps = Object.values(extractSteps.steps).map((ValuesOfSteps, value) => {
-    //     console.log("key", ValuesOfSteps, " val:", value);
-    //
-    //     Object.values(ValuesOfSteps).map((k, va) => {
-    //         console.log("end:", k.end_location, "start:", k.start_location)
-    //     })
-    // });
-
-
     render() {
-
-
-        // let extractedStep = extractSteps;
-
-
-
         return (
-            <div>
-                {console.log("DIES IST extractedStep: " , this.extractSteps(this.completeResults))}
-            </div>
+            <Fragment>
+                {this.renderDynamicResults(this.props.ActiveTravelItem)}
+            </Fragment>
         );
     }
 }
