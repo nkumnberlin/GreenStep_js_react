@@ -38,17 +38,17 @@ export default class Results extends Component {
 
     render() {
 
-        // const locationArrival = this.props.locationArrival;
-        // const locationDeparture = this.props.locationDeparture;
-        const locationArrival = "this.props.locationArrival";
-        const locationDeparture = "this.props.locationDeparture";
+        const locationArrival = this.props.locationArrival;
+        const locationDeparture = this.props.locationDeparture;
+        // const locationArrival = "this.props.locationArrival";
+        // const locationDeparture = "this.props.locationDeparture";
 
         const renderResult = (
             Object.keys(this.props.resultData).map((value) => {
                 const completeResults = this.props.resultData[value];
                 return (
                     <React.Fragment key={value}>
-                        <Segment inverted color={'green'} >
+                        <Segment className={'invertedSegmentGreen'} >
                             <Divider horizontal>
                                 <Header as='h4'>
                                     Results

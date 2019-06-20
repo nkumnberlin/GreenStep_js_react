@@ -14,6 +14,7 @@ export default class Search extends Component {
     createMenuButton = (key) => {
         const {TravelChoices} = this.props;
         return (<Button basic
+                        className={"submitButton"}
                         onClick={this.props.clickedItem}
                         id={TravelChoices[key]}
                         active={this.props.activeItem === TravelChoices[key]}

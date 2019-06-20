@@ -30,12 +30,9 @@ export default async function controlDistance(props) {
 export const distanceTable = async (dist) => {
     dist = dist / 1000;
     let recommendation = [];
-    if (dist <= 5) {
-        console.log("5");
-        recommendation = ["Male"]
-    } else if (dist <= 30) {
+    if (dist <= 30) {
         console.log("30");
-        recommendation = ["Male", "Bicycle"]
+        recommendation = ["Male", "Bicycle", "Car", "Train"]
     } else if (dist <= 500) {
         console.log("500");
         recommendation = ["Car", "Train"]

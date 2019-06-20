@@ -71,10 +71,21 @@ body {
 
 }
 
+.submitButton {
+    background: #4CAF50 !important;
+}
+
 span {
     font-weight: bold;
     color: #4CAF50;
 }
+
+.invertedSegmentGreen {
+    background: #4CAF50 !important;
+}
+
+
+
 
 .compDes.description {
     color: black !important;
