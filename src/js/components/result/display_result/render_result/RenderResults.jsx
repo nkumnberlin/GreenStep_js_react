@@ -7,8 +7,6 @@ export const renderTotal = currentType => {
     console.log("CURRENT :", currentType);
     return (
         <Fragment>
-            <br/>
-            <br/>
             <Divider horizontal>
                 <Header as='h4'>
                     Total

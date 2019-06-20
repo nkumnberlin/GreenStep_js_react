@@ -11,7 +11,7 @@ export default class Results extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         console.log("IN RESULTS")
-        if(this.props !== prevProps){
+        if (this.props !== prevProps) {
             this.render();
         }
     }
@@ -46,22 +46,23 @@ export default class Results extends Component {
         const renderResult = (
             Object.keys(this.props.resultData).map((value) => {
                 const completeResults = this.props.resultData[value];
+                console.log("komplet: " , completeResults)
                 return (
                     <React.Fragment key={value}>
+                        <Segment inverted color={'green'} tertiary>
+                            <Divider horizontal>
+                                <Header as='h4'>
+                                    Results
+                                </Header>
+                            </Divider>
+                            <Container textAlign="center">
+                                <p> From {locationDeparture} to {locationArrival} </p>
+                            </Container>
                         <Segment>
-                        <Divider horizontal>
-                            <Header as='h4'>
-                                Results
-                            </Header>
-                        </Divider>
-                        <Container textAlign="center">
-                            <p> From {locationDeparture} to {locationArrival} </p>
-                        </Container>
+                            {/*{this.createGeneralResult(completeResults, value)}*/}
+                            {this.createSpecificResult(completeResults, value)}
                         </Segment>
-<Segment>
-                        {/*{this.createGeneralResult(completeResults, value)}*/}
-                        {this.createSpecificResult(completeResults, value)}
-</Segment>
+                        </Segment>
                     </React.Fragment>
                 )
             })
@@ -70,8 +71,8 @@ export default class Results extends Component {
 
         return (
             <React.Fragment>
-                {this.props.loading  ?
-                     ReceiveResults()
+                {this.props.loading ?
+                    ReceiveResults()
                     :
                     renderResult}
             </React.Fragment>)

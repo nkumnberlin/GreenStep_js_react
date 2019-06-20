@@ -1,7 +1,6 @@
 import React, {Component, useRef} from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import MenuBar from './menubar/MenuBar.js';
-import Footer from './footer/Footer.js';
 import Results from './result/Results.jsx';
 import Title,{LowerTitle}  from './title/Title.js';
 import {GreenstepHeader} from './result/display_result/Placeholder.js'

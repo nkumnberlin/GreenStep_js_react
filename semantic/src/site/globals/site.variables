@@ -6,6 +6,7 @@
      Fonts
 --------------------*/
 
+@primaryColor: #002f4e;
 @headerFont        : 'Roboto Mono', 'Helvetica Neue', Arial, Helvetica, sans-serif;
 @pageFont          : 'Roboto Mono', 'Helvetica Neue', Arial, Helvetica, sans-serif;
 @googleFontFamily  : 'Roboto Mono', monospace;

@@ -71,7 +71,7 @@ body {
 
 }
 
-.boldText {
+span {
     font-weight: bold;
     color: blue;
 }
