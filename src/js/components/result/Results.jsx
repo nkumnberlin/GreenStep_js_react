@@ -55,11 +55,13 @@ export default class Results extends Component {
                             </Header>
                         </Divider>
                         <Container textAlign="center">
-                            <p> From {locationDeparture} to {locationArrival} would be this the CO2 - Emission </p>
+                            <p> From {locationDeparture} to {locationArrival} </p>
                         </Container>
+                        </Segment>
+<Segment>
                         {/*{this.createGeneralResult(completeResults, value)}*/}
                         {this.createSpecificResult(completeResults, value)}
-                        </Segment>
+</Segment>
                     </React.Fragment>
                 )
             })

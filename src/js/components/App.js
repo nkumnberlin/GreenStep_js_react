@@ -3,7 +3,7 @@ import 'semantic-ui-css/semantic.min.css';
 import MenuBar from './menubar/MenuBar.js';
 import Footer from './footer/Footer.js';
 import Results from './result/Results.jsx';
-import Title from './title/Title.js';
+import Title,{LowerTitle}  from './title/Title.js';
 import {GreenstepHeader} from './result/display_result/Placeholder.js'
 import '../../style.css'
 import Search from "./search/Search.js"
@@ -200,6 +200,10 @@ export default class App extends Component {
                     locationDeparture={this.state.LocationDeparture}
                     checkLocation={this.checkLocation}
                 />
+                <Comparison
+                    clickedItem={this.state.activeItem}
+                    resultData={this.state.resultData.data}
+                />
                 <Results
                     resultData={resultData}
                     locationDeparture={LocationDeparture}
@@ -216,14 +220,12 @@ export default class App extends Component {
                     clickedItem={this.state.activeItem}
                 />
 
-                <Comparison
-                    clickedItem={this.state.activeItem}
-                    resultData={this.state.resultData.data}
-                />
+
 
                 {ListExampleHeader(this.state.resultData.data)}
+                {/*<Footer/>*/}
 
-                <Footer/>
+                <LowerTitle/>
             </div>
         )
     }
