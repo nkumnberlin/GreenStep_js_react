@@ -5,7 +5,7 @@ Created on Sat May 25 18:38:13 2019
 @author: tristanwachtel
 """
 # pyCharm
-from APIrequests.APIrequest import APIrequest
+from ..APIrequests.APIrequest import APIrequest
 import json
 
 

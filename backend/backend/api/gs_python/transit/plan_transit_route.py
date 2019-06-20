@@ -5,8 +5,8 @@ Created on Sat May 25 18:38:13 2019
 @author: tristanwachtel
 """
 #pyCharm
-from APIrequests.APIrequest import APIrequest, get_time
-from transit.crawl_transit_steps import crawl_steps
+from ..APIrequests.APIrequest import APIrequest, get_time
+from ..transit.crawl_transit_steps import crawl_steps
 import json
 #react - not tested in react
 # from ..APIrequests.APIrequest import APIrequest

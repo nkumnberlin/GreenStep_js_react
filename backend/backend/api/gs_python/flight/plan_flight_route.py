@@ -2,13 +2,13 @@
 
 import json
 # Pycharm
-from flight.airportfinder import airportfinder
-from flight.flight_response_creator import flight_response
-from flight.flight_info import flight_data
-from distcalc.calc_geographic_points import distcalc
-from APIrequests.APIrequest import call_flight_api
-from transit.plan_transit_route import transit_route_cords
-from driving.plan_driving_route import driving_route
+from .airportfinder import airportfinder
+from .flight_response_creator import flight_response
+from .flight_info import flight_data
+from api.gs_python.distcalc.calc_geographic_points import distcalc
+from api.gs_python.APIrequests.APIrequest import call_flight_api
+from api.gs_python.transit.plan_transit_route import transit_route_cords
+from api.gs_python.driving.plan_driving_route import driving_route
 
 
 # react
@@ -47,7 +47,7 @@ class flight_route:
         # jsonload = json.load(open("api/gs_python/flight/airport_db.json"))
         # pycharm
         jsonload = json.load(open(
-            "/Users/tristanwachtel/PycharmProjects/GreenStep_js_react/backend/backend/api/gs_python/flight/airport_db.json"))
+            "api/gs_python/flight/airport_db.json"))
         # origin_iata, origin_city, origin_airport_lat, origin_airport_lng \
         f_data.origin_airport = airportfinder().find_next_airport(self.origin_lat, self.origin_lng, jsonload)
         # dest_iata, dest_city, dest_airport_lat, dest_airport_lng \

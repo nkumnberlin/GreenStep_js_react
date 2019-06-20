@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flight.flight_info import flight_data
+from .flight_info import flight_data
 import json
 class flight_response:
     emission_flight = 0.18

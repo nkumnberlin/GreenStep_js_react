@@ -9,7 +9,7 @@ Created on Tue May 14 16:38:13 2019
 #from .distcalc.calc_geographic_points import distcalc
 
 #Pycharm - path
-from distcalc.calc_geographic_points import distcalc
+from ..distcalc.calc_geographic_points import distcalc
 
 class airportfinder:
 

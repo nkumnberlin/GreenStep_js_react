@@ -133,8 +133,9 @@ export default class App extends Component {
 
     handleClickedItem = (item) => {
         const activeItem = {activeItem: item.target.id};
-        this.setState(activeItem);
-        this.changeLoading();
+        this.setState((activeItem), () =>{
+            this.changeLoading();
+        });
     };
 
     handleMenuItemClick = (e, {item}) => {
@@ -143,14 +144,14 @@ export default class App extends Component {
     };
 
     changeLoading = () => {
-        // this.setState({loading:true});
-        // this.chooseCorrectPost().then((result)=>{
-        //     console.log("RESULT VON APP:_" , result)
-        //     this.setState({loading: false});
-        //         const resultData = result;
-        //         this.handleResults(resultData.data)
-        // });
-        this.handleResults(mock_data);
+        this.setState({loading:true});
+        this.chooseCorrectPost().then((result)=>{
+            console.log("RESULT VON APP:_" , result)
+            this.setState({loading: false});
+                const resultData = result;
+                this.handleResults(resultData.data)
+        });
+        // this.handleResults(mock_data);
     };
 
     chooseCorrectPost = async () => {
@@ -163,7 +164,7 @@ export default class App extends Component {
             case 2: return TravelChoices.hasOwnProperty("Car") ?
                     postCords(this.state,`http://127.0.0.1:8000/getTransitAndDriving/`) :
                     postCords(this.state,`http://127.0.0.1:8000/getWalkingCycling/`);
-            case 3: return postCords(this.state,`http://127.0.0.1:8000/getTransitDrivingAndFlying/`);
+            case 3: return postCords(this.state,`http://127.0.0.1:8000/getTravelData/`);
         }
     };
 
@@ -221,7 +222,6 @@ export default class App extends Component {
 
                 {ListExampleHeader(this.state.resultData.data)}
 
-                <Vision/>
                 <Footer/>
             </div>
         )

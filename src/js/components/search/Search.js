@@ -99,7 +99,7 @@ export default class Search extends Component {
                     <br/>
                     {ArrivalAndDeparture}
                     <br/>
-                    {/*{grid_Button}*/}
+                    {grid_Button}
                     <br/>
                     {console.log("Leng:", this.props.TravelChoices.length)}
                     {menu_Button}

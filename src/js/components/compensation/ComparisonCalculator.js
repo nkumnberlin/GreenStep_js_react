@@ -12,13 +12,11 @@
 	const bottleSize = 1.5;
 
 	export function equalsTrain(co2) {
-		let amountRides = Math.round(co2/amountCO2);
-		return amountRides;
+		return Math.round(co2/amountCO2);
 	}
 
 	export function allowedPercentage(co2) {
-		let percentage = Math.round(co2 / allowedCO2*100 / 100 * 100);
-		return percentage;
+		return Math.round(co2 / allowedCO2*100 / 100 * 100);
 	}
 
 	export function equalsWaterBottles(co2) {

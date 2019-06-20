@@ -14,7 +14,6 @@ export default class Comparison extends Component {
 
 	renderComparison = (typeOfTravel, resultData) => {
 		if(resultData !== undefined) {	
-			//console.log("Fahrten Berlin-Köln: " + equalsTrain(200));
 			const {driving, walking, cycling, flight, transit} = resultData;
 
 			switch (typeOfTravel.toString()) {
@@ -23,25 +22,25 @@ export default class Comparison extends Component {
                         <Fragment>
 							{GridVerticallyDivided(flight.emission)}
 						</Fragment>
-                    )
+                    );
                 case "Train":
                     return (
                         <Fragment>
 							{GridVerticallyDivided(transit.emission)}
 						</Fragment>
-                    )
+                    );
                 case "Male":
                     return (
                         <Fragment>
 							{GridVerticallyDivided(walking.emission)}
 						</Fragment>
-                    )
+                    );
                 case "Car":
                     return (
                         <Fragment>
 							{GridVerticallyDivided(driving.emission)}
 						</Fragment>
-                    )
+                    );
                 case "Bicycle":
                     return (
                         <Fragment>
