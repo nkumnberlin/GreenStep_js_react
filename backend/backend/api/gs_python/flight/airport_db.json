@@ -15131,18 +15131,6 @@
       "lng":4.7638897896,
       "tz":"Europe/Amsterdam"
    },
-   "EDOP":{
-      "icao":"EDOP",
-      "iata":"SZW",
-      "name":"Schwerin Parchim Airport",
-      "city":"",
-      "state":"Mecklenburg-Vorpommern",
-      "country":"DE",
-      "elevation":166,
-      "lat":53.4269981384,
-      "lng":11.7833995819,
-      "tz":"Europe/Berlin"
-   },
    "KBLV":{
       "icao":"KBLV",
       "iata":"BLV",
@@ -18406,5 +18394,17 @@
       "lat":60.193901062,
       "lng":11.100399971,
       "tz":"Europe/Oslo"
+   },
+   "LEBL":{
+      "icao":"LEBL",
+      "iata":"BCN",
+      "name":"Barcelnga International Airport",
+      "city":"Barcelnga",
+      "state":"Catalngia",
+      "country":"ES",
+      "elevation":12,
+      "lat":41.2971000671,
+      "lng":2.0784599781,
+      "tz":"Europe/Madrid"
    }
 }
