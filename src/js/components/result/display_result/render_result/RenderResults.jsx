@@ -1,45 +1,60 @@
 import React, {Fragment} from 'react';
 import {Container, Divider, Grid, Header, Icon, Segment} from "semantic-ui-react";
-import {adjustEmissionValues, daysHoursMinutes,
-    distanceInKm, iconTranslator} from "../../../data_handler/Converter.jsx";
+import {
+    adjustEmissionValues, daysHoursMinutes,
+    distanceInKm, iconTranslator
+} from "../../../data_handler/Converter.jsx";
+
+const ErrorMessage = (
+    <Segment textAlign={"center"}>
+        Something went wrong, please contact our Support
+    </Segment>);
 
 export const renderTotal = currentType => {
-    console.log("CURRENT :", currentType);
+
     return (
-        <Fragment>
-            <Divider horizontal>
-                <Header as='h4'>
-                    Total
-                </Header>
-            </Divider>
-            <Grid columns={'equal'}>
-                <Grid.Column width={5}>
-                    <Segment textAlign={"center"}>
-                        <Icon loading name='clock outline'/>
-                        Duration: {daysHoursMinutes(currentType.time)}
-                    </Segment>
-                </Grid.Column>
-                <Grid.Column width={6}>
-                    <Segment textAlign={"center"}>
-                        Distance: {distanceInKm(currentType.dist)}
-                    </Segment>
-                </Grid.Column>
-                <Grid.Column width={5}>
-                    <Segment textAlign={"center"}>
-                        <Icon name='exclamation circle'/>
-                        Emission: {adjustEmissionValues(currentType.emission)}
-                    </Segment>
-                </Grid.Column>
-            </Grid>
-        </Fragment>
+        <>
+            {console.log(currentType.dist)}
+            {currentType.dist === 0 ? ErrorMessage :
+
+                <Fragment>
+                    <Divider horizontal>
+                        <Header as='h4'>
+                            Total
+                        </Header>
+                    </Divider>
+                    <Grid columns={'equal'}>
+                        <Grid.Column width={5}>
+                            <Segment textAlign={"center"}>
+                                <Icon loading name='clock outline'/>
+                                Duration: {daysHoursMinutes(currentType.time)}
+                            </Segment>
+                        </Grid.Column>
+                        <Grid.Column width={6}>
+                            <Segment textAlign={"center"}>
+                                Distance: {distanceInKm(currentType.dist)}
+                            </Segment>
+                        </Grid.Column>
+                        <Grid.Column width={5}>
+                            <Segment textAlign={"center"}>
+                                <Icon name='exclamation circle'/>
+                                Emission: {adjustEmissionValues(currentType.emission)}
+                            </Segment>
+                        </Grid.Column>
+                    </Grid>
+                </Fragment>
+            }
+        </>
     )
 };
 
 
 export const renderSteps = key => (
-    <Fragment>
+    <>
         <br/>
         <Grid style={{padding: 2, marginBottom: 10}}>
+
+
             <Grid.Column width={6}>
                 <Icon size='large' name={iconTranslator(key.travel_mode)}/>
                 From:
@@ -65,8 +80,10 @@ export const renderSteps = key => (
                 <br/>
                 Distance: {distanceInKm(key.distance)}
             </Grid.Column>
+
         </Grid>
-    </Fragment>
+
+    </>
 );
 
 export const renderStepsToGoalTertiary = key => (

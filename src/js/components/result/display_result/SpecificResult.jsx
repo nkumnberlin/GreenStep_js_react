@@ -9,14 +9,6 @@ class SpecificResult extends Component {
         this.completeResults = this.props.completeResults;
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log("IN SPECIFIC")
-
-        console.log("prevpro:", prevProps)
-        console.log("prevstate:", prevState)
-        console.log("this props:", this.props)
-
-    }
 
     renderDynamicResults = typeOfTravel => {
         switch (typeOfTravel.toString()) {

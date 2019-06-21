@@ -15,7 +15,7 @@ export default class MyFootprint extends Component {
         const prog_values = {
             0: {
                 perc_amount: perc_amount,
-                descr: "Your route's emission" ,
+                descr: "Your route's emission",
                 width: 3,
                 color: "teal",
                 emission: adjustEmissionValues(data.emission),
@@ -23,12 +23,12 @@ export default class MyFootprint extends Component {
             1: {
                 perc_amount: 100,
                 descr: "How much CO2 an EU citizen should max. cause per year in order to stop climate change:",
-                width:3,
+                width: 3,
                 color: "olive",
                 emission: "1200kg",
             },
             2: {
-                perc_amount:100,
+                perc_amount: 100,
                 descr: "How much CO2 one EU citizen actually causes on average per year:",
                 width: 16,
                 color: "yellow",
@@ -40,17 +40,19 @@ export default class MyFootprint extends Component {
     };
 
 
-    prepareFootprint = (data) => {
+    prepareFootprint = (footprintData) => {
         return (
             <Fragment>
-                <Segment>
+                {footprintData.emission === 0 ? null :
+                    <Segment>
                         <Divider horizontal>
                             <Header as='h4'>
                                 Your Carbon Footprint
                             </Header>
                         </Divider>
-                    {this.renderFootprint(data)}
-                </Segment>
+                        {this.renderFootprint(footprintData)}
+                    </Segment>
+                }
             </Fragment>
         )
     };
@@ -89,7 +91,7 @@ export default class MyFootprint extends Component {
         return (
             <>
                 {this.renderDynamicResults(this.props.clickedItem)}
-                
+
             </>
         )
     };

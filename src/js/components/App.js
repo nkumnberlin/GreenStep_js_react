@@ -13,7 +13,7 @@ import Vision from './Vision/vision.jsx'
 import MyFootprint from './compensation/MyFootprint.jsx'
 import Comparison from './compensation/Comparison.jsx'
 import {ListExampleHeader} from './compensation/CompensationList.jsx';
-
+import Segment from "semantic-ui-react/dist/commonjs/elements/Segment";
 
 
 export default class App extends Component {
@@ -35,8 +35,10 @@ export default class App extends Component {
             activeMenuItem: "",
             loadingStatusChange: this.changeLoading,
             loading: ""
-        }
+        };
+
     }
+
 
     initComponent = () => {
         this.fields = ['address_components', 'geometry', 'icon', 'name'];
@@ -115,7 +117,6 @@ export default class App extends Component {
     };
 
 
-
     handleClickedItem = (item) => {
         console.log("ES WURDE GEKLICKT ITEM TARGET: ", item.target)
         this.resetResultData();
@@ -126,7 +127,7 @@ export default class App extends Component {
     };
 
     resetResultData = () => {
-        this.setState({ resultData: {}});
+        this.setState({resultData: {}});
     };
 
     handleMenuItemClick = (e, {item}) => {
@@ -167,11 +168,16 @@ export default class App extends Component {
 
     checkLocation = () => {
         controlDistance(this.state).then(response => {
-            console.log("DIES IS RES:", response)
             this.setState({TravelChoices: response});
-            console.log("AKTUALSIIERTER STATE:", this.state.TravelChoices)
+        }).catch(error => {
+                this.showErrorMessage();
+            }
+        );
+    };
 
-        });
+    showErrorMessage = () => {
+        alert(
+            "Please type a valid Departure and Arrival Address")
     };
 
 

@@ -5,7 +5,7 @@ export const MyFootprintSegment = (prop) => {
     return (Object.values(prop).map((key) => {
                 const per = Math.round(key.perc_amount);
                 return (
-                    <Segment>
+                    <Segment key={key.descr}>
                         {key.descr}
                         <br/>
                         <br/>

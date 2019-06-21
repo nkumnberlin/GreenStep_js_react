@@ -1,7 +1,9 @@
 import React, {Component, Fragment} from 'react';
-import {renderTotal, renderIconsTransitFlight,
+import {
+    renderTotal, renderIconsTransitFlight,
     renderHeaderOfIcon, renderStepsToGoal,
-    renderStepsToGoalSecondary, renderStepsToGoalTertiary} from './render_result/RenderResults.jsx'
+    renderStepsToGoalSecondary, renderStepsToGoalTertiary
+} from './render_result/RenderResults.jsx'
 import {Segment, Grid, Header, Divider} from 'semantic-ui-react'
 
 class RenderTransit extends Component {
@@ -18,7 +20,7 @@ class RenderTransit extends Component {
                         Steps
                     </Header>
                 </Divider>
-                {this.renderGoalTransit(currentType)}
+                {this.renderStepsOfTransit(currentType)}
             </Fragment>
         )
     };
@@ -43,13 +45,16 @@ class RenderTransit extends Component {
     };
 
 
-
-    renderGoalTransit = currentType => {
+    renderStepsOfTransit = currentType => {
         return Object.values(currentType.steps).map((key) => {
-            {
-                return key.travel_mode === "DRIVING" ? renderStepsToGoalSecondary(key) :
-                    key.travel_mode === "FLYING" ? renderStepsToGoalTertiary(key) :
-                        renderStepsToGoal(key)
+            if (key.distance === 0) {
+                console.log("key dist = null")
+            } else {
+                {
+                    return key.travel_mode === "DRIVING" ? renderStepsToGoalSecondary(key) :
+                        key.travel_mode === "FLYING" ? renderStepsToGoalTertiary(key) :
+                            renderStepsToGoal(key)
+                }
             }
         });
     };

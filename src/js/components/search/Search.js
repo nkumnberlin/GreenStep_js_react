@@ -19,7 +19,7 @@ export default class Search extends Component {
                         id={TravelChoices[key]}
                         active={this.props.activeItem === TravelChoices[key]}
             >
-                <Button.Content id={TravelChoices[key]} >
+                <Button.Content id={TravelChoices[key]}>
                     {TravelChoices[key] === 'Male' ? "Walking" : TravelChoices[key]}
                 </Button.Content>
 
