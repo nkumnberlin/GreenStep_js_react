@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react'
-import {List, Segment, Header, Icon, Divider} from 'semantic-ui-react'
+import {Segment, Header, Icon, Divider} from 'semantic-ui-react'
 
 export const ListExampleHeader = (props) => {
     if (props !== undefined) {
@@ -14,10 +14,10 @@ export const ListExampleHeader = (props) => {
 
                     <Segment.Group>
                         <Segment>
-                            <icon name="pagelines"/>
+                            <Icon name="pagelines" size={"big"}>
+                            </Icon>
                             <a href="https://www.atmosfair.de/en/offset/"
-                               target="_blank">
-                                Atmosfair
+                               target="_blank"> Atmosfair
                             </a>
                         </Segment>
                         <Segment.Group>
@@ -33,12 +33,12 @@ export const ListExampleHeader = (props) => {
 
                     <Segment.Group>
                         <Segment>
-                            <icon name="pagelines"/>
-                            <a
-                                href="https://co2.myclimate.org/de/contribution_calculators/new"
-                                target="_blank">
-                                MyClimate
-                            </a>
+                            <Icon name="pagelines" size={"big"}>
+                            </Icon>
+                                <a
+                                    href="https://co2.myclimate.org/de/contribution_calculators/new"
+                                    target="_blank"> MyClimate
+                                </a>
                         </Segment>
                         <Segment.Group>
                             <Segment>
@@ -52,12 +52,12 @@ export const ListExampleHeader = (props) => {
 
                     <Segment.Group>
                         <Segment>
-                            <icon name="pagelines"/>
-                            <a
-                                href="https://www.primaklima.org/baeume-verschenken/"
-                                target="_blank"
-                            >
-                                PrimaKlima</a>
+                            <Icon name="pagelines" size={"big"}>
+                            </Icon>
+                                <a
+                                    href="https://www.primaklima.org/baeume-verschenken/"
+                                    target="_blank"
+                                > PrimaKlima</a>
                         </Segment>
                         <Segment.Group>
                             <Segment>
@@ -71,13 +71,13 @@ export const ListExampleHeader = (props) => {
 
                     <Segment.Group>
                         <Segment>
-                            <icon name="pagelines"/>
-                            <a
-                                href="https://www.plant-for-the-planet.org/en/donation"
-                                target="_blank"
-                            >
-                                Plant For The Planet
-                            </a>
+                            <Icon name="pagelines" size={"big"}>
+                            </Icon>
+                                <a
+                                    href="https://www.plant-for-the-planet.org/en/donation"
+                                    target="_blank"
+                                > Plant For The Planet
+                                </a>
                         </Segment>
                         <Segment.Group>
                             <Segment>
