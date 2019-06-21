@@ -28,7 +28,7 @@ export default class MyFootprint extends Component {
                 emission: "1200kg",
             },
             2: {
-                perc_amount:100,
+                perc_amount: 100,
                 descr: "How much CO2 one EU citizen actually causes on average per year:",
                 width: 16,
                 color: "red",
