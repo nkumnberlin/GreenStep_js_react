@@ -37,10 +37,10 @@ export default class Results extends Component {
 
 
     render() {
-        // const locationArrival = this.props.locationArrival;
-        // const locationDeparture = this.props.locationDeparture;
-        const locationArrival = "this.props.locationArrival";
-        const locationDeparture = "this.props.locationDeparture";
+        const locationArrival = this.props.locationArrival;
+        const locationDeparture = this.props.locationDeparture;
+        // const locationArrival = "this.props.locationArrival";
+        // const locationDeparture = "this.props.locationDeparture";
 
         const renderResult = (
             Object.keys(this.props.resultData).map((value) => {
