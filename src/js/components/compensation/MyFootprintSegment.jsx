@@ -14,16 +14,23 @@ export const MyFootprintSegment = (prop) => {
                 return (
                     <Segment>
                         <Grid>
+                            <Grid.Column width="16">
+                            <p>{key.descr}</p>
+                            </Grid.Column>
                             <Grid.Column width={key.width}>
-                                <p>{key.descr}</p>
+                                
                                  <Progress
                                     percent={per}
                                     theme={{
                                         default: {
-                                            color: color
+                                            color: color,
                                             symbol: key.emission
                                         },
                                         success: {
+                                            color: color,
+                                            symbol: key.emission
+                                        },
+                                        active: {
                                             color: color,
                                             symbol: key.emission
                                         }

@@ -23,14 +23,14 @@ export default class MyFootprint extends Component {
             1: {
                 perc_amount: 100,
                 descr: "How much CO2 an EU citizen should max. cause per year in order to stop climate change:",
-                width:3,
+                width: 3,
                 color: "green",
                 emission: "1200kg",
             },
             2: {
                 perc_amount: 100,
                 descr: "How much CO2 one EU citizen actually causes on average per year:",
-                width: 16,
+                width: 15,
                 color: "red",
                 emission: "8400kg",
             }
