@@ -25,7 +25,7 @@ SECRET_KEY = 'x5g(xups*#+uj%5&03ua40^tgpmn@k1ze3+3)$p(i^1bs@=43^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['new-gs-2.6ihrqjpyut.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['final-gs.8uvhfihbat.eu-central-1.elasticbeanstalk.com']
 
 
 # Application definition
